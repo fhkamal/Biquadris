@@ -143,6 +143,5 @@ void Interface::commandInterpreter(string cmd) {
             break;
         }
         multiplier--;
-    }
-    
+    }    
 }
