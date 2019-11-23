@@ -1,5 +1,8 @@
 #include "interface.h"
 
+//  Testing
+#include "board.h"
+
 using namespace std;
 
 void Interface::mainMenu() {
@@ -32,6 +35,9 @@ void Interface::initialize() {
 }
 
 void Interface::startGame() {
+    Board b;
+    b.init();
+    cout << b;
     // Create Players 1 and 2
 
     // Do Turn basing here
