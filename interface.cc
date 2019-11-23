@@ -64,7 +64,7 @@ void Interface::commandInterpreter(string cmd) {
 
     int multiplier = 1;
     if (isdigit(cmd[0])) {
-        int n = cmd[0] - '0'; // Convers the multiplier from char to int
+        int n = cmd[0] - '0'; // Converts the multiplier from char to int
         if (n > -1) { // Check if the multiplier is valid
             multiplier = n;
         }
@@ -143,5 +143,6 @@ void Interface::commandInterpreter(string cmd) {
             break;
         }
         multiplier--;
-    }    
+    }
+    
 }
