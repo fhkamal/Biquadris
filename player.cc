@@ -25,9 +25,6 @@ void Player::playSequence(std::vector<std::string> &seq){
         current = make_unique<IBlock>(board);
         cout << "I";
     }
-
-
-
 }
 
 int Player::getScore()  {
