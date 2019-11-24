@@ -32,7 +32,7 @@ void TextDisplay::updateDisplay(Board b){
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (b.getGrid()[i][j].getIsOccupied()){
+			if (!b.getGrid()[i][j].getIsOccupied()){
 				board[i][j] = b.getGrid()[i][j].getBlockType();
 			}
 		}
