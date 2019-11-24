@@ -15,12 +15,12 @@ class Block;
 
 class Player { 
     int score;
-    std::unique_ptr<Level> lvl;
+    std::shared_ptr<Level> lvl;
     int highscore;
     std::string fileName;
     // std::unique_ptr<Board> board;
     Board board;
-    std::unique_ptr<Block> current, next;
+    std::shared_ptr<Block> current, next;
     std::vector<std::string> queue;
 public:
     Player(std::string fileName);

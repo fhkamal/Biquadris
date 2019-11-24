@@ -19,7 +19,7 @@ class Board {
     // Dimensions of the grid
     const int height = 18;
     const int width = 11;
-    std::unique_ptr<TextDisplay> td;
+    std::shared_ptr<TextDisplay> td;
 
     public:
 
@@ -30,6 +30,7 @@ class Board {
     void init();
     // bool validMove(unique_ptr<Block> b);
     // void setPiece(unique_ptr<Block> b);
+    std::shared_ptr<TextDisplay> getTextDisplay();
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

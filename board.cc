@@ -12,7 +12,7 @@ void Board::init() {
         grid.push_back(row);
     }
 
-    td = make_unique<TextDisplay>();
+    td = make_shared<TextDisplay>();
 
 }
 
@@ -51,6 +51,10 @@ bool Board::tooTall() {
 // void Board::setPiece(unique_ptr<Block> b) {
 
 // }
+
+shared_ptr<TextDisplay> Board::getTextDisplay(){
+	return td;
+}
 
 std::ostream &operator<<(std::ostream &out, const Board &b) {
     out << *(b.td);

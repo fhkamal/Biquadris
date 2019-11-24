@@ -15,15 +15,16 @@ using namespace std;
 
  
 Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} {
-    lvl = make_unique<LevelZero>(fileName); 
+    lvl = make_shared<LevelZero>(fileName); 
     board.init();
     queue = lvl->getSequence();
 }
 
 void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
-        current = make_unique<IBlock>(board);	
+       current = make_shared<IBlock>(board);	
     }
+    board.getTextDisplay()->updateDisplay(board);
     cout << board;
 }
 
