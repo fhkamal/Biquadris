@@ -28,12 +28,13 @@ public:
     int getScore();
     int getHighScore();
     int getLevel();
-
+	
+    std::vector<std::string> getQueue();
     void setScore(int x);
     void setLevel(int x);
     void setHighScore(int x);
     void specialAction(std::string action);
-    void playSequence(std::vector<std::string> &seq);
+    void playSequence(std::vector<std::string> seq);
    
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };

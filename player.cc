@@ -20,11 +20,15 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
     queue = lvl->getSequence();
 }
 
-void Player::playSequence(std::vector<std::string> &seq){
+void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
-        current = make_unique<IBlock>(board);
-        cout << "I";
+        current = make_unique<IBlock>(board);	
     }
+    cout << board;
+}
+
+vector<string> Player::getQueue(){
+	return queue;
 }
 
 int Player::getScore()  {

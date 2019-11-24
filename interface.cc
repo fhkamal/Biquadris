@@ -40,6 +40,7 @@ void Interface::startGame() {
     // b->init();
     // cout << b;
     Player p1("biquadris_sequence1.txt");
+    p1.playSequence(p1.getQueue());
     // Create Players 1 and 2
 
     // Do Turn basing here

@@ -17,6 +17,7 @@ public:
     bool getIsOccupied();
     void setIsOccupied(bool b);
     void setBlockType(char c);
+    char getBlockType();
 };
 
 #endif

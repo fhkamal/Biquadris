@@ -21,3 +21,7 @@ void Cell::setIsOccupied(bool b) {
 void Cell::setBlockType(char c) {
     blockType = c;
 }
+
+char Cell::getBlockType() {
+	return blockType;
+}
