@@ -22,3 +22,22 @@ Block::~Block() {
     four->setIsOccupied(false);
     
 }
+
+// Block Block::&operator=(const Block &other) {
+//     using std::swap;
+//     one = other.one;
+//     two = other.two;
+//     three = other.three;
+//     four = other.four;
+//     board = other.board;
+// }
+
+// Block& Block::operator=(Block &&other) {
+//     using std::swap;
+//     swap(one, other.one);
+//     swap(two, other.two);
+//     swap(three, other.three);
+//     swap(four, other.four);
+//     swap(board, other.board);
+//     return (*this);
+// }

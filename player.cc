@@ -21,7 +21,7 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 }
 
 void Player::playSequence(std::vector<std::string> &seq){
-    if (*(seq.begin()) == "I") current = IBlock(board);
+    if (*(seq.begin()) == "I") current = make_unique<IBlock>(board);
 
 }
 

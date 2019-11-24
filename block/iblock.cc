@@ -7,9 +7,9 @@ IBlock::IBlock(Board& board) : Block{'I', board} {
 	two = &board.getGrid()[3][1];
 	three = &board.getGrid()[3][2];
 	four = &board.getGrid()[3][3];
-
+	
 	// Set the block in the cells
-	 one->setBlockType('I');
+	one->setBlockType('I');
     one->setIsOccupied(true);
 
     two->setBlockType('I');

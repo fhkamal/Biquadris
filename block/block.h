@@ -25,6 +25,8 @@ class Block{
 		virtual void movement(std::string dir) = 0;
 		Block(char let, Board& board);
 		virtual ~Block();
+		// Block &operator=(const Block& other);
+		// Block &operator=(Block&& other);
 		virtual void rotate(std::string direction) = 0;
 };
 
