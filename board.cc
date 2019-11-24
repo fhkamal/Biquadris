@@ -57,3 +57,7 @@ std::ostream &operator<<(std::ostream &out, const Board &b) {
     out << *(b.td);
     return out;
 }
+
+vector<vector<Cell>> Board::getGrid() {
+    return grid;
+}

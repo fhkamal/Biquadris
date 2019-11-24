@@ -22,6 +22,8 @@ class Board {
     std::unique_ptr<TextDisplay> td;
 
     public:
+
+    std::vector<std::vector<Cell>> getGrid();
     void clearRow();
     // void setDisplay(unique_ptr<TextDisplay> td);
     bool tooTall();
