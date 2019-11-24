@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
-// #include "player.h"
+#include "player.h"
 
 class Interface {
     void startGame();
@@ -14,7 +14,7 @@ class Interface {
 
     // Player currentTurn;
     public:
-    
+
         void initialize(); // initializes the main menu
         // Player whoseTurn(); (don't need pretty sure)
         // Player whoWon();

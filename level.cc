@@ -2,3 +2,5 @@
 using namespace std;
 
 Level::Level() {}
+
+Level::~Level() {}

@@ -6,7 +6,7 @@ using namespace std;
 LevelZero::LevelZero(string fileName)
 {
     level = 0;
-    this->getBlocks(fileName);
+    this->getBlocks(fileName); 
 }
 
 void LevelZero::getBlocks(string fileName)
@@ -18,6 +18,10 @@ void LevelZero::getBlocks(string fileName)
     {
         sequence.emplace_back(block);
     }
+}
+
+vector<string> LevelZero::getSequence() {
+    return sequence;
 }
 
 int LevelZero::getLevel()

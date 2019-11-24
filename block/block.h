@@ -1,16 +1,19 @@
 #ifndef BLOCK_H
 #define BLOCK_H
-#include "cell.h"
+#include "../cell.h"
 
 class Block{
 	protected:
 		char let;
-		Cell *one, *two, *three, *four;
+		std::shared_ptr<Cell> one, two, three, four;
 		int orient;
-		Board *board;
+		std::shared_ptr<Board> board;
 	public:
+		bool isValid();
+		void movement(std::string dir);
 		Block(char let, Board *board);
 		virtual ~Block();
 		virtual void rotate(std::string direction) = 0;
 };
+
 #endif

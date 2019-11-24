@@ -1,7 +1,8 @@
 #include "interface.h"
 
 //  Testing
-#include "board.h"
+ // #include "board.h"
+ //#include "player.h"
 
 using namespace std;
 
@@ -35,9 +36,10 @@ void Interface::initialize() {
 }
 
 void Interface::startGame() {
-    Board b;
-    b.init();
-    cout << b;
+    // Board *b;
+    // b->init();
+    // cout << b;
+    Player p1("biquadris_sequence1.txt");
     // Create Players 1 and 2
 
     // Do Turn basing here

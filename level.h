@@ -11,12 +11,13 @@ class Level
 {
 protected:
     int level;
-    std::vector<std::vector<std::string>> sequence;
+    std::vector<std::string> sequence;
 
 public:
     Level();
 
     virtual int getLevel() = 0;
+    virtual std::vector<std::string> getSequence() = 0;
     //virtual std::unique_ptr<Block> generateBlock(Board &board, std::string blockType);
 
     virtual ~Level() = 0;
