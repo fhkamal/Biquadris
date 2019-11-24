@@ -15,7 +15,7 @@ class TextDisplay;
 
 class Board {
     // The grid
-    std::vector<std::vector<Cell>> grid;
+    std::vector<std::vector<std::shared_ptr<Cell>>> grid;
     // Dimensions of the grid
     const int height = 18;
     const int width = 11;
@@ -23,7 +23,7 @@ class Board {
 
     public:
 
-    std::vector<std::vector<Cell>> getGrid();
+    std::vector<std::vector<std::shared_ptr<Cell>>> getGrid();
     void clearRow();
     // void setDisplay(unique_ptr<TextDisplay> td);
     bool tooTall();

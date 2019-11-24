@@ -5,9 +5,9 @@ using namespace std;
 // Initialize the board
 void Board::init() {  
     for (int i = 0; i < height; i++) {
-        vector<Cell> row;
+        vector<shared_ptr<Cell>> row;
         for (int j = 0; j < width; j++) {
-            row.push_back(Cell(i, j));
+            row.push_back(make_shared<Cell>(i, j));
         }
         grid.push_back(row);
     }
@@ -21,12 +21,12 @@ void Board::clearRow() {
     for (int i = 0; i < height; i++) {
         bool deleteRow = true;
         for (int j = 0; j < width && deleteRow; j++) {
-            deleteRow = grid[i][j].getIsOccupied(); 
+            deleteRow = grid[i][j]->getIsOccupied(); 
         }
         if (deleteRow) {
             for (int k = 0; k < width; k++) {
-                grid[i][k].setIsOccupied(false); 
-                // grid[i][k].setBlockType('1');
+               grid[i][k]->setIsOccupied(false); 
+                //grid[i][k].setBlockType('1');
             }
         }
 
@@ -35,7 +35,7 @@ void Board::clearRow() {
 
 bool Board::tooTall() {
     for (int i = 0; i < width; i++) {
-        if (grid[2][i].getIsOccupied()) return true;
+        if (grid[2][i]->getIsOccupied()) return true;
     }
     return false;
 }
@@ -61,6 +61,6 @@ std::ostream &operator<<(std::ostream &out, const Board &b) {
     return out;
 }
 
-vector<vector<Cell>> Board::getGrid() {
+vector<vector<shared_ptr<Cell>>> Board::getGrid() {
     return grid;
 }

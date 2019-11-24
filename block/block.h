@@ -10,14 +10,14 @@ class Block{
 	protected:
 		const char let;
 		// Cell *one;
-		Cell *two;
-		Cell *three;
-		Cell *four;
+		// Cell *two;
+		// Cell *three;
+		// Cell *four;
 
 		std::shared_ptr<Cell> one;
-		// std::shared_ptr<Cell> two;
-		// std::shared_ptr<Cell> three;
-		// std::shared_ptr<Cell> four;
+		std::shared_ptr<Cell> two;
+		std::shared_ptr<Cell> three;
+		std::shared_ptr<Cell> four;
 		// int orient;
 		std::shared_ptr<Board> board;
 	public:
