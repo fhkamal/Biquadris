@@ -1,10 +1,11 @@
 #ifndef SBLOCK_H_
 #define SBLOCK_H_
-#include "cell.h"
 #include "block.h"
 
 class SBlock: public Block {
 	public:
-		void rotate(std::string direction, std::vector<std::vector<int>> coor);
-}
+		void movement(std::string dir);
+		void rotate(std::string direction);
+		SBlock(Board& board);
+};
 #endif
