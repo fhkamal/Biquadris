@@ -7,6 +7,7 @@
 #include "board.h"
 
 class Board;
+class Block;
 // class Level;
 // class LevelZero;
 
@@ -17,6 +18,7 @@ class Player {
     std::string fileName;
     // std::unique_ptr<Board> board;
     Board board;
+    std::unique_ptr<Block> current, next;
 public:
     Player(std::string fileName);
 

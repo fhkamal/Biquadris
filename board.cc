@@ -21,7 +21,6 @@ void Board::clearRow() {
     for (int i = 0; i < height; i++) {
         bool deleteRow = true;
         for (int j = 0; j < width && deleteRow; j++) {
-            
             deleteRow = grid[i][j].getIsOccupied(); 
         }
         if (deleteRow) {
