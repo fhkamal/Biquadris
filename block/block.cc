@@ -1,8 +1,8 @@
 #include "block.h"
 using namespace std;
 
-Block::Block(char let, Board& board) : let {let}{
-    this->board = make_shared<Board>();
+Block::Block(char let, shared_ptr<Board> board) : let {let}{
+    this->board = board;
 };
 
 // Block::Block(char let, Board *board): let{let}, board{board} orient{0}, 

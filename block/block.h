@@ -9,12 +9,12 @@
 class Block{
 	protected:
 		const char let;
-		Cell *one;
+		// Cell *one;
 		Cell *two;
 		Cell *three;
 		Cell *four;
 
-		// std::shared_ptr<Cell> one;
+		std::shared_ptr<Cell> one;
 		// std::shared_ptr<Cell> two;
 		// std::shared_ptr<Cell> three;
 		// std::shared_ptr<Cell> four;
@@ -23,7 +23,7 @@ class Block{
 	public:
 		bool isValid();
 		virtual void movement(std::string dir) = 0;
-		Block(char let, Board& board);
+		Block(char let, std::shared_ptr<Board> board);
 		virtual ~Block();
 		// Block &operator=(const Block& other);
 		// Block &operator=(Block&& other);

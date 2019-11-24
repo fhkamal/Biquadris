@@ -19,7 +19,7 @@ class Player {
     int highscore;
     std::string fileName;
     // std::unique_ptr<Board> board;
-    Board board;
+    std::shared_ptr<Board> board;
     std::shared_ptr<Block> current, next;
     std::vector<std::string> queue;
 public:

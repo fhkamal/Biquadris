@@ -1,22 +1,11 @@
 #include "player.h"
 
 using namespace std;
-
-// int getScore();
-//     int getHighScore();
-
-//     void setScore(int x);
-//     void setLevel(int x);
-//     void setHighScore(int x);
-//     void specialAction(std::string action);
-   
-
-//     friend std::ostream &operator<<(std::ostream &out, const Player &p); 
-
  
 Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} {
-    lvl = make_shared<LevelZero>(fileName); 
-    board.init();
+    lvl = make_shared<LevelZero>(fileName);
+    board = make_shared<Board>();
+    board->init();
     queue = lvl->getSequence();
 }
 
@@ -24,8 +13,8 @@ void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
        current = make_shared<IBlock>(board);	
     }
-    board.getTextDisplay()->updateDisplay(board);
-    cout << board;
+    board->getTextDisplay()->updateDisplay(*board);
+    cout << *board;
 }
 
 vector<string> Player::getQueue(){
