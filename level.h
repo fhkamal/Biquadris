@@ -17,7 +17,7 @@ public:
     Level();
 
     virtual int getLevel() = 0;
-    virtual std::vector<std::string> getSequence() = 0;
+    virtual std::vector<std::string> getSequence();
     //virtual std::unique_ptr<Block> generateBlock(Board &board, std::string blockType);
 
     virtual ~Level() = 0;

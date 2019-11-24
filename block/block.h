@@ -23,7 +23,7 @@ class Block{
 	public:
 		bool isValid();
 		virtual void movement(std::string dir) = 0;
-		Block(char let, std::shared_ptr<Board> board);
+		Block(char let, Board& board);
 		virtual ~Block();
 		virtual void rotate(std::string direction) = 0;
 };

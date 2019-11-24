@@ -5,6 +5,8 @@
 #include "level.h"
 #include "levels/levelzero.h"
 #include "board.h"
+#include "block/block.h"
+#include "block/iblock.h"
 
 class Board;
 class Block;
@@ -19,6 +21,7 @@ class Player {
     // std::unique_ptr<Board> board;
     Board board;
     std::unique_ptr<Block> current, next;
+    std::vector<std::string> queue;
 public:
     Player(std::string fileName);
 
@@ -30,8 +33,8 @@ public:
     void setLevel(int x);
     void setHighScore(int x);
     void specialAction(std::string action);
+    void playSequence(std::vector<std::string> &seq);
    
-
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };
 

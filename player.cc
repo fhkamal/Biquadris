@@ -17,7 +17,12 @@ using namespace std;
 Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} {
     lvl = make_unique<LevelZero>(fileName); 
     board.init();
-    cout << board;
+    queue = lvl->getSequence();
+}
+
+void Player::playSequence(std::vector<std::string> &seq){
+    if (*(seq.begin()) == "I") current = IBlock(board);
+
 }
 
 int Player::getScore()  {
