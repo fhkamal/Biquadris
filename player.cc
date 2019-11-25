@@ -13,6 +13,7 @@ void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
         current = make_shared<IBlock>(board);	
     }
+    cout << "here";
     board->getTextDisplay()->updateDisplay(*board);
     cout << *board;
 }
