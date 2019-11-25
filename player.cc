@@ -11,7 +11,6 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 
 void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
-        cout << &board <<  endl;
         current = make_shared<IBlock>(board);	
     }
     board->getTextDisplay()->updateDisplay(*board);
