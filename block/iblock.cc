@@ -16,14 +16,19 @@ IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b} {
 	cout << one->getBlockType() << endl;
 	cout << b->getGrid()[3][0]->getBlockType() << endl;
     	
+	cout << "two";
        	two->setBlockType('I');
        	two->setIsOccupied(true);
-
+	
+	cout << "three";
     	three->setBlockType('I');
 	three->setIsOccupied(true);
-   
+   	
+	cout << "four";
     	four->setBlockType('I');
    	four->setIsOccupied(true);
+
+	cout << "end";
 }	
 
 void IBlock::rotate(string direction){
