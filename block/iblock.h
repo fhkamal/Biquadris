@@ -7,7 +7,8 @@ class IBlock: public Block {
 	public:
 		void movement(std::string dir);
 		void rotate(std::string direction);
-		IBlock(std::shared_ptr<Board> board);
+		// IBlock(Board* b);
+		IBlock(std::shared_ptr<Board> b);
 };
 
 #endif

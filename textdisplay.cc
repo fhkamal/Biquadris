@@ -9,7 +9,7 @@ TextDisplay::TextDisplay()
 		vector<char> row;
 		for (int j = 0; j < width; j++)
 		{
-			row.push_back(' ');
+			row.push_back('A');
 		}
 		board.push_back(row);
 	}
@@ -32,8 +32,8 @@ void TextDisplay::updateDisplay(Board b){
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (!b.getGrid()[i][j].getIsOccupied()){
-				board[i][j] = b.getGrid()[i][j].getBlockType();
+			if (!b.getGrid()[i][j]->getIsOccupied()){
+				//board[i][j] = b.getGrid()[i][j]->getBlockType();
 			}
 		}
 	}
