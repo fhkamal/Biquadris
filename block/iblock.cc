@@ -70,8 +70,9 @@ void IBlock::movement(string dir)
 		tmp.two = board->getGrid()[(two->getCoordinates().first)][two->getCoordinates().second + 1];
 		tmp.three = board->getGrid()[(three->getCoordinates().first)][three->getCoordinates().second + 1];
 		tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
-		
+
 		// Set the current block cells to empty
+		
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');
@@ -80,12 +81,20 @@ void IBlock::movement(string dir)
 		three->setIsOccupied(false);
 		four->setBlockType(' ');
 		four->setIsOccupied(false);
+		
 
 		// Swap pointers to cells with the temporary block
+		
 		swap(one, tmp.one);
 		swap(two, tmp.two);
 		swap(three, tmp.three);
 		swap(four, tmp.four);
+
+		// Set temp values to sa random cell so they don't delete board cells
+		tmp.one = make_shared<Cell>(3, 1);
+		tmp.two = tmp.one;
+		tmp.three = tmp.one;
+		tmp.four = tmp.one;
 
 		// Set the new cell values
 		one->setBlockType('I');

@@ -35,7 +35,9 @@ void TextDisplay::updateDisplay(Board b){
 			if (b.getGrid()[i][j]->getIsOccupied()){
 				board[i][j] = b.getGrid()[i][j]->getBlockType();
 			}
+			else {
+				board[i][j] = '*';
+			}
 		}
 	}
-
 }
