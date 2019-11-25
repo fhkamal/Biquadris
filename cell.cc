@@ -6,7 +6,7 @@ pair<int, int> Cell::getCoordinates() {
     return make_pair(row, col);
 }
 
-Cell::Cell(int row, int col) : row {row}, col {col}, isOccupied {false} {}
+Cell::Cell(int row, int col) : row {row}, col {col}, isOccupied {false}, blockType {' '} {}
 
 Cell::~Cell() {}
 

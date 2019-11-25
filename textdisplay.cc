@@ -9,7 +9,7 @@ TextDisplay::TextDisplay()
 		vector<char> row;
 		for (int j = 0; j < width; j++)
 		{
-			row.push_back('A');
+			row.push_back('*');
 		}
 		board.push_back(row);
 	}
@@ -28,15 +28,12 @@ ostream &operator<<(ostream &out, const TextDisplay &td)
 }
 
 void TextDisplay::updateDisplay(Board b){
-	cout << "pre";
 	for (int i = 0; i < height; i++)
 	{
-		cout << "first";
 		for (int j = 0; j < width; j++)
 		{
 			if (b.getGrid()[i][j]->getIsOccupied()){
-				cout << "here";
-				//board[i][j] = b.getGrid()[i][j]->getBlockType();
+				board[i][j] = b.getGrid()[i][j]->getBlockType();
 			}
 		}
 	}
