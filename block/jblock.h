@@ -8,5 +8,6 @@ class JBlock: public Block {
 		void movement(std::string dir);
 		void rotate(std::string direction);
 		JBlock(std::shared_ptr<Board> b);
+		JBlock();
 };
 #endif
