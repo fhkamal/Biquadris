@@ -19,6 +19,15 @@ void Player::playSequence(std::vector<std::string> seq){
     current->movement("right");
     board->getTextDisplay()->updateDisplay(*board);
     cout << *board << endl;
+    cout << "Movement Left" << endl;
+    current->movement("left");
+    board->getTextDisplay()->updateDisplay(*board);
+    cout << *board << endl;
+    cout << "Movement Down" << endl;
+    current->movement("down");
+    board->getTextDisplay()->updateDisplay(*board);
+    cout << *board << endl;
+
 }
 
 vector<string> Player::getQueue(){
