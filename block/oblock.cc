@@ -22,11 +22,15 @@ OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b} {
     four->setIsOccupied(true);
 }
 
+// Constructor for temp blocks
+OBlock::OBlock() : Block{'O', make_shared<Board>()} {}
+
 void OBlock::rotate(string direction){}
 
 void OBlock::movement(string dir)
 {
-        OBlock tmp = OBlock(board);
+        // call temp block constructor
+        OBlock tmp = OBlock();
 
         // Set the new Block to current block position
         tmp.one = one;

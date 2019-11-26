@@ -10,6 +10,7 @@ class IBlock: public Block {
 		void rotate(std::string direction);
 		// IBlock(Board* b);
 		IBlock(std::shared_ptr<Board> b);
+		IBlock();
 };
 
 #endif

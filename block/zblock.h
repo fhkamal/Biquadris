@@ -7,5 +7,6 @@ class ZBlock: public Block {
 		void movement(std::string dir);
 		void rotate(std::string direction);
 		ZBlock(std::shared_ptr<Board> b);
+		ZBlock();
 };
 #endif

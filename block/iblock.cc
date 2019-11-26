@@ -32,6 +32,9 @@ IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b}
 	// cout << "end";
 }
 
+// Constructor for temp blocks
+IBlock::IBlock() : Block{'I', make_shared<Board>()} {}
+
 void IBlock::rotate(string direction)
 {
 	if (direction == "clockwise")
@@ -67,7 +70,8 @@ bool IBlock::validMove(string dir){
 
 void IBlock::movement(string dir)
 {
-	IBlock tmp = IBlock(board);
+	// call temp block constructor
+	IBlock tmp = IBlock();
 
 	// Set the new Block to current block position
 	tmp.one = one;

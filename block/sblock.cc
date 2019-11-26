@@ -22,6 +22,9 @@ SBlock::SBlock(shared_ptr<Board> b) : Block{'S', b} {
     four->setIsOccupied(true);
 }
 
+// Constructor for temp blocks
+SBlock::SBlock() : Block{'S', make_shared<Board>()} {}
+
 void SBlock::rotate(string direction){
         if(direction == "clockwise"){
 
@@ -30,8 +33,9 @@ void SBlock::rotate(string direction){
 
 void SBlock::movement(string dir)
 {
-        SBlock tmp = SBlock(board);
-
+        // call temp block constructor
+        SBlock tmp = SBlock();
+        
         // Set the new Block to current block position
         tmp.one = one;
         tmp.two = two;

@@ -22,6 +22,9 @@ ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b} {
     four->setIsOccupied(true);
 }
 
+// Constructor for temp blocks
+ZBlock::ZBlock() : Block{'Z', make_shared<Board>()} {}
+
 void ZBlock::rotate(string direction){
         if(direction == "clockwise"){
 
@@ -30,7 +33,8 @@ void ZBlock::rotate(string direction){
 
 void ZBlock::movement(string dir)
 {
-        ZBlock tmp = ZBlock(board);
+        // call temp block constructor
+        ZBlock tmp = ZBlock();
 
         // Set the new Block to current block position
         tmp.one = one;
