@@ -73,27 +73,34 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         }
         cmd = cmd.substr(1);
     }
+    bool printBoard = false;
 
     while (multiplier > 0) {
 
         // Block Commands
         if (cmd == "left") {
             player.moveBlock("left");
+            printBoard = true;
         }
         else if (cmd == "right") {
             player.moveBlock("right");
+            printBoard = true;
         }
         else if (cmd == "down") {
             player.moveBlock("down");
+            printBoard = true;
         }
         else if (cmd == "clockwise") {
             cout << "cw" << endl;
+            printBoard = true;
         }
         else if (cmd == "counterclockwise") {
             cout << "ccw" << endl;
+            printBoard = true;
         }
         else if (cmd == "drop") {
             cout << "drp" << endl;
+            printBoard = true;
         }
 
         // Player Commands
@@ -121,25 +128,32 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         }
         else if (cmd == "I") {
             cout << "i-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "J") {
             cout << "j-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "L") {
             cout << "l-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "O") {
             cout << "o-block" << endl;
+            printBoard = true;
             
         }
         else if (cmd == "S") {
             cout << "s-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "Z") {
             cout << "z-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "T") {
             cout << "t-block" << endl;
+            printBoard = true;
         }
         else if (cmd == "restart") {
             cout << "rstrt" << endl;
@@ -147,6 +161,8 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         }
         multiplier--;
     }
-    cout << *(player.getBoard());
+    if (printBoard) {
+        cout << *(player.getBoard());
+    }
     
 }
