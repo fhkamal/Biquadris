@@ -70,6 +70,9 @@ bool IBlock::validMove(string dir){
 
 void IBlock::movement(string dir)
 {
+	if(!validMove(dir)){
+		return;
+	}
 	// call temp block constructor
 	IBlock tmp = IBlock();
 
@@ -81,9 +84,6 @@ void IBlock::movement(string dir)
 
 	if (dir == "right")
 	{
-		if(!validMove(dir)){
-			return;
-		}
 		// // Check if blocks to the right are in bounds
 		// if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
 		// 	three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
