@@ -7,6 +7,7 @@
 #include "board.h"
 #include "block/block.h"
 #include "block/iblock.h"
+#include "block/jblock.h"
 
 class Board;
 class Block;

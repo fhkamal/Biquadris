@@ -11,10 +11,12 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 
 void Player::playSequence(std::vector<std::string> seq){
     if (*(seq.begin()) == "I") {
-        current = make_shared<IBlock>(board);	
+        current = make_shared<JBlock>(board);	// block test
     }
     board->getTextDisplay()->updateDisplay(*board);
     cout << *board << endl;;
+
+    // Testing Block Movement
     cout << "Movement Right" << endl;
     current->movement("right");
     board->getTextDisplay()->updateDisplay(*board);

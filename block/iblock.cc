@@ -190,5 +190,4 @@ void IBlock::movement(string dir)
 		four->setBlockType('I');
 		four->setIsOccupied(true);
 	}
-	
 }
