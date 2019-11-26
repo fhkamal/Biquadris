@@ -66,11 +66,17 @@ void Interface::commandInterpreter(string cmd, Player &player) {
     map<string, string> macros; // Fill in later
 
     int multiplier = 1;
+
     if (isdigit(cmd[0])) {
         int n = cmd[0] - '0'; // Converts the multiplier from char to int
         if (n > -1) { // Check if the multiplier is valid
             multiplier = n;
         }
+        cmd = cmd.substr(1);
+    }
+    while (isdigit(cmd[0])) {
+        int n = cmd[0] - '0'; // Converts the multiplier from char to int
+        multiplier = multiplier * 10 + n;
         cmd = cmd.substr(1);
     }
     bool printBoard = false;
