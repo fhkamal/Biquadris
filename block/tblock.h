@@ -6,6 +6,6 @@ class TBlock: public Block {
 	public:
 		void movement(std::string dir);
 		void rotate(std::string direction);
-		TBlock(Board& board);
+		TBlock(std::shared_ptr<Board> b);
 };
 #endif

@@ -1,7 +1,7 @@
 #include "block.h"
 using namespace std;
 
-Block::Block(char let, shared_ptr<Board> board) : let {let}{
+Block::Block(char let, shared_ptr<Board> board) : let {let}, orient {0}{
     this->board = board;
 };
 

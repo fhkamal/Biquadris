@@ -6,6 +6,6 @@ class OBlock: public Block {
 	public:
 		void movement(std::string dir);
 		void rotate(std::string direction);
-		OBlock(Board& board);
+		OBlock(std::shared_ptr<Board> b);
 };
 #endif

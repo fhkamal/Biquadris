@@ -1,32 +1,36 @@
-#include "oblock.h"
+#include "zblock.h"
 using namespace std;
 
-OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b} {
+ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b} {
         // The block spawns in the top left
         one = b->getGrid()[3][0];
         two = b->getGrid()[3][1];
-        three = b->getGrid()[4][0];
-        four = b->getGrid()[4][1];
+        three = b->getGrid()[4][1];
+        four = b->getGrid()[4][2];
 
         // Set the block in the cells
-        one->setBlockType('O');
+        one->setBlockType('Z');
     one->setIsOccupied(true);
 
-    two->setBlockType('O');
+    two->setBlockType('Z');
     two->setIsOccupied(true);
 
-    three->setBlockType('O');
+    three->setBlockType('Z');
     three->setIsOccupied(true);
 
-    four->setBlockType('O');
+    four->setBlockType('Z');
     four->setIsOccupied(true);
 }
 
-void OBlock::rotate(string direction){}
+void ZBlock::rotate(string direction){
+        if(direction == "clockwise"){
 
-void OBlock::movement(string dir)
+        }
+}
+
+void ZBlock::movement(string dir)
 {
-        OBlock tmp = OBlock(board);
+        ZBlock tmp = ZBlock(board);
 
         // Set the new Block to current block position
         tmp.one = one;
@@ -82,13 +86,13 @@ void OBlock::movement(string dir)
                 tmp.four = tmp.one;
 
                 // Set the new cell values
-                one->setBlockType('O');
+                one->setBlockType('Z');
                 one->setIsOccupied(true);
-                two->setBlockType('O');
+                two->setBlockType('Z');
                 two->setIsOccupied(true);
-                three->setBlockType('O');
+                three->setBlockType('Z');
                 three->setIsOccupied(true);
-                four->setBlockType('O');
+                four->setBlockType('Z');
                 four->setIsOccupied(true);
         }
         else if (dir =="left") {
@@ -124,13 +128,13 @@ void OBlock::movement(string dir)
                 tmp.four = tmp.one;
 
                 // Set the new cell values
-                one->setBlockType('O');
+                one->setBlockType('Z');
                 one->setIsOccupied(true);
-                two->setBlockType('O');
+                two->setBlockType('Z');
                 two->setIsOccupied(true);
-                three->setBlockType('O');
+                three->setBlockType('Z');
                 three->setIsOccupied(true);
-                four->setBlockType('O');
+                four->setBlockType('Z');
                 four->setIsOccupied(true);
         }
         else if (dir =="down") {
@@ -166,13 +170,13 @@ void OBlock::movement(string dir)
                 tmp.four = tmp.one;
 
                 // Set the new cell values
-                one->setBlockType('O');
+                one->setBlockType('Z');
                 one->setIsOccupied(true);
-                two->setBlockType('O');
+                two->setBlockType('Z');
                 two->setIsOccupied(true);
-                three->setBlockType('O');
+                three->setBlockType('Z');
                 three->setIsOccupied(true);
-                four->setBlockType('O');
+                four->setBlockType('Z');
                 four->setIsOccupied(true);
         }
 }

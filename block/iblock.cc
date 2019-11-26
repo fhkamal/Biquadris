@@ -39,6 +39,32 @@ void IBlock::rotate(string direction)
 	}
 }
 
+bool IBlock::validMove(string dir){
+	if(dir == "right"){
+		 // Check if blocks to the right are in bounds
+                 if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
+                      three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
+                 {
+                      return false;
+                 }
+		 if(orient == 0){
+		      if(board->getGrid()[four->getCoordinates().first + 1][four->getCoordinates().second + 1]->getIsOccupied()){
+			   return false;
+		      }
+		 }
+		 else if(orient == 1){
+                      // Check if blocks to the right are occupied
+                      if (board->getGrid()[(one->getCoordinates().first + 1)][one->getCoordinates().second + 1]->getIsOccupied() ||
+                           board->getGrid()[(two->getCoordinates().first + 1)][two->getCoordinates().second + 1]->getIsOccupied() ||
+                           board->getGrid()[(three->getCoordinates().first + 1)][three->getCoordinates().second + 1]->getIsOccupied() ||
+                           board->getGrid()[(four->getCoordinates().first + 1)][four->getCoordinates().second + 1]->getIsOccupied())
+                           return false;
+		}
+	 return true;	 
+	}
+	return true;
+}
+
 void IBlock::movement(string dir)
 {
 	IBlock tmp = IBlock(board);
@@ -51,6 +77,9 @@ void IBlock::movement(string dir)
 
 	if (dir == "right")
 	{
+		if(!validMove(dir)){
+			return;
+		}
 		// // Check if blocks to the right are in bounds
 		// if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
 		// 	three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
