@@ -17,18 +17,18 @@ void Player::playSequence(std::vector<std::string> seq){
     cout << *board << endl;;
 
     // Testing Block Movement
-    cout << "Movement Right" << endl;
-    current->movement("right");
-    board->getTextDisplay()->updateDisplay(*board);
-    cout << *board << endl;
-    cout << "Movement Left" << endl;
-    current->movement("left");
-    board->getTextDisplay()->updateDisplay(*board);
-    cout << *board << endl;
-    cout << "Movement Down" << endl;
-    current->movement("down");
-    board->getTextDisplay()->updateDisplay(*board);
-    cout << *board << endl;
+    // cout << "Movement Right" << endl;
+    // current->movement("right");
+    // board->getTextDisplay()->updateDisplay(*board);
+    // cout << *board << endl;
+    // cout << "Movement Left" << endl;
+    // current->movement("left");
+    // board->getTextDisplay()->updateDisplay(*board);
+    // cout << *board << endl;
+    // cout << "Movement Down" << endl;
+    // current->movement("down");
+    // board->getTextDisplay()->updateDisplay(*board);
+    // cout << *board << endl;
 
 }
 
@@ -44,6 +44,11 @@ int Player::getLevel() {
     return lvl->getLevel();
 }
 
+std::shared_ptr<Board> Player::getBoard() {
+    return board;
+}
+
+
 void Player::setScore(int x) {
     score = x;
 }
@@ -57,4 +62,44 @@ void Player::setLevel(int x) {
 
 void Player::specialAction(string action) {
 
+}
+
+void Player::setCurrent(string b) {
+    if (b == "I") {
+        current = make_shared<IBlock>(board);
+    }
+    else if (b == "J")
+    {
+         current = make_shared<IBlock>(board);
+    }
+    else if (b == "L")
+    {
+        // current = make_shared<IBlock>(board);
+        cout << "Force L Block to be the current";
+    }
+    else if (b == "O")
+    {
+        // current = make_shared<IBlock>(board);
+        cout << "Force O Block to be the current";
+    }
+    else if (b == "S")
+    {
+        // current = make_shared<IBlock>(board);
+        cout << "Force S Block to be the current";
+    }
+    else if (b == "Z")
+    {
+        // current = make_shared<IBlock>(board);
+        cout << "Force Z Block to be the current";
+    }
+    else if (b == "T")
+    {
+        //current = make_shared<IBlock>(board);
+        cout << "Force T Block to be the current";
+    }
+}
+
+void Player::moveBlock(string dir) {
+    current->movement(dir);
+    board->getTextDisplay()->updateDisplay(*board);
 }

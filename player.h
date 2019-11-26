@@ -29,13 +29,17 @@ public:
     int getScore();
     int getHighScore();
     int getLevel();
+    std::shared_ptr<Board> getBoard();
 	
     std::vector<std::string> getQueue();
     void setScore(int x);
     void setLevel(int x);
     void setHighScore(int x);
+    void setCurrent(std::string b);
+    void moveBlock(std::string dir);
     void specialAction(std::string action);
     void playSequence(std::vector<std::string> seq);
+    
    
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };
