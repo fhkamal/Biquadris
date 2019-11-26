@@ -42,7 +42,7 @@ void IBlock::rotate(string direction)
 	}
 }
 
-bool IBlock::validMove(string dir){
+/*  bool IBlock::validMove(string dir){
 	if(dir == "right"){
 		 // Check if blocks to the right are in bounds
                  if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
@@ -66,11 +66,11 @@ bool IBlock::validMove(string dir){
 	 return true;	 
 	}
 	return true;
-}
+} */
 
 void IBlock::movement(string dir)
 {
-	if(!validMove(dir)){
+	if(!isValid(dir)){
 		return;
 	}
 	// call temp block constructor

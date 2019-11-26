@@ -23,6 +23,33 @@ Block::~Block() {
     
 }
 
+bool Block::isValid(string dir){
+	if(dir == "right"){
+	// Check if blocks to the right are in bounds
+                 if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second  + 1 > 10 ||
+                      three->getCoordinates().second + 1 > 10 || four->getCoordinates().second  + 1 > 10)
+                 {
+                      return false;
+                 }	
+	}
+	else if(dir == "left"){
+	//Checks if blocks to the left are in bounds
+		if (one->getCoordinates().second  <= 0 || two->getCoordinates().second <= 0 ||
+                      three->getCoordinates().second  <= 0 || four->getCoordinates().second <= 0)
+                 {
+                      return false;
+                 }
+	}
+	else{
+		if (one->getCoordinates().first + 1 > 17 || two->getCoordinates().first + 1 > 17 ||
+                      three->getCoordinates().first + 1 > 17 || four->getCoordinates().first + 1 > 17)
+                 {
+                      return false;
+                 }	
+	}
+	return true;
+}
+
 // Block Block::&operator=(const Block &other) {
 //     using std::swap;
 //     one = other.one;

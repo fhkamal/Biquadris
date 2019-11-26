@@ -44,6 +44,9 @@ void JBlock::rotate(string direction)
 
 void JBlock::movement(string dir)
 {
+	if(!isValid(dir)){
+		return;
+	}
 	// Call constructor for temp blocks so it doesn't initialize on the board
 	JBlock tmp = JBlock();
 

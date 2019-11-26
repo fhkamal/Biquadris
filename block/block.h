@@ -21,7 +21,7 @@ class Block{
 		int orient;
 		std::shared_ptr<Board> board;
 	public:
-		bool isValid();
+		bool isValid(std::string dir);
 		virtual void movement(std::string dir) = 0;
 		Block(char let, std::shared_ptr<Board> board);
 		virtual ~Block();
