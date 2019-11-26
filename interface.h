@@ -9,7 +9,7 @@
 class Interface {
     void startGame();
     void mainMenu();
-    void commandInterpreter(std::string cmd);
+    void commandInterpreter(std::string cmd, Player &player);
     
 
     // Player currentTurn;

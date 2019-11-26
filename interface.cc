@@ -36,14 +36,10 @@ void Interface::initialize() {
 }
 
 void Interface::startGame() {
-    // Board *b;
-    // b->init();
-    // cout << b;
+    // Create Players 1 and 2
     Player p1("biquadris_sequence1.txt");
     p1.playSequence(p1.getQueue());
-    // Create Players 1 and 2
-
-    // Do Turn basing here
+    
 
     string cmd;
 
@@ -52,16 +48,14 @@ void Interface::startGame() {
         if (cmd == "quit" || cmd == "exit" || cmd == "q") break;
 
         if (cmd != "restart") {
-            commandInterpreter(cmd);
-        }
-        else {
-            cout << "Restarting" << endl;
-            // Delete players and remake players
+            commandInterpreter(cmd, p1);
+            // check if turn is done
+            // switch turn if done
         }
     }
 }
 
-void Interface::commandInterpreter(string cmd) {
+void Interface::commandInterpreter(string cmd, Player &player) {
     // List of Commands
 
     // Block Commands: left, right, down, clockwise, counterclockwise, drop
@@ -84,13 +78,13 @@ void Interface::commandInterpreter(string cmd) {
 
         // Block Commands
         if (cmd == "left") {
-            cout << "l" << endl;
+            player.moveBlock("left");
         }
         else if (cmd == "right") {
-            cout << "r" << endl;
+            player.moveBlock("right");
         }
         else if (cmd == "down") {
-            cout << "d" << endl;
+            player.moveBlock("down");
         }
         else if (cmd == "clockwise") {
             cout << "cw" << endl;
@@ -153,5 +147,6 @@ void Interface::commandInterpreter(string cmd) {
         }
         multiplier--;
     }
+    cout << *(player.getBoard());
     
 }
