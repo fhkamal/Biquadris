@@ -1,4 +1,5 @@
 #include "interface.h"
+#include "iomanip"
 
 //  Testing
 // #include "board.h"
@@ -205,6 +206,10 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 }
 
 void Interface::printGame(Player &p1, Player &p2) {
+	cout << "Level:    " << p1.getLevel() << "      " << "Level:    " << p2.getLevel() << endl;
+	cout << "Score:" << right << setw(5) << p1.getScore();
+	cout << "      " << "Score:" << right << setw(5) << p2.getScore() << endl;
+	cout << "-----------      -----------" << endl;
 	for (int i = 0; i < 18; i++)
 	{
 		for (int j = 0; j < 11; j++)
@@ -219,5 +224,6 @@ void Interface::printGame(Player &p1, Player &p2) {
 			cout << p2.getBoard()->getTextDisplay()->getBoard()[i][j];
 		}
 		cout << endl;
-	}	
+	}
+	cout << "-----------      -----------" << endl;	
 }
