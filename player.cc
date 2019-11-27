@@ -10,45 +10,57 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 }
 
 void Player::playSequence(std::vector<std::string> seq){
+    if (seq.size() == 1) {
+        queue.insert(queue.end(), lvl->getSequence().begin(), lvl->getSequence().end()); 
+    }
     if (*(seq.begin()) == "J") {
         current = make_shared<JBlock>(board);	// block test
     }
     else if (*(seq.begin()) == "S") {
-	current = make_shared<SBlock>(board);
+	    current = make_shared<SBlock>(board);
     }
     else if (*(seq.begin()) == "I") {
-	current = make_shared<IBlock>(board);
+	    current = make_shared<IBlock>(board);
     }
     else if (*(seq.begin()) == "Z") {
-	current = make_shared<ZBlock>(board);
+    	current = make_shared<ZBlock>(board);
     }
-    else if (*(seq.begin()) == "T") {
-	current = make_shared<TBlock>(board);
+      else if (*(seq.begin()) == "T") {
+    	current = make_shared<TBlock>(board);
     }
     else if (*(seq.begin()) == "O") {
-	current = make_shared<OBlock>(board);
+    	current = make_shared<OBlock>(board);
     }
     else if (*(seq.begin()) == "L") {
-	current = make_shared<LBlock>(board);
+    	current = make_shared<LBlock>(board);
     }
+
+    // Updates the next block
+    if (*(seq.at(1)) == "J") {
+        next = make_shared<JBlock>(board);	
+    }
+    else if (*(seq.at()) == "S") {
+	    next = make_shared<SBlock>(board);
+    }
+    else if (*(seq.at(1)) == "I") {
+	    next = make_shared<IBlock>(board);
+    }
+    else if (*(seq.at(1)) == "Z") {
+    	next = make_shared<ZBlock>(board);
+    }
+      else if (*(seq.at(1)) == "T") {
+    	next = make_shared<TBlock>(board);
+    }
+    else if (*(seq.at(1)) == "O") {
+    	next = make_shared<OBlock>(board);
+    }
+    else if (*(seq.at(1)) == "L") {
+    	next = make_shared<LBlock>(board);
+    }
+
+    // Update the board display and shift the queue of blocks
     board->getTextDisplay()->updateDisplay(*board);
-    seq.erase(seq.begin());
-    //cout << *board << endl;;
-
-    // Testing Block Movement
-    // cout << "Movement Right" << endl;
-    // current->movement("right");
-    // board->getTextDisplay()->updateDisplay(*board);
-    // cout << *board << endl;
-    // cout << "Movement Left" << endl;
-    // current->movement("left");
-    // board->getTextDisplay()->updateDisplay(*board);
-    // cout << *board << endl;
-    // cout << "Movement Down" << endl;
-    // current->movement("down");
-    // board->getTextDisplay()->updateDisplay(*board);
-    // cout << *board << endl;
-
+    queue.erase(queue.begin());
 }
 
 vector<string> Player::getQueue(){
