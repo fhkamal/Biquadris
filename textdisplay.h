@@ -16,6 +16,7 @@ class TextDisplay
 public:
     TextDisplay();
     void updateDisplay(Board grid);
+    std::vector<std::vector<char>> getBoard();
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };
 

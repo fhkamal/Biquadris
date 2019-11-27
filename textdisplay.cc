@@ -41,3 +41,7 @@ void TextDisplay::updateDisplay(Board b){
 		}
 	}
 }
+
+vector<vector<char>> TextDisplay::getBoard(){
+	return board;
+}
