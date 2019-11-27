@@ -61,21 +61,21 @@ void Interface::startGame() {
             {
                 currentTurn = "p1";
             }
-            
+            switchTurn = false;
         }
 
 
         // Exits the game loop and returns to main menu
         if (cmd == "quit" || cmd == "exit" || cmd == "q") break;
 
-        // if (cmd != "restart") {
-        //     if (currentTurn == "p1") {
+         if (cmd != "restart") {
+             if (currentTurn == "p1") {
                 commandInterpreter(cmd, p1);
-            // }
-            // else if (currentTurn == "p2") {
-            //     commandInterpreter(cmd, p2);
-            // }
-        // }
+             }
+             else if (currentTurn == "p2") {
+                 commandInterpreter(cmd, p2);
+             }
+        }
     }
 }
 
@@ -123,7 +123,6 @@ void Interface::commandInterpreter(string cmd, Player &player) {
                 printBoard = true;
                 break;
             }
-            cout << player.getCurrentBlock()->getCanDown() << endl;
             player.moveBlock("down");
             printBoard = true;
         }
@@ -138,11 +137,9 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         else if (cmd == "drop") {
             // use a getter to check if file can go anymore down from block field and if false then change player
             while (player.getCurrentBlock()->getCanDown()) {
-                cout << player.getCurrentBlock()->getCanDown() << endl;
                 player.moveBlock("down");
             }
             switchTurn = true;
-            cout << "drp" << endl;
             printBoard = true;
         }
 
