@@ -1,6 +1,7 @@
 #ifndef SBLOCK_H_
 #define SBLOCK_H_
 #include "block.h"
+#include <memory>
 
 class SBlock: public Block {
 	public:

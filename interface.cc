@@ -39,6 +39,8 @@ void Interface::startGame() {
     // Create Players 1 and 2
     Player p1("biquadris_sequence1.txt");
     p1.playSequence(p1.getQueue());
+    Player p2("biquadris_sequence2.txt");
+    p2.playSequence(p2.getQueue());
     
 
     string cmd;
