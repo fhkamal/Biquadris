@@ -11,8 +11,10 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 
 void Player::playSequence(std::vector<std::string> seq){
     cout << lvl->getSequence().size() << endl;
-    if (seq.size() == 0) {
-        // queue.insert(queue.end(), lvl->getSequence().begin(), lvl->getSequence().end()); 
+    if (seq.size() == 1) {
+        // cout << "HERE" << endl;
+        queue.insert(queue.end(), lvl->getSequence().begin(), lvl->getSequence().end()); 
+        // cout << "HERE1" << endl;
         //queue = lvl->getSequence();
     }
     if (*(seq.begin()) == "J") {
@@ -97,6 +99,11 @@ void Player::setHighScore(int  x) {
 }
 
 void Player::setLevel(int x) {
+    if (x > 4) x = 4;
+    if (x < 0) x = 0;
+
+    if  (x == 0) lvl = make_shared<LevelZero>(fileName);
+    // ADD IN REST HERE
 }
 
 void Player::specialAction(string action) {

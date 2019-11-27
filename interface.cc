@@ -146,7 +146,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 
 		// Player Commands
 		else if (cmd == "levelup") {
-			cout << "lvlu" << endl;
+			player.setLevel(player.getLevel() + 1);
 		}
 		else if (cmd == "leveldown") {
 			cout << "lvld" << endl;
