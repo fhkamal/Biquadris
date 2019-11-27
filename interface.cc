@@ -118,11 +118,12 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         }
         else if (cmd == "down") {
             // use a getter to check if file can go anymore down from block field and if false then change player
-            // if (!player.getCurrentBlock()->getCanDown()) {
-            //     switchTurn = true;
-            //     printBoard = true;
-            //     break;
-            // }
+            if (!player.getCurrentBlock()->getCanDown()) {
+                switchTurn = true;
+                printBoard = true;
+                break;
+            }
+            cout << player.getCurrentBlock()->getCanDown() << endl;
             player.moveBlock("down");
             printBoard = true;
         }
@@ -136,9 +137,10 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         }
         else if (cmd == "drop") {
             // use a getter to check if file can go anymore down from block field and if false then change player
-            // while (!player.getCurrentBlock()->getCanDown()) {
-            //     player.moveBlock("down");
-            // }
+            while (player.getCurrentBlock()->getCanDown()) {
+                cout << player.getCurrentBlock()->getCanDown() << endl;
+                player.moveBlock("down");
+            }
             switchTurn = true;
             cout << "drp" << endl;
             printBoard = true;
