@@ -54,10 +54,12 @@ void Interface::startGame() {
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
+                p2.playSequence(p2.getQueue());
 			}
 			else
 			{
 				currentTurn = "p1";
+                p1.playSequence(p1.getQueue());
 			}
 			switchTurn = false;
 		}

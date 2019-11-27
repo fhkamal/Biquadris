@@ -36,31 +36,32 @@ void Player::playSequence(std::vector<std::string> seq){
     }
 
     // Updates the next block
-    if (*(seq.at(1)) == "J") {
-        next = make_shared<JBlock>(board);	
-    }
-    else if (*(seq.at()) == "S") {
-	    next = make_shared<SBlock>(board);
-    }
-    else if (*(seq.at(1)) == "I") {
-	    next = make_shared<IBlock>(board);
-    }
-    else if (*(seq.at(1)) == "Z") {
-    	next = make_shared<ZBlock>(board);
-    }
-      else if (*(seq.at(1)) == "T") {
-    	next = make_shared<TBlock>(board);
-    }
-    else if (*(seq.at(1)) == "O") {
-    	next = make_shared<OBlock>(board);
-    }
-    else if (*(seq.at(1)) == "L") {
-    	next = make_shared<LBlock>(board);
-    }
+    // if ((seq.at(1)) == "J") {
+    //     next = make_shared<JBlock>(board);	
+    // }
+    // else if ((seq.at(1)) == "S") {
+	//     next = make_shared<SBlock>(board);
+    // }
+    // else if ((seq.at(1)) == "I") {
+	//     next = make_shared<IBlock>(board);
+    // }
+    // else if ((seq.at(1)) == "Z") {
+    // 	next = make_shared<ZBlock>(board);
+    // }
+    //   else if ((seq.at(1)) == "T") {
+    // 	next = make_shared<TBlock>(board);
+    // }
+    // else if ((seq.at(1)) == "O") {
+    // 	next = make_shared<OBlock>(board);
+    // }
+    // else if ((seq.at(1)) == "L") {
+    // 	next = make_shared<LBlock>(board);
+    // }
 
     // Update the board display and shift the queue of blocks
     board->getTextDisplay()->updateDisplay(*board);
     queue.erase(queue.begin());
+    cout << *queue.begin() << endl;
 }
 
 vector<string> Player::getQueue(){
