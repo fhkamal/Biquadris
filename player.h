@@ -9,6 +9,12 @@
 #include "block/iblock.h"
 #include "block/jblock.h"
 #include "block/sblock.h"
+#include "block/tblock.h"
+#include "block/oblock.h"
+#include "block/zblock.h"
+#include "block/lblock.h"
+
+
 
 class Board;
 class Block;

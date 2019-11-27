@@ -16,6 +16,21 @@ void Player::playSequence(std::vector<std::string> seq){
     else if (*(seq.begin()) == "S") {
 	current = make_shared<SBlock>(board);
     }
+    else if (*(seq.begin()) == "I") {
+	current = make_shared<IBlock>(board);
+    }
+    else if (*(seq.begin()) == "Z") {
+	current = make_shared<ZBlock>(board);
+    }
+    else if (*(seq.begin()) == "T") {
+	current = make_shared<TBlock>(board);
+    }
+    else if (*(seq.begin()) == "O") {
+	current = make_shared<OBlock>(board);
+    }
+    else if (*(seq.begin()) == "L") {
+	current = make_shared<LBlock>(board);
+    }
     board->getTextDisplay()->updateDisplay(*board);
     cout << *board << endl;;
 
