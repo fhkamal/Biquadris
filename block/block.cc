@@ -52,7 +52,7 @@ bool Block::inBounds(string dir){
 		if (one->getCoordinates().first + 1 > 17 || two->getCoordinates().first + 1 > 17 ||
                       three->getCoordinates().first + 1 > 17 || four->getCoordinates().first + 1 > 17)
                  {
-		      canDown = true;
+		      canDown = false;
                       return false;
                  }	
 	}
