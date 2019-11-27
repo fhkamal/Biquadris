@@ -70,7 +70,6 @@ void Interface::startGame() {
 				commandInterpreter(cmd, p1);
 			}
 			else if (currentTurn == "p2") {
-				cout << "p2";
 				commandInterpreter(cmd, p2);
 			}
 		}
@@ -117,13 +116,12 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 		}
 		else if (cmd == "down") {
 			// use a getter to check if file can go anymore down from block field and if false then change player
+			player.moveBlock("down");
 			if (!player.getCurrentBlock()->getCanDown()) {
-				cout << "switch" << endl;
 				switchTurn = true;
 				printBoard = true;
 				break;
 			}
-			player.moveBlock("down");
 			printBoard = true;
 		}
 		else if (cmd == "clockwise") {

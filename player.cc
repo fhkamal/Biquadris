@@ -32,6 +32,7 @@ void Player::playSequence(std::vector<std::string> seq){
 	current = make_shared<LBlock>(board);
     }
     board->getTextDisplay()->updateDisplay(*board);
+    seq.erase(seq.begin());
     //cout << *board << endl;;
 
     // Testing Block Movement
