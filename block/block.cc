@@ -51,16 +51,18 @@ bool Block::inBounds(string dir){
 }
 
 bool Block::collision(Block &b){
-	if(b.one->getIsOccupied() && b.one->getBlockType() == one->getBlockType()){
+	if(b.one->getIsOccupied() && (b.one != one) && (b.one != two) && (b.one != three) && (b.one != four)){
+		cout << &b.one << endl;
+		cout << &two << endl;
 		return false;
 	}
-	if(b.two->getIsOccupied() && b.two->getBlockType() == two->getBlockType()){
+	if(b.two->getIsOccupied() && (b.two != one) && (b.two != two) && (b.two != three) && (b.two != four)){
 		return false;
 	}	
-	if(b.three->getIsOccupied() && b.three->getBlockType() == three->getBlockType()){
+	if(b.three->getIsOccupied() && (b.three != one) && (b.three != two) && (b.three != three) && (b.three != four)){
 		return false;
 	}
-	if(b.four->getIsOccupied() && b.four->getBlockType() == four->getBlockType()){
+	if(b.four->getIsOccupied() && (b.four != one) && (b.four != two) && (b.four != three) && (b.four != four)){
 		return false;
 	}
 	return true;

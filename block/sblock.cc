@@ -69,7 +69,9 @@ void SBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
 
                 // Set the current block cells to empty
-		if(!collision(tmp));
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
