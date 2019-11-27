@@ -10,8 +10,10 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 }
 
 void Player::playSequence(std::vector<std::string> seq){
-    if (seq.size() == 1) {
-        queue.insert(queue.end(), lvl->getSequence().begin(), lvl->getSequence().end()); 
+    cout << lvl->getSequence().size() << endl;
+    if (seq.size() == 0) {
+        // queue.insert(queue.end(), lvl->getSequence().begin(), lvl->getSequence().end()); 
+        //queue = lvl->getSequence();
     }
     if (*(seq.begin()) == "J") {
         current = make_shared<JBlock>(board);	// block test
@@ -58,10 +60,10 @@ void Player::playSequence(std::vector<std::string> seq){
     // 	next = make_shared<LBlock>(board);
     // }
 
+    blocksOnBoard.emplace_back(current);
     // Update the board display and shift the queue of blocks
     board->getTextDisplay()->updateDisplay(*board);
     queue.erase(queue.begin());
-    cout << *queue.begin() << endl;
 }
 
 vector<string> Player::getQueue(){

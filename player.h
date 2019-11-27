@@ -30,6 +30,8 @@ class Player {
     std::shared_ptr<Board> board;
     std::shared_ptr<Block> current, next;
     std::vector<std::string> queue;
+    std::vector<std::shared_ptr<Block>> blocksOnBoard;
+    
 public:
     Player(std::string fileName);
 
