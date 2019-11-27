@@ -28,7 +28,7 @@ void Interface::initialize()  {
 		}
 		else 
 		{
-			cout << "You entered an invalid command: " << cmd << ". "<< endl << "Please try  again" << endl;
+			cout << "You entered an invalid command: " << cmd << ". "<< endl << "Please try again" << endl;
 			mainMenu();
 		}
 
