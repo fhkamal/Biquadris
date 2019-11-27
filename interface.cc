@@ -208,6 +208,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 }
 
 void Interface::printGame(Player &p1, Player &p2) {
+	cout << endl;
 	cout << "Level:    " << p1.getLevel() << "      " << "Level:    " << p2.getLevel() << endl;
 	cout << "Score:" << right << setw(5) << p1.getScore();
 	cout << "      " << "Score:" << right << setw(5) << p2.getScore() << endl;
@@ -228,4 +229,10 @@ void Interface::printGame(Player &p1, Player &p2) {
 		cout << endl;
 	}
 	cout << "-----------      -----------" << endl;	
+	cout <<"Next:            Next:" << endl;
+	string x = p1.printBlock(p1.getNext());
+	string y = p2.printBlock(p2.getNext());
+	cout << x.substr(0, x.find('/')) + "             " + y.substr(0, y.find('/')) << endl;
+	cout << x.substr(x.find('/') + 1) + "             " + y.substr(y.find('/') + 1) << endl;
+	cout << endl;
 }
