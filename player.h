@@ -31,7 +31,7 @@ class Player {
     std::shared_ptr<Block> current, next;
     std::vector<std::string> queue;
     std::vector<std::shared_ptr<Block>> blocksOnBoard;
-    
+
 public:
     Player(std::string fileName);
 
@@ -49,7 +49,7 @@ public:
     void moveBlock(std::string dir);
     void specialAction(std::string action);
     void playSequence(std::vector<std::string> seq);
-    
+    void printBlock(std::string b);
    
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };

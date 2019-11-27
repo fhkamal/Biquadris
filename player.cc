@@ -149,3 +149,33 @@ void Player::moveBlock(string dir) {
     current->movement(dir);
     board->getTextDisplay()->updateDisplay(*board);
 }
+
+void Player::printBlock(string b) {
+     if (b == "I") {
+        cout << endl << "IIII" << endl;
+    }
+    else if (b == "J")
+    {
+        cout << endl << "J" << endl << "JJJ" << endl;
+    }
+    else if (b == "L")
+    {
+        cout << endl << "  L" << endl << "LLL" << endl;
+    }
+    else if (b == "O")
+    {
+        cout << endl << "OO" << endl << "OO" << endl;
+    }
+    else if (b == "S")
+    {
+        cout << endl << " SS" << endl << "SS " << endl;
+    }
+    else if (b == "Z")
+    {
+         cout << endl << "ZZ" << endl << " ZZ " << endl;
+    }
+    else if (b == "T")
+    {
+        cout << endl << "TTT" << endl << " T " << endl;
+    }
+}
