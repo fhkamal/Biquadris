@@ -60,18 +60,33 @@ bool Block::inBounds(string dir){
 }
 
 bool Block::collision(Block &b){
+	shared_ptr<Cell> c = make_shared<Cell>(30, 30);
 	if(b.one->getIsOccupied() && (b.one != one) && (b.one != two) && (b.one != three) && (b.one != four)){
-		cout << &b.one << endl;
-		cout << &two << endl;
+		b.one = c;
+		b.two = c;
+		b.three = c;
+		b.four = c;
 		return false;
 	}
 	if(b.two->getIsOccupied() && (b.two != one) && (b.two != two) && (b.two != three) && (b.two != four)){
+		b.one = c;
+                b.two = c;
+                b.three = c;
+                b.four = c;
 		return false;
 	}	
 	if(b.three->getIsOccupied() && (b.three != one) && (b.three != two) && (b.three != three) && (b.three != four)){
+		b.one = c;
+                b.two = c;
+                b.three = c;
+                b.four = c;
 		return false;
 	}
 	if(b.four->getIsOccupied() && (b.four != one) && (b.four != two) && (b.four != three) && (b.four != four)){
+		b.one = c;
+                b.two = c;
+                b.three = c;
+                b.four = c;
 		return false;
 	}
 	return true;
