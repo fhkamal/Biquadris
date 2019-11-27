@@ -39,6 +39,7 @@ public:
     int getScore();
     int getHighScore();
     int getLevel();
+    std::string getNext();
     std::shared_ptr<Board> getBoard();
     std::shared_ptr<Block> getCurrentBlock();
 	

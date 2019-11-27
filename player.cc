@@ -131,34 +131,38 @@ void Player::moveBlock(string dir) {
 
 string Player::printBlock(string b) {
      if (b == "I") {
-        return "IIII";
+        return "IIII/    ";
     }
     else if (b == "J")
     {
-        return "J/JJJ";
+        return "J   /JJJ ";
     }
     else if (b == "L")
     {
-        return "  L/LLL";
+        return "  L /LLL ";
     }
     else if (b == "O")
     {
-        return "OO/OO";
+        return " OO / OO ";
     }
     else if (b == "S")
     {
-        return " SS/SS";
+        return " SS /SS  ";
     }
     else if (b == "Z")
     {
-        return "ZZ/ ZZ ";
+        return "ZZ  / ZZ ";
     }
     else if (b == "T")
     {
-       return "TTT/ T ";
+       return "TTT / T  ";
     }
     else
     {
         return "";
     }
+}
+
+string Player::getNext() {
+    return next;
 }
