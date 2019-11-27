@@ -11,7 +11,7 @@ Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} 
 
 void Player::playSequence(std::vector<std::string> seq){
 
-    if (seq.size() == 1) {
+    if (seq.size() <= 2) {
         for (int i = 0; i < lvl->getSequence().size(); i++) {
             queue.emplace_back(lvl->getSequence()[i]);
         }

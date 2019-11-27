@@ -54,12 +54,12 @@ void Interface::startGame() {
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
-                p2.playSequence(p2.getQueue());
+                // p2.playSequence(p2.getQueue());
 			}
 			else
 			{
 				currentTurn = "p1";
-                p1.playSequence(p1.getQueue());
+                // p1.playSequence(p1.getQueue());
 			}
 			switchTurn = false;
 		}
@@ -121,6 +121,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			// use a getter to check if file can go anymore down from block field and if false then change player
 			player.moveBlock("down");
 			if (!player.getCurrentBlock()->getCanDown()) {
+                player.playSequence(player.getQueue());
 				switchTurn = true;
 				printBoard = true;
 				break;
@@ -140,6 +141,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			while (player.getCurrentBlock()->getCanDown()) {
 				player.moveBlock("down");
 			}
+            player.playSequence(player.getQueue());
 			switchTurn = true;
 			printBoard = true;
 		}
@@ -202,6 +204,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 		}
 		multiplier--;
 	}
+    
 	if (printBoard == true) {
 		//cout << *(player.getBoard());
 	}    
