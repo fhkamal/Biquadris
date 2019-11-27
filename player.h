@@ -37,6 +37,7 @@ public:
     int getHighScore();
     int getLevel();
     std::shared_ptr<Board> getBoard();
+    std::shared_ptr<Block> getCurrentBlock();
 	
     std::vector<std::string> getQueue();
     void setScore(int x);

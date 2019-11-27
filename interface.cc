@@ -12,10 +12,10 @@ void Interface::mainMenu() {
 }
 
 
-void Interface::initialize() {
+void Interface::initialize()  {
     mainMenu();
     string cmd;
-
+    
     while (cin >> cmd) {
         if (cmd == "start") {
             cout << "Starting the game..." << endl;
@@ -42,17 +42,39 @@ void Interface::startGame() {
     Player p2("biquadris_sequence2.txt");
     p2.playSequence(p2.getQueue());
     
+    currentTurn = "p1";
+    switchTurn = false;
 
     string cmd;
 
     while(cin >> cmd) {
+        
+        if (printBoard) {
+            printGame(p1, p2);
+        }
+
+        if (switchTurn) {
+            if (currentTurn == "p1") {
+                currentTurn = "p2";
+            }
+            else
+            {
+                currentTurn = "p1";
+            }
+            
+        }
+
+
         // Exits the game loop and returns to main menu
         if (cmd == "quit" || cmd == "exit" || cmd == "q") break;
 
         if (cmd != "restart") {
-            commandInterpreter(cmd, p1);
-            // check if turn is done
-            // switch turn if done
+            if (currentTurn == "p1") {
+                commandInterpreter(cmd, p1);
+            }
+            else if (currentTurn == "p2") {
+                commandInterpreter(cmd, p2);
+            }
         }
     }
 }
@@ -81,7 +103,7 @@ void Interface::commandInterpreter(string cmd, Player &player) {
         multiplier = multiplier * 10 + n;
         cmd = cmd.substr(1);
     }
-    bool printBoard = false;
+    printBoard = false;
 
     while (multiplier > 0) {
 
@@ -95,6 +117,12 @@ void Interface::commandInterpreter(string cmd, Player &player) {
             printBoard = true;
         }
         else if (cmd == "down") {
+            // use a getter to check if file can go anymore down from block field and if false then change player
+            // if (!player.getCurrentBlock()->getCanDown()) {
+            //     switchTurn = true;
+            //     printBoard = true;
+            //     break;
+            // }
             player.moveBlock("down");
             printBoard = true;
         }
@@ -107,6 +135,11 @@ void Interface::commandInterpreter(string cmd, Player &player) {
             printBoard = true;
         }
         else if (cmd == "drop") {
+            // use a getter to check if file can go anymore down from block field and if false then change player
+            // while (!player.getCurrentBlock()->getCanDown()) {
+            //     player.moveBlock("down");
+            // }
+            switchTurn = true;
             cout << "drp" << endl;
             printBoard = true;
         }
@@ -168,9 +201,9 @@ void Interface::commandInterpreter(string cmd, Player &player) {
             break;
         }
         multiplier--;
-    }
-    if (printBoard) {
-        cout << *(player.getBoard());
-    }
+    }    
+}
+
+void Interface::printGame(Player &p1, Player &p2) {
     
 }

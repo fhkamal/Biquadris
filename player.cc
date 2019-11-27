@@ -62,9 +62,14 @@ int Player::getLevel() {
     return lvl->getLevel();
 }
 
-std::shared_ptr<Board> Player::getBoard() {
+shared_ptr<Board> Player::getBoard() {
     return board;
 }
+
+shared_ptr<Block> Player::getCurrentBlock() {
+    return current;
+}
+
 
 
 void Player::setScore(int x) {
