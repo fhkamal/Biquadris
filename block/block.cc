@@ -1,7 +1,7 @@
 #include "block.h"
 using namespace std;
 
-Block::Block(char let, shared_ptr<Board> board) : let {let}, orient {0}{
+Block::Block(char let, shared_ptr<Board> board) : let {let}, canDown {true}{
     this->board = board;
 };
 
@@ -21,6 +21,14 @@ Block::~Block() {
     four->setBlockType(' ');
     four->setIsOccupied(false);
     
+}
+
+void Block::setCanDown(bool b){
+	canDown = b;
+}
+
+bool Block::getCanDown(){
+	return canDown;
 }
 
 bool Block::inBounds(string dir){
@@ -44,6 +52,7 @@ bool Block::inBounds(string dir){
 		if (one->getCoordinates().first + 1 > 17 || two->getCoordinates().first + 1 > 17 ||
                       three->getCoordinates().first + 1 > 17 || four->getCoordinates().first + 1 > 17)
                  {
+		      canDown = true;
                       return false;
                  }	
 	}

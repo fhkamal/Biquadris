@@ -158,6 +158,7 @@ void LBlock::movement(string dir)
 
                 // Set the current block cells to empty
 		if(!collision(tmp)){
+			canDown = false;
 			return;
 		}
                 one->setBlockType(' ');

@@ -18,9 +18,12 @@ class Block{
 		std::shared_ptr<Cell> two;
 		std::shared_ptr<Cell> three;
 		std::shared_ptr<Cell> four;
-		int orient;
+		//int orient;
 		std::shared_ptr<Board> board;
+		bool canDown;
 	public:
+		void setCanDown(bool b);
+		bool getCanDown();
 		bool inBounds(std::string dir);
 		bool collision(Block &b);
 		virtual void movement(std::string dir) = 0;
