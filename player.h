@@ -28,7 +28,8 @@ class Player {
     std::string fileName;
     // std::unique_ptr<Board> board;
     std::shared_ptr<Board> board;
-    std::shared_ptr<Block> current, next;
+    std::shared_ptr<Block> current;
+    std::string next;
     std::vector<std::string> queue;
     std::vector<std::shared_ptr<Block>> blocksOnBoard;
 
@@ -49,7 +50,7 @@ public:
     void moveBlock(std::string dir);
     void specialAction(std::string action);
     void playSequence(std::vector<std::string> seq);
-    void printBlock(std::string b);
+    std::string printBlock(std::string b);
    
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };

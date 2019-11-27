@@ -38,29 +38,7 @@ void Player::playSequence(std::vector<std::string> seq){
     	current = make_shared<LBlock>(board);
     }
 
-    // Updates the next block
-    // if ((seq.at(1)) == "J") {
-    //     next = make_shared<JBlock>(board);	
-    // }
-    // else if ((seq.at(1)) == "S") {
-	//     next = make_shared<SBlock>(board);
-    // }
-    // else if ((seq.at(1)) == "I") {
-	//     next = make_shared<IBlock>(board);
-    // }
-    // else if ((seq.at(1)) == "Z") {
-    // 	next = make_shared<ZBlock>(board);
-    // }
-    //   else if ((seq.at(1)) == "T") {
-    // 	next = make_shared<TBlock>(board);
-    // }
-    // else if ((seq.at(1)) == "O") {
-    // 	next = make_shared<OBlock>(board);
-    // }
-    // else if ((seq.at(1)) == "L") {
-    // 	next = make_shared<LBlock>(board);
-    // }
-
+    next = seq[1];
     blocksOnBoard.emplace_back(current);
     // Update the board display and shift the queue of blocks
     board->getTextDisplay()->updateDisplay(*board);
@@ -142,6 +120,8 @@ void Player::setCurrent(string b) {
         //current = make_shared<IBlock>(board);
         cout << "Force T Block to be the current";
     }
+    
+    
 }
 
 void Player::moveBlock(string dir) {
@@ -149,32 +129,36 @@ void Player::moveBlock(string dir) {
     board->getTextDisplay()->updateDisplay(*board);
 }
 
-void Player::printBlock(string b) {
+string Player::printBlock(string b) {
      if (b == "I") {
-        cout << endl << "IIII" << endl;
+        return "IIII";
     }
     else if (b == "J")
     {
-        cout << endl << "J" << endl << "JJJ" << endl;
+        return "J/JJJ";
     }
     else if (b == "L")
     {
-        cout << endl << "  L" << endl << "LLL" << endl;
+        return "  L/LLL";
     }
     else if (b == "O")
     {
-        cout << endl << "OO" << endl << "OO" << endl;
+        return "OO/OO";
     }
     else if (b == "S")
     {
-        cout << endl << " SS" << endl << "SS " << endl;
+        return " SS/SS";
     }
     else if (b == "Z")
     {
-         cout << endl << "ZZ" << endl << " ZZ " << endl;
+        return "ZZ/ ZZ ";
     }
     else if (b == "T")
     {
-        cout << endl << "TTT" << endl << " T " << endl;
+       return "TTT/ T ";
+    }
+    else
+    {
+        return "";
     }
 }
