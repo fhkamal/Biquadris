@@ -44,7 +44,7 @@ void JBlock::rotate(string direction)
 
 void JBlock::movement(string dir)
 {
-	if(!isValid(dir)){
+	if(!inBounds(dir)){
 		return;
 	}
 	// Call constructor for temp blocks so it doesn't initialize on the board
@@ -79,7 +79,9 @@ void JBlock::movement(string dir)
 		tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
 
 		// Set the current block cells to empty
-		
+		if(!collision(tmp)){
+			return;
+		}	
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');
@@ -121,7 +123,9 @@ void JBlock::movement(string dir)
 		tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
 		// Set the current block cells to empty
-		
+		if(!collision(tmp)){
+			return;
+		}
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');
@@ -133,7 +137,6 @@ void JBlock::movement(string dir)
 		
 
 		// Swap pointers to cells with the temporary block
-		
 		swap(one, tmp.one);
 		swap(two, tmp.two);
 		swap(three, tmp.three);
@@ -163,7 +166,9 @@ void JBlock::movement(string dir)
 		tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
 		// Set the current block cells to empty
-		
+		if(!collision(tmp)){
+			return;
+		}
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');

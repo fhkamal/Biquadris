@@ -70,7 +70,7 @@ void IBlock::rotate(string direction)
 
 void IBlock::movement(string dir)
 {
-	if(!isValid(dir)){
+	if(!inBounds(dir)){
 		return;
 	}
 	// call temp block constructor
@@ -103,7 +103,10 @@ void IBlock::movement(string dir)
 		tmp.two = board->getGrid()[(two->getCoordinates().first)][two->getCoordinates().second + 1];
 		tmp.three = board->getGrid()[(three->getCoordinates().first)][three->getCoordinates().second + 1];
 		tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
-
+		
+		if(!collision(tmp)){
+			return;
+		}
 		// Set the current block cells to empty
 		
 		one->setBlockType(' ');
@@ -147,7 +150,9 @@ void IBlock::movement(string dir)
 		tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
 		// Set the current block cells to empty
-		
+		if(!collision(tmp)){
+			return;
+		}
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');
@@ -189,7 +194,9 @@ void IBlock::movement(string dir)
 		tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
 		// Set the current block cells to empty
-		
+		if(!collision(tmp)){
+			return;
+		}
 		one->setBlockType(' ');
 		one->setIsOccupied(false);
 		two->setBlockType(' ');

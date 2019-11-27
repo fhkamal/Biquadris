@@ -32,8 +32,12 @@ void LBlock::rotate(string direction){
 }
 
 void LBlock::movement(string dir)
-{
-        // call temp block constructor
+{	
+
+	if(!inBounds(dir)){
+		return;
+	}
+	// call temp block constructor
         LBlock tmp = LBlock();
 
         // Set the new Block to current block position
@@ -65,7 +69,9 @@ void LBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -107,7 +113,9 @@ void LBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -149,7 +157,9 @@ void LBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');

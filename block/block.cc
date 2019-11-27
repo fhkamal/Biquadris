@@ -23,14 +23,14 @@ Block::~Block() {
     
 }
 
-bool Block::isValid(string dir){
+bool Block::inBounds(string dir){
 	if(dir == "right"){
 	// Check if blocks to the right are in bounds
                  if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second  + 1 > 10 ||
                       three->getCoordinates().second + 1 > 10 || four->getCoordinates().second  + 1 > 10)
                  {
                       return false;
-                 }	
+                 }	 
 	}
 	else if(dir == "left"){
 	//Checks if blocks to the left are in bounds
@@ -46,6 +46,22 @@ bool Block::isValid(string dir){
                  {
                       return false;
                  }	
+	}
+	return true;
+}
+
+bool Block::collision(Block &b){
+	if(b.one->getIsOccupied() && b.one->getBlockType() == one->getBlockType()){
+		return false;
+	}
+	if(b.two->getIsOccupied() && b.two->getBlockType() == two->getBlockType()){
+		return false;
+	}	
+	if(b.three->getIsOccupied() && b.three->getBlockType() == three->getBlockType()){
+		return false;
+	}
+	if(b.four->getIsOccupied() && b.four->getBlockType() == four->getBlockType()){
+		return false;
 	}
 	return true;
 }

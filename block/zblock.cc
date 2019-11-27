@@ -33,6 +33,9 @@ void ZBlock::rotate(string direction){
 
 void ZBlock::movement(string dir)
 {
+	if(!inBounds(dir)){
+		return;
+	}
         // call temp block constructor
         ZBlock tmp = ZBlock();
 
@@ -65,7 +68,9 @@ void ZBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -107,7 +112,9 @@ void ZBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -149,7 +156,9 @@ void ZBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
                 // Set the current block cells to empty
-
+		if(!collision(tmp)){
+			return;
+		}
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
