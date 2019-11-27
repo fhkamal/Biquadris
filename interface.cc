@@ -68,14 +68,14 @@ void Interface::startGame() {
         // Exits the game loop and returns to main menu
         if (cmd == "quit" || cmd == "exit" || cmd == "q") break;
 
-        if (cmd != "restart") {
-            if (currentTurn == "p1") {
+        // if (cmd != "restart") {
+        //     if (currentTurn == "p1") {
                 commandInterpreter(cmd, p1);
-            }
-            else if (currentTurn == "p2") {
-                commandInterpreter(cmd, p2);
-            }
-        }
+            // }
+            // else if (currentTurn == "p2") {
+            //     commandInterpreter(cmd, p2);
+            // }
+        // }
     }
 }
 
@@ -201,6 +201,9 @@ void Interface::commandInterpreter(string cmd, Player &player) {
             break;
         }
         multiplier--;
+    }
+    if (printBoard == true) {
+        cout << *(player.getBoard());
     }    
 }
 
