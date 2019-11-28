@@ -6,32 +6,42 @@
 
 //class Board;
 
-class Block{
-	protected:
-		const char let;
-		// Cell *one;
-		// Cell *two;
-		// Cell *three;
-		// Cell *four;
+class Block
+{
+protected:
+	const char let;
+	// Cell *one;
+	// Cell *two;
+	// Cell *three;
+	// Cell *four;
 
-		std::shared_ptr<Cell> one;
-		std::shared_ptr<Cell> two;
-		std::shared_ptr<Cell> three;
-		std::shared_ptr<Cell> four;
-		std::shared_ptr<Board> board;
-		bool canDown;
-		const int length;
-	public:
-		void setCanDown(bool b);
-		bool getCanDown();
-		bool inBounds(std::string dir);
-		bool collision(Block &b);
-		virtual void movement(std::string dir);
-		Block(char let, std::shared_ptr<Board> board, int length);
-		virtual ~Block();
-		// Block &operator=(const Block& other);
-		// Block &operator=(Block&& other);
-		virtual void rotate(std::string direction);
+	// cell's that a block occupies
+	std::shared_ptr<Cell> one;
+	std::shared_ptr<Cell> two;
+	std::shared_ptr<Cell> three;
+	std::shared_ptr<Cell> four;
+
+	// corners of the smallest bounding rectangle
+	std::shared_ptr<Cell> topLeft;
+	std::shared_ptr<Cell> topRight;
+	std::shared_ptr<Cell> bottomLeft;
+	std::shared_ptr<Cell> bottomRight;
+
+	std::shared_ptr<Board> board;
+	bool canDown;
+	const int length;
+
+public:
+	void setCanDown(bool b);
+	bool getCanDown();
+	bool inBounds(std::string dir);
+	bool collision(Block &b);
+	virtual void movement(std::string dir);
+	Block(char let, std::shared_ptr<Board> board, int length);
+	virtual ~Block();
+	// Block &operator=(const Block& other);
+	// Block &operator=(Block&& other);
+	virtual void rotate(std::string direction);
 };
 
 #endif

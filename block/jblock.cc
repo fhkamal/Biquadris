@@ -4,18 +4,20 @@ using namespace std;
 JBlock::JBlock(shared_ptr<Board> b) : Block{'J', b, 3}
 {
 	// The block spawns in the top left
-
 	one = b->getGrid()[2][0];
 	two = b->getGrid()[3][0];
 	three = b->getGrid()[3][1];
 	four = b->getGrid()[3][2];
 
+	// Set the bounding rectangle
+	topLeft = b->getGrid()[2][0];
+	bottomLeft = b->getGrid()[3][0];
+	topRight = b->getGrid()[2][2];
+	bottomRight = b->getGrid()[3][2];
+
 	// Set the block in the cells
 	one->setBlockType('J');
 	one->setIsOccupied(true);
-
-	// cout << one->getBlockType() << endl;
-	// cout << b->getGrid()[3][0]->getBlockType() << endl;
 
 	// cout << "two";
 	two->setBlockType('J');
