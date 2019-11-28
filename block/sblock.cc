@@ -3,10 +3,10 @@ using namespace std;
 
 SBlock::SBlock(shared_ptr<Board> b) : Block{'S', b} {
         // The block spawns in the top left
-        one = b->getGrid()[3][1];
-        two = b->getGrid()[3][2];
-        three = b->getGrid()[4][0];
-        four = b->getGrid()[4][1];
+        one = b->getGrid()[2][1];
+        two = b->getGrid()[2][2];
+        three = b->getGrid()[3][0];
+        four = b->getGrid()[3][1];
 
         // Set the block in the cells
         one->setBlockType('S');

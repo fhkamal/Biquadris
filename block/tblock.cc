@@ -3,10 +3,10 @@ using namespace std;
 
 TBlock::TBlock(shared_ptr <Board> b) : Block{'T', b} {
         // The block spawns in the top left
-        one = b->getGrid()[3][0];
-        two = b->getGrid()[3][1];
-        three = b->getGrid()[3][2];
-        four = b->getGrid()[4][1];
+        one = b->getGrid()[2][0];
+        two = b->getGrid()[2][1];
+        three = b->getGrid()[2][2];
+        four = b->getGrid()[3][1];
 
         // Set the block in the cells
         one->setBlockType('T');

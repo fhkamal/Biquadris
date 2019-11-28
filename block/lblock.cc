@@ -3,10 +3,10 @@ using namespace std;
 
 LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b} {
         // The block spawns in the top left
-        one = b->getGrid()[3][2];
-        two = b->getGrid()[4][0];
-        three = b->getGrid()[4][1];
-        four = b->getGrid()[4][2];
+        one = b->getGrid()[2][2];
+        two = b->getGrid()[3][0];
+        three = b->getGrid()[3][1];
+        four = b->getGrid()[3][2];
 
         // Set the block in the cells
         one->setBlockType('L');
