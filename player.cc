@@ -66,6 +66,9 @@ int Player::getLevel() {
 shared_ptr<Board> Player::getBoard() {
     return board;
 }
+int Player::getHighScore() {
+    return highscore;
+}
 
 shared_ptr<Block> Player::getCurrentBlock() {
     return current;

@@ -74,16 +74,16 @@ void Interface::startGame() {
 				commandInterpreter(cmd, p2);
 			}
 		}
-
+        if (printBoard) printGame(p1, p2);
         if (p1.getEndGame() || p2.getEndGame()) break;
 	}
 
     if (!p1.getEndGame() && p2.getEndGame()) {
-        cout << endl << endl << "Player 2 Wins!" << endl;
+        cout << endl << endl << "Player 2 Wins with a highscore of: " << p2.getHighScore() << "!" << endl;
     }
 
     if(p1.getEndGame() && !p2.getEndGame()) {
-        cout << endl << endl << "Player 1 Wins!" << endl;
+         cout << endl << endl << "Player 2 Wins with a highscore of:" << p2.getHighScore() << "!" << endl;
     }
 
     if(p1.getEndGame() && !p2.getEndGame()) {
