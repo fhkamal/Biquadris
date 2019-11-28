@@ -54,6 +54,7 @@ public:
     void specialAction(std::string action);
     void playSequence(std::vector<std::string> seq);
     std::string printBlock(std::string b);
+    void rotateBlock(std::string direction);
    
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };

@@ -102,6 +102,10 @@ void Player::moveBlock(string dir) {
     board->getTextDisplay()->updateDisplay(*board);
 }
 
+void Player::rotateBlock(string direction) {
+    current->rotate(direction);
+    board->getTextDisplay()->updateDisplay(*board);
+}
 string Player::printBlock(string b) {
     if (b == "I") {
         return "IIII/    ";
