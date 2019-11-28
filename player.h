@@ -40,10 +40,11 @@ public:
     int getScore();
     int getHighScore();
     int getLevel();
+    bool getEndGame();
     std::string getNext();
     std::shared_ptr<Board> getBoard();
     std::shared_ptr<Block> getCurrentBlock();
-	
+	bool canSpawn(std::string b);
     std::vector<std::string> getQueue();
     void setScore(int x);
     void setLevel(int x);

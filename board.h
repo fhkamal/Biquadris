@@ -25,7 +25,6 @@ class Board {
 
     std::vector<std::vector<std::shared_ptr<Cell>>> getGrid();
     int clearRow();
-
     // void setDisplay(unique_ptr<TextDisplay> td);
     bool tooTall();
     void init();

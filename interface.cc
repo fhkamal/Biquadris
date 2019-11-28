@@ -51,15 +51,14 @@ void Interface::startGame() {
 
 	while(cin >> cmd) {
 
+        if (p1.getEndGame() || p2.getEndGame()) break;
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
-                // p2.playSequence(p2.getQueue());
 			}
 			else
 			{
 				currentTurn = "p1";
-                // p1.playSequence(p1.getQueue());
 			}
 			switchTurn = false;
 		}
@@ -78,6 +77,16 @@ void Interface::startGame() {
 		}
 		if (printBoard) printGame(p1, p2);
 	}
+    
+    printGame(p1, p2);
+    if (!p1.getEndGame() && p2.getEndGame()) {
+        cout << endl << endl << "Player 2 Wins!" << endl;
+    }
+
+    if(p1.getEndGame() && !p2.getEndGame()) {
+        cout << endl << endl << "Player 1 Wins!" << endl;
+    }
+    cout << "Enter start to play again. " << endl << "Enter exit to quit." << endl;
 }
 
 void Interface::commandInterpreter(string cmd, Player &player) {

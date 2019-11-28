@@ -16,8 +16,13 @@ void Player::playSequence(std::vector<std::string> seq){
             queue.emplace_back(lvl->getSequence()[i]);
         }
     }
-    if (*(seq.begin()) == "J") {
+    // If a block can't spawn, the game must end
+    if (!canSpawn(*(seq.begin())))  {
+        endGame = true;
+        return;
+    }
 
+    if (*(seq.begin()) == "J") {
         current = make_shared<JBlock>(board);	// block test
     }
     else if (*(seq.begin()) == "S") {
@@ -95,7 +100,7 @@ void Player::moveBlock(string dir) {
 }
 
 string Player::printBlock(string b) {
-     if (b == "I") {
+    if (b == "I") {
         return "IIII/    ";
     }
     else if (b == "J")
@@ -130,4 +135,42 @@ string Player::printBlock(string b) {
 
 string Player::getNext() {
     return next;
+}
+
+bool Player::canSpawn(string b) {
+    if (b == "I") {
+        if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied() ||
+             board->getGrid()[3][2]->getIsOccupied() || board->getGrid()[3][3]->getIsOccupied()) return false;
+    }
+    else if (b == "J")
+    {
+        if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied() ||
+             board->getGrid()[3][2]->getIsOccupied()) return false;
+    }
+    else if (b == "L")
+    {
+        if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied() ||
+             board->getGrid()[3][2]->getIsOccupied()) return false;
+    }
+    else if (b == "O")
+    {
+        if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied()) return false;
+    }
+    else if (b == "S")
+    {
+        if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied()) return false;
+    }
+    else if (b == "Z")
+    {
+        if (board->getGrid()[3][1]->getIsOccupied() || board->getGrid()[3][2]->getIsOccupied()) return false;
+    }
+    else if (b == "T")
+    {
+       if (board->getGrid()[3][1]->getIsOccupied()) return false;
+    }
+    return true;
+}
+
+bool Player::getEndGame() {
+    return endGame;
 }
