@@ -51,7 +51,6 @@ void Interface::startGame() {
 
 	while(cin >> cmd) {
 
-        if (p1.getEndGame() || p2.getEndGame()) break;
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
@@ -75,10 +74,10 @@ void Interface::startGame() {
 				commandInterpreter(cmd, p2);
 			}
 		}
-		if (printBoard) printGame(p1, p2);
+
+        if (p1.getEndGame() || p2.getEndGame()) break;
 	}
-    
-    printGame(p1, p2);
+
     if (!p1.getEndGame() && p2.getEndGame()) {
         cout << endl << endl << "Player 2 Wins!" << endl;
     }
@@ -86,6 +85,11 @@ void Interface::startGame() {
     if(p1.getEndGame() && !p2.getEndGame()) {
         cout << endl << endl << "Player 1 Wins!" << endl;
     }
+
+    if(p1.getEndGame() && !p2.getEndGame()) {
+        cout << endl << endl << "The game ends in a Tie!" << endl;
+    }
+
     cout << "Enter start to play again. " << endl << "Enter exit to quit." << endl;
 }
 
