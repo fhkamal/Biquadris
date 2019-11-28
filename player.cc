@@ -2,7 +2,7 @@
 
 using namespace std;
  
-Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName} {
+Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName}, endGame {false} {
     lvl = make_shared<LevelZero>(fileName);
     board = make_shared<Board>();
     board->init();
@@ -17,6 +17,7 @@ void Player::playSequence(std::vector<std::string> seq){
         }
     }
     if (*(seq.begin()) == "J") {
+
         current = make_shared<JBlock>(board);	// block test
     }
     else if (*(seq.begin()) == "S") {
@@ -68,7 +69,7 @@ shared_ptr<Block> Player::getCurrentBlock() {
 
 
 void Player::setScore(int x) {
-    score = x;
+    score += (x + getLevel()) * (x + getLevel());
 }
 
 void Player::setHighScore(int  x) {
@@ -87,42 +88,6 @@ void Player::specialAction(string action) {
 
 }
 
-void Player::setCurrent(string b) {
-    if (b == "I") {
-        current = make_shared<IBlock>(board);
-    }
-    else if (b == "J")
-    {
-         current = make_shared<IBlock>(board);
-    }
-    else if (b == "L")
-    {
-        // current = make_shared<IBlock>(board);
-        cout << "Force L Block to be the current";
-    }
-    else if (b == "O")
-    {
-        // current = make_shared<IBlock>(board);
-        cout << "Force O Block to be the current";
-    }
-    else if (b == "S")
-    {
-        // current = make_shared<IBlock>(board);
-        cout << "Force S Block to be the current";
-    }
-    else if (b == "Z")
-    {
-        // current = make_shared<IBlock>(board);
-        cout << "Force Z Block to be the current";
-    }
-    else if (b == "T")
-    {
-        //current = make_shared<IBlock>(board);
-        cout << "Force T Block to be the current";
-    }
-    
-    
-}
 
 void Player::moveBlock(string dir) {
     current->movement(dir);

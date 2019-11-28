@@ -32,6 +32,7 @@ class Player {
     std::string next;
     std::vector<std::string> queue;
     std::vector<std::shared_ptr<Block>> blocksOnBoard;
+    bool endGame;
 
 public:
     Player(std::string fileName);

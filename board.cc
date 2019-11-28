@@ -17,20 +17,28 @@ void Board::init() {
 }
 
 // Clear the rows starting from the bottom if 
-void Board::clearRow() {
-    for (int i = 0; i < height; i++) {
+int Board::clearRow() {
+    int count = 0;
+    for (int i = height - 1; i >= 0; i--) {
         bool deleteRow = true;
         for (int j = 0; j < width && deleteRow; j++) {
             deleteRow = grid[i][j]->getIsOccupied(); 
         }
         if (deleteRow) {
             for (int k = 0; k < width; k++) {
-               grid[i][k]->setIsOccupied(false); 
-                //grid[i][k].setBlockType('1');
+               grid[i][k]->setIsOccupied(false);
+              
             }
+            vector<shared_ptr<Cell>> c = grid[i];
+            grid.erase(grid.begin() + i);
+            grid.emplace(grid.begin(), c);
+            count++;
+            i++;
         }
 
     }
+    td->updateDisplay(*this);
+    return count;
 }
 
 bool Board::tooTall() {

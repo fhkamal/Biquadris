@@ -122,6 +122,9 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			player.moveBlock("down");
 			if (!player.getCurrentBlock()->getCanDown()) {
                 player.playSequence(player.getQueue());
+                int score = player.getBoard()->clearRow();
+                player.setScore(score);
+                player.getBoard()->clearRow();
 				switchTurn = true;
 				printBoard = true;
 				break;
@@ -142,6 +145,8 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 				player.moveBlock("down");
 			}
             player.playSequence(player.getQueue());
+            int score = player.getBoard()->clearRow();
+            player.setScore(score);
 			switchTurn = true;
 			printBoard = true;
 		}
@@ -212,6 +217,8 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 
 void Interface::printGame(Player &p1, Player &p2) {
 	cout << endl;
+    //p1.getBoard()->clearRow();
+    //p2.getBoard()->clearRow();
 	cout << "Level:    " << p1.getLevel() << "      " << "Level:    " << p2.getLevel() << endl;
 	cout << "Score:" << right << setw(5) << p1.getScore();
 	cout << "      " << "Score:" << right << setw(5) << p2.getScore() << endl;
