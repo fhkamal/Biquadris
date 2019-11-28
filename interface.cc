@@ -36,7 +36,7 @@ void Interface::initialize()  {
 	cout << "Thank you for playing." << endl;
 }
 
-void Interface::startGame() {
+void Interface::startGame(string fileNameSeq1, string fileNameSeq2) {
 	// Create Players 1 and 2
 	Player p1("biquadris_sequence1.txt");
 	p1.playSequence(p1.getQueue());

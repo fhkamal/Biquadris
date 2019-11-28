@@ -8,7 +8,7 @@
 #include "player.h"
 
 class Interface {
-    void startGame();
+    void startGame(std::string fileNameSeq1 = "biquadris_sequence1.txt", std::string fileNameSeq2 = "biquadris_sequence2.txt");
     void mainMenu();
     void commandInterpreter(std::string cmd, Player &player);
     std::string currentTurn;
