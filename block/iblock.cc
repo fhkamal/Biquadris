@@ -1,7 +1,7 @@
 #include "iblock.h"
 using namespace std;
 
-IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b}
+IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b, 4}
 {
 	// The block spawns in the top left
 
@@ -33,14 +33,11 @@ IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b}
 }
 
 // Constructor for temp blocks
-IBlock::IBlock() : Block{'I', make_shared<Board>()} {}
+IBlock::IBlock() : Block{'I', make_shared<Board>(), 4} {}
 
-void IBlock::rotate(string direction)
-{
-	if (direction == "clockwise")
-	{
-	}
-}
+//void IBlock::rotate(string direction)
+//{
+//}
 
 /*  bool IBlock::validMove(string dir){
 	if(dir == "right"){

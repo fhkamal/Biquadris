@@ -1,7 +1,7 @@
 #include "zblock.h"
 using namespace std;
 
-ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b} {
+ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b, 3} {
         // The block spawns in the top left
         one = b->getGrid()[2][0];
         two = b->getGrid()[2][1];
@@ -23,13 +23,13 @@ ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b} {
 }
 
 // Constructor for temp blocks
-ZBlock::ZBlock() : Block{'Z', make_shared<Board>()} {}
+ZBlock::ZBlock() : Block{'Z', make_shared<Board>(), 3} {}
 
-void ZBlock::rotate(string direction){
-        if(direction == "clockwise"){
-
-        }
-}
+//void ZBlock::rotate(string direction){
+//        if(direction == "clockwise"){
+//
+//        }
+//}
 
 void ZBlock::movement(string dir)
 {

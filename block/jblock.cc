@@ -1,7 +1,7 @@
 #include "jblock.h"
 using namespace std;
 
-JBlock::JBlock(shared_ptr<Board> b) : Block{'J', b}
+JBlock::JBlock(shared_ptr<Board> b) : Block{'J', b, 3}
 {
 	// The block spawns in the top left
 
@@ -33,14 +33,14 @@ JBlock::JBlock(shared_ptr<Board> b) : Block{'J', b}
 }
 
 // Constructor for temp blocks
-JBlock::JBlock() : Block{'J', make_shared<Board>()} {}
+JBlock::JBlock() : Block{'J', make_shared<Board>(), 3} {}
 
-void JBlock::rotate(string direction)
-{
-	if (direction == "clockwise")
-	{
-	}
-}
+//void JBlock::rotate(string direction)
+//{
+//	if (direction == "clockwise")
+//	{
+//	}
+//}
 
 void JBlock::movement(string dir)
 {

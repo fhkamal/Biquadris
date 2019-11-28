@@ -145,11 +145,11 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			printBoard = true;
 		}
 		else if (cmd == "clockwise") {
-			cout << "cw" << endl;
+			player.rotateBlock(cmd);
 			printBoard = true;
 		}
 		else if (cmd == "counterclockwise") {
-			cout << "ccw" << endl;
+			player.rotateBlock(cmd);
 			printBoard = true;
 		}
 		else if (cmd == "drop") {

@@ -18,20 +18,20 @@ class Block{
 		std::shared_ptr<Cell> two;
 		std::shared_ptr<Cell> three;
 		std::shared_ptr<Cell> four;
-		//int orient;
 		std::shared_ptr<Board> board;
 		bool canDown;
+		const int length;
 	public:
 		void setCanDown(bool b);
 		bool getCanDown();
 		bool inBounds(std::string dir);
 		bool collision(Block &b);
-		virtual void movement(std::string dir) = 0;
-		Block(char let, std::shared_ptr<Board> board);
+		virtual void movement(std::string dir);
+		Block(char let, std::shared_ptr<Board> board, int length);
 		virtual ~Block();
 		// Block &operator=(const Block& other);
 		// Block &operator=(Block&& other);
-		virtual void rotate(std::string direction) = 0;
+		virtual void rotate(std::string direction);
 };
 
 #endif

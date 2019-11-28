@@ -1,7 +1,7 @@
 #include "lblock.h"
 using namespace std;
 
-LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b} {
+LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b, 3} {
         // The block spawns in the top left
         one = b->getGrid()[2][2];
         two = b->getGrid()[3][0];
@@ -23,13 +23,13 @@ LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b} {
 }
 
 // Constructor for temp blocks
-LBlock::LBlock() : Block{'L', make_shared<Board>()} {}
+LBlock::LBlock() : Block{'L', make_shared<Board>(), 3} {}
 
-void LBlock::rotate(string direction){
-        if(direction == "clockwise"){
+//void LBlock::rotate(string direction){
+//       if(direction == "clockwise"){
 
-        }
-}
+//        }
+//}
 
 void LBlock::movement(string dir)
 {	

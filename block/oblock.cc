@@ -1,7 +1,7 @@
 #include "oblock.h"
 using namespace std;
 
-OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b} {
+OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b, 2} {
         // The block spawns in the top left
         one = b->getGrid()[2][0];
         two = b->getGrid()[2][1];
@@ -23,7 +23,7 @@ OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b} {
 }
 
 // Constructor for temp blocks
-OBlock::OBlock() : Block{'O', make_shared<Board>()} {}
+OBlock::OBlock() : Block{'O', make_shared<Board>(), 2} {}
 
 void OBlock::rotate(string direction){}
 
