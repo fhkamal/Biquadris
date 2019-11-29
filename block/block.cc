@@ -142,15 +142,17 @@ void Block::rotate(string dir)
                hs = 3;
 
           // Apply rotation on block
-          tmp->one = board->getGrid()[hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)]
-                                     [vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)];
-          tmp->two = board->getGrid()[hs + pivotX - (abs(two->getCoordinates().first - pivotY) * type)]
-                                     [vs + pivotY - (abs(two->getCoordinates().second - pivotX) * type)];
-          tmp->three = board->getGrid()[hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)]
-                                       [vs + pivotY - (abs(three->getCoordinates().second - pivotX) * type)];
-          tmp->four = board->getGrid()[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)]
-                                      [vs + pivotY - (abs(four->getCoordinates().second - pivotX) * type)];
-
+          tmp->one = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
+                                     [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+          tmp->two = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
+                                     [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+          tmp->three = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
+                                       [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+          tmp->four = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
+                                      [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+     }
+     else if (let != 'O')
+     {
           tmp->topLeft = board->getGrid()[hs + pivotX - (abs(topLeft->getCoordinates().first - pivotY) * type)]
                                          [vs + pivotY - (abs(topLeft->getCoordinates().second - pivotX) * type)];
           tmp->topRight = board->getGrid()[hs + pivotX - (abs(topRight->getCoordinates().first - pivotY) * type)]
@@ -159,9 +161,6 @@ void Block::rotate(string dir)
                                             [vs + pivotY - (abs(bottomLeft->getCoordinates().second - pivotX) * type)];
           tmp->bottomRight = board->getGrid()[hs + pivotX - (abs(bottomRight->getCoordinates().first - pivotY) * type)]
                                              [vs + pivotY - (abs(bottomRight->getCoordinates().second - pivotX) * type)];
-     }
-     else if (let != 'O')
-     {
      }
 
      // if(dir == "clockwise"){
@@ -208,7 +207,7 @@ void Block::rotate(string dir)
      tmp->four = tmp->one;
      tmp->topLeft = tmp->one;
      tmp->topRight = tmp->one;
-     tmp->bottomLeft= tmp->one;
+     tmp->bottomLeft = tmp->one;
      tmp->bottomRight = tmp->one;
 
      // Set the new cell values
