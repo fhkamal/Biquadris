@@ -93,11 +93,13 @@ void JBlock::movement(string dir)
 		tmp.topRight = board->getGrid()[(topRight->getCoordinates().first) + 1][topRight->getCoordinates().second];
 	}
 
-		// Check if the movement causes a collision
-	if (!collision(tmp))
+	// Check if the movement causes a collision
+	if (!collision(tmp) && dir == "down")
 	{
-		return;
+		canDown = false;
+		return; 
 	}
+	if (!collision(tmp)) return;
 
 	// Set the current cells to empty
 	one->setBlockType(' ');

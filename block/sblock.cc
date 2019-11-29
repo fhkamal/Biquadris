@@ -96,10 +96,12 @@ void SBlock::movement(string dir)
 	}
 
 	// Check if the movement causes a collision
-	if (!collision(tmp))
+	if (!collision(tmp) && dir == "down")
 	{
+		canDown = false;
 		return;
 	}
+	if (!collision(tmp)) return;
 
 	// Set the current cells to empty
 	one->setBlockType(' ');
@@ -121,10 +123,12 @@ void SBlock::movement(string dir)
 	swap(bottomLeft, tmp.bottomLeft);
 	swap(bottomRight, tmp.bottomRight);
 
+	/*
 	cout << "tl: " << topLeft->getCoordinates().first << topLeft->getCoordinates().second << endl;
 	cout << "tr: " << topRight->getCoordinates().first << topRight->getCoordinates().second << endl;
 	cout << "bl: " << bottomLeft->getCoordinates().first << bottomLeft->getCoordinates().second << endl;
 	cout << "br: " << bottomRight->getCoordinates().first << bottomRight->getCoordinates().second << endl;
+	*/
 
 	// Set temp values to sa random cell so they don't delete board cells
 	tmp.one = make_shared<Cell>(3, 1);

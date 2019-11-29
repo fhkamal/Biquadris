@@ -3,30 +3,30 @@ using namespace std;
 
 TBlock::TBlock(shared_ptr<Board> b) : Block{'T', b, 3}
 {
-        // The block spawns in the top left
-        one = b->getGrid()[2][0];
-        two = b->getGrid()[2][1];
-        three = b->getGrid()[2][2];
-        four = b->getGrid()[3][1];
+	// The block spawns in the top left
+	one = b->getGrid()[2][0];
+	two = b->getGrid()[2][1];
+	three = b->getGrid()[2][2];
+	four = b->getGrid()[3][1];
 
-        // Set the bounding rectangle
-        topLeft = b->getGrid()[2][0];
-        bottomLeft = b->getGrid()[3][0];
-        topRight = b->getGrid()[2][2];
-        bottomRight = b->getGrid()[3][2];
+	// Set the bounding rectangle
+	topLeft = b->getGrid()[2][0];
+	bottomLeft = b->getGrid()[3][0];
+	topRight = b->getGrid()[2][2];
+	bottomRight = b->getGrid()[3][2];
 
-        // Set the block in the cells
-        one->setBlockType('T');
-        one->setIsOccupied(true);
+	// Set the block in the cells
+	one->setBlockType('T');
+	one->setIsOccupied(true);
 
-        two->setBlockType('T');
-        two->setIsOccupied(true);
+	two->setBlockType('T');
+	two->setIsOccupied(true);
 
-        three->setBlockType('T');
-        three->setIsOccupied(true);
+	three->setBlockType('T');
+	three->setIsOccupied(true);
 
-        four->setBlockType('T');
-        four->setIsOccupied(true);
+	four->setBlockType('T');
+	four->setIsOccupied(true);
 }
 
 // Constructor for temp blocks
@@ -40,13 +40,13 @@ TBlock::TBlock() : Block{'T', make_shared<Board>(), 3} {}
 
 void TBlock::movement(string dir)
 {
-        if (!inBounds(dir))
-        {
-                return;
-        }
-        // call temp block constructor
-        TBlock tmp = TBlock();
-        
+	if (!inBounds(dir))
+	{
+		return;
+	}
+	// call temp block constructor
+	TBlock tmp = TBlock();
+
 	// Set the new Block to current block position
 	tmp.one = one;
 	tmp.two = two;
@@ -94,11 +94,13 @@ void TBlock::movement(string dir)
 		tmp.topRight = board->getGrid()[(topRight->getCoordinates().first) + 1][topRight->getCoordinates().second];
 	}
 
-		// Check if the movement causes a collision
-	if (!collision(tmp))
+	// Check if the movement causes a collision
+	if (!collision(tmp) && dir == "down")
 	{
+		canDown = false;
 		return;
 	}
+	if (!collision(tmp)) return;
 
 	// Set the current cells to empty
 	one->setBlockType(' ');

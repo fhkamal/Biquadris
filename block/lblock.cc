@@ -3,30 +3,30 @@ using namespace std;
 
 LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b, 3}
 {
-        // The block spawns in the top left
-        one = b->getGrid()[2][2];
-        two = b->getGrid()[3][0];
-        three = b->getGrid()[3][1];
-        four = b->getGrid()[3][2];
+	// The block spawns in the top left
+	one = b->getGrid()[2][2];
+	two = b->getGrid()[3][0];
+	three = b->getGrid()[3][1];
+	four = b->getGrid()[3][2];
 
-        // Set the bounding rectangle
-        topLeft = b->getGrid()[2][0];
-        bottomLeft = b->getGrid()[3][0];
-        topRight = b->getGrid()[2][2];
-        bottomRight = b->getGrid()[3][2];
+	// Set the bounding rectangle
+	topLeft = b->getGrid()[2][0];
+	bottomLeft = b->getGrid()[3][0];
+	topRight = b->getGrid()[2][2];
+	bottomRight = b->getGrid()[3][2];
 
-        // Set the block in the cells
-        one->setBlockType('L');
-        one->setIsOccupied(true);
+	// Set the block in the cells
+	one->setBlockType('L');
+	one->setIsOccupied(true);
 
-        two->setBlockType('L');
-        two->setIsOccupied(true);
+	two->setBlockType('L');
+	two->setIsOccupied(true);
 
-        three->setBlockType('L');
-        three->setIsOccupied(true);
+	three->setBlockType('L');
+	three->setIsOccupied(true);
 
-        four->setBlockType('L');
-        four->setIsOccupied(true);
+	four->setBlockType('L');
+	four->setIsOccupied(true);
 }
 
 // Constructor for temp blocks
@@ -41,13 +41,13 @@ LBlock::LBlock() : Block{'L', make_shared<Board>(), 3} {}
 void LBlock::movement(string dir)
 {
 
-        if (!inBounds(dir))
-        {
-                return;
-        }
-        // call temp block constructor
-        LBlock tmp = LBlock();
-        
+	if (!inBounds(dir))
+	{
+		return;
+	}
+	// call temp block constructor
+	LBlock tmp = LBlock();
+
 	// Set the new Block to current block position
 	tmp.one = one;
 	tmp.two = two;
@@ -95,11 +95,14 @@ void LBlock::movement(string dir)
 		tmp.topRight = board->getGrid()[(topRight->getCoordinates().first) + 1][topRight->getCoordinates().second];
 	}
 
-		// Check if the movement causes a collision
-	if (!collision(tmp))
+	// Check if movement causes a collision
+	if (!collision(tmp) && dir == "down")
 	{
+		canDown = false;
 		return;
 	}
+	if (!collision(tmp)) return;
+
 
 	// Set the current cells to empty
 	one->setBlockType(' ');
@@ -132,12 +135,12 @@ void LBlock::movement(string dir)
 	tmp.bottomLeft = tmp.one;
 
 	// Set the new cell values
-	one->setBlockType('J');
+	one->setBlockType('L');
 	one->setIsOccupied(true);
-	two->setBlockType('J');
+	two->setBlockType('L');
 	two->setIsOccupied(true);
-	three->setBlockType('J');
+	three->setBlockType('L');
 	three->setIsOccupied(true);
-	four->setBlockType('J');
+	four->setBlockType('L');
 	four->setIsOccupied(true);
 }

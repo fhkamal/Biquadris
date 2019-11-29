@@ -3,30 +3,30 @@ using namespace std;
 
 ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b, 3}
 {
-        // The block spawns in the top left
-        one = b->getGrid()[2][0];
-        two = b->getGrid()[2][1];
-        three = b->getGrid()[3][1];
-        four = b->getGrid()[3][2];
+	// The block spawns in the top left
+	one = b->getGrid()[2][0];
+	two = b->getGrid()[2][1];
+	three = b->getGrid()[3][1];
+	four = b->getGrid()[3][2];
 
-        // Set the bounding rectangle
-        topLeft = b->getGrid()[2][0];
-        bottomLeft = b->getGrid()[3][0];
-        topRight = b->getGrid()[2][2];
-        bottomRight = b->getGrid()[3][2];
+	// Set the bounding rectangle
+	topLeft = b->getGrid()[2][0];
+	bottomLeft = b->getGrid()[3][0];
+	topRight = b->getGrid()[2][2];
+	bottomRight = b->getGrid()[3][2];
 
-        // Set the block in the cells
-        one->setBlockType('Z');
-        one->setIsOccupied(true);
+	// Set the block in the cells
+	one->setBlockType('Z');
+	one->setIsOccupied(true);
 
-        two->setBlockType('Z');
-        two->setIsOccupied(true);
+	two->setBlockType('Z');
+	two->setIsOccupied(true);
 
-        three->setBlockType('Z');
-        three->setIsOccupied(true);
+	three->setBlockType('Z');
+	three->setIsOccupied(true);
 
-        four->setBlockType('Z');
-        four->setIsOccupied(true);
+	four->setBlockType('Z');
+	four->setIsOccupied(true);
 }
 
 // Constructor for temp blocks
@@ -40,12 +40,12 @@ ZBlock::ZBlock() : Block{'Z', make_shared<Board>(), 3} {}
 
 void ZBlock::movement(string dir)
 {
-        if (!inBounds(dir))
-        {
-                return;
-        }
-        // call temp block constructor
-        ZBlock tmp = ZBlock();
+	if (!inBounds(dir))
+	{
+		return;
+	}
+	// call temp block constructor
+	ZBlock tmp = ZBlock();
 
 	// Set the new Block to current block position
 	tmp.one = one;
@@ -93,12 +93,14 @@ void ZBlock::movement(string dir)
 		tmp.topLeft = board->getGrid()[(topLeft->getCoordinates().first) + 1][topLeft->getCoordinates().second];
 		tmp.topRight = board->getGrid()[(topRight->getCoordinates().first) + 1][topRight->getCoordinates().second];
 	}
-
-		// Check if the movement causes a collision
-	if (!collision(tmp))
+	
+	// Check is collision occurs
+	if (!collision(tmp) && dir == "down")
 	{
+		canDown = false;
 		return;
 	}
+	if (!collision(tmp)) return;
 
 	// Set the current cells to empty
 	one->setBlockType(' ');
