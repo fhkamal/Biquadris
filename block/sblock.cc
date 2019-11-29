@@ -10,10 +10,10 @@ SBlock::SBlock(shared_ptr<Board> b) : Block{'S', b, 3}
         four = b->getGrid()[3][1];
 
         // Set the bounding rectangle
-	topLeft = b->getGrid()[2][0];
-	bottomLeft = b->getGrid()[3][0];
-	topRight = b->getGrid()[2][2];
-	bottomRight = b->getGrid()[3][2];
+        topLeft = b->getGrid()[2][0];
+        bottomLeft = b->getGrid()[3][0];
+        topRight = b->getGrid()[2][2];
+        bottomRight = b->getGrid()[3][2];
 
         // Set the block in the cells
         one->setBlockType('S');
@@ -75,43 +75,54 @@ void SBlock::movement(string dir)
                 tmp.two = board->getGrid()[(two->getCoordinates().first)][two->getCoordinates().second + 1];
                 tmp.three = board->getGrid()[(three->getCoordinates().first)][three->getCoordinates().second + 1];
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
+                tmp.bottomLeft = board->getGrid()[(bottomLeft->getCoordinates().first)][bottomLeft->getCoordinates().second + 1];
+                tmp.bottomRight = board->getGrid()[(bottomRight->getCoordinates().first)][bottomRight->getCoordinates().second + 1];
+                tmp.topLeft = board->getGrid()[(topLeft->getCoordinates().first)][topLeft->getCoordinates().second + 1];
+                tmp.topLeft = board->getGrid()[(topRight->getCoordinates().first)][topRight->getCoordinates().second + 1];
 
-                // Set the current block cells to empty
-                if (!collision(tmp))
-                {
-                        return;
-                }
-                one->setBlockType(' ');
-                one->setIsOccupied(false);
-                two->setBlockType(' ');
-                two->setIsOccupied(false);
-                three->setBlockType(' ');
-                three->setIsOccupied(false);
-                four->setBlockType(' ');
-                four->setIsOccupied(false);
+                // // Set the current block cells to empty
+                // if (!collision(tmp))
+                // {
+                //         return;
+                // }
+                // one->setBlockType(' ');
+                // one->setIsOccupied(false);
+                // two->setBlockType(' ');
+                // two->setIsOccupied(false);
+                // three->setBlockType(' ');
+                // three->setIsOccupied(false);
+                // four->setBlockType(' ');
+                // four->setIsOccupied(false);
 
-                // Swap pointers to cells with the temporary block
+                // // Swap pointers to cells with the temporary block
+                // swap(one, tmp.one);
+                // swap(two, tmp.two);
+                // swap(three, tmp.three);
+                // swap(four, tmp.four);
+                // swap(topLeft, tmp.topLeft);
+                // swap(topRight, tmp.topRight);
+                // swap(bottomLeft, tmp.bottomLeft);
+                // swap(bottomRight, tmp.bottomRight);
 
-                swap(one, tmp.one);
-                swap(two, tmp.two);
-                swap(three, tmp.three);
-                swap(four, tmp.four);
+                // // Set temp values to sa random cell so they don't delete board cells
+                // tmp.one = make_shared<Cell>(3, 1);
+                // tmp.two = tmp.one;
+                // tmp.three = tmp.one;
+                // tmp.four = tmp.one;
+                // topRight = tmp.one;
+                // topLeft = tmp.one;
+                // bottomRight = tmp.one;
+                // bottomLeft = tmp.one;
 
-                // Set temp values to sa random cell so they don't delete board cells
-                tmp.one = make_shared<Cell>(3, 1);
-                tmp.two = tmp.one;
-                tmp.three = tmp.one;
-                tmp.four = tmp.one;
-
-                // Set the new cell values
-                one->setBlockType('S');
-                one->setIsOccupied(true);
-                two->setBlockType('S');
-                two->setIsOccupied(true);
-                three->setBlockType('S');
-                three->setIsOccupied(true);
-                four->setBlockType('S');
-                four->setIsOccupied(true);
+                // // Set the new cell values
+                // one->setBlockType('S');
+                // one->setIsOccupied(true);
+                // two->setBlockType('S');
+                // two->setIsOccupied(true);
+                // three->setBlockType('S');
+                // three->setIsOccupied(true);
+                // four->setBlockType('S');
+                // four->setIsOccupied(true);
         }
         else if (dir == "left")
         {
@@ -122,41 +133,41 @@ void SBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
                 // Set the current block cells to empty
-                if (!collision(tmp))
-                {
-                        return;
-                }
-                one->setBlockType(' ');
-                one->setIsOccupied(false);
-                two->setBlockType(' ');
-                two->setIsOccupied(false);
-                three->setBlockType(' ');
-                three->setIsOccupied(false);
-                four->setBlockType(' ');
-                four->setIsOccupied(false);
+                // if (!collision(tmp))
+                // {
+                //         return;
+                // }
+                // one->setBlockType(' ');
+                // one->setIsOccupied(false);
+                // two->setBlockType(' ');
+                // two->setIsOccupied(false);
+                // three->setBlockType(' ');
+                // three->setIsOccupied(false);
+                // four->setBlockType(' ');
+                // four->setIsOccupied(false);
 
-                // Swap pointers to cells with the temporary block
+                // // Swap pointers to cells with the temporary block
 
-                swap(one, tmp.one);
-                swap(two, tmp.two);
-                swap(three, tmp.three);
-                swap(four, tmp.four);
+                // swap(one, tmp.one);
+                // swap(two, tmp.two);
+                // swap(three, tmp.three);
+                // swap(four, tmp.four);
 
-                // Set temp values to sa random cell so they don't delete board cells
-                tmp.one = make_shared<Cell>(3, 1);
-                tmp.two = tmp.one;
-                tmp.three = tmp.one;
-                tmp.four = tmp.one;
+                // // Set temp values to sa random cell so they don't delete board cells
+                // tmp.one = make_shared<Cell>(3, 1);
+                // tmp.two = tmp.one;
+                // tmp.three = tmp.one;
+                // tmp.four = tmp.one;
 
-                // Set the new cell values
-                one->setBlockType('S');
-                one->setIsOccupied(true);
-                two->setBlockType('S');
-                two->setIsOccupied(true);
-                three->setBlockType('S');
-                three->setIsOccupied(true);
-                four->setBlockType('S');
-                four->setIsOccupied(true);
+                // // Set the new cell values
+                // one->setBlockType('S');
+                // one->setIsOccupied(true);
+                // two->setBlockType('S');
+                // two->setIsOccupied(true);
+                // three->setBlockType('S');
+                // three->setIsOccupied(true);
+                // four->setBlockType('S');
+                // four->setIsOccupied(true);
         }
         else if (dir == "down")
         {
@@ -167,41 +178,85 @@ void SBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
                 // Set the current block cells to empty
-                if (!collision(tmp))
-                {
-                        canDown = false;
-                        return;
-                }
-                one->setBlockType(' ');
-                one->setIsOccupied(false);
-                two->setBlockType(' ');
-                two->setIsOccupied(false);
-                three->setBlockType(' ');
-                three->setIsOccupied(false);
-                four->setBlockType(' ');
-                four->setIsOccupied(false);
+                // if (!collision(tmp))
+                // {
+                //         canDown = false;
+                //         return;
+                // }
+                // one->setBlockType(' ');
+                // one->setIsOccupied(false);
+                // two->setBlockType(' ');
+                // two->setIsOccupied(false);
+                // three->setBlockType(' ');
+                // three->setIsOccupied(false);
+                // four->setBlockType(' ');
+                // four->setIsOccupied(false);
 
-                // Swap pointers to cells with the temporary block
+                // // Swap pointers to cells with the temporary block
 
-                swap(one, tmp.one);
-                swap(two, tmp.two);
-                swap(three, tmp.three);
-                swap(four, tmp.four);
+                // swap(one, tmp.one);
+                // swap(two, tmp.two);
+                // swap(three, tmp.three);
+                // swap(four, tmp.four);
 
-                // Set temp values to sa random cell so they don't delete board cells
-                tmp.one = make_shared<Cell>(3, 1);
-                tmp.two = tmp.one;
-                tmp.three = tmp.one;
-                tmp.four = tmp.one;
+                // // Set temp values to sa random cell so they don't delete board cells
+                // tmp.one = make_shared<Cell>(3, 1);
+                // tmp.two = tmp.one;
+                // tmp.three = tmp.one;
+                // tmp.four = tmp.one;
 
-                // Set the new cell values
-                one->setBlockType('S');
-                one->setIsOccupied(true);
-                two->setBlockType('S');
-                two->setIsOccupied(true);
-                three->setBlockType('S');
-                three->setIsOccupied(true);
-                four->setBlockType('S');
-                four->setIsOccupied(true);
+                // // Set the new cell values
+                // one->setBlockType('S');
+                // one->setIsOccupied(true);
+                // two->setBlockType('S');
+                // two->setIsOccupied(true);
+                // three->setBlockType('S');
+                // three->setIsOccupied(true);
+                // four->setBlockType('S');
+                // four->setIsOccupied(true);
         }
+
+        if (!collision(tmp))
+        {
+                return;
+        }
+
+        one->setBlockType(' ');
+        one->setIsOccupied(false);
+        two->setBlockType(' ');
+        two->setIsOccupied(false);
+        three->setBlockType(' ');
+        three->setIsOccupied(false);
+        four->setBlockType(' ');
+        four->setIsOccupied(false);
+
+        // Swap pointers to cells with the temporary block
+        swap(one, tmp.one);
+        swap(two, tmp.two);
+        swap(three, tmp.three);
+        swap(four, tmp.four);
+        swap(topLeft, tmp.topLeft);
+        swap(topRight, tmp.topRight);
+        swap(bottomLeft, tmp.bottomLeft);
+        swap(bottomRight, tmp.bottomRight);
+
+        // Set temp values to sa random cell so they don't delete board cells
+        tmp.one = make_shared<Cell>(3, 1);
+        tmp.two = tmp.one;
+        tmp.three = tmp.one;
+        tmp.four = tmp.one;
+        topRight = tmp.one;
+        topLeft = tmp.one;
+        bottomRight = tmp.one;
+        bottomLeft = tmp.one;
+
+        // Set the new cell values
+        one->setBlockType('S');
+        one->setIsOccupied(true);
+        two->setBlockType('S');
+        two->setIsOccupied(true);
+        three->setBlockType('S');
+        three->setIsOccupied(true);
+        four->setBlockType('S');
+        four->setIsOccupied(true);
 }
