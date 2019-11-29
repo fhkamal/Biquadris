@@ -117,9 +117,9 @@ void Block::rotate(string dir)
 	// which way is it rotating
 	int type;
 	if (dir == "clockwise")
-		type = 1;
-	else
 		type = -1;
+	else
+		type = 1;
 
 	// Pivot point
 	int pivotX = 0;
@@ -141,6 +141,7 @@ void Block::rotate(string dir)
 		else if (one->getCoordinates().second == four->getCoordinates().second && type == 1)
 			hs = 3;
 
+		/*
 		cout << "hs: " << hs << endl;
 		cout << "vs: " << vs << endl;
 
@@ -148,6 +149,7 @@ void Block::rotate(string dir)
 		cout << "2: " << tmp->two->getCoordinates().first << tmp->two->getCoordinates().second << endl;
 		cout << "3: " << tmp->three->getCoordinates().first << tmp->three->getCoordinates().second << endl;
 		cout << "4: " << tmp->four->getCoordinates().first << tmp->four->getCoordinates().second << endl;
+		*/
 
 		// Apply rotation on block
 		tmp->one = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
@@ -158,11 +160,12 @@ void Block::rotate(string dir)
 									 [hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)];
 		tmp->four = board->getGrid()[vs + pivotY - (abs(four->getCoordinates().second - pivotX) * type)]
 									[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)];
-
+		/*
 		cout << "1: " << tmp->one->getCoordinates().first << tmp->one->getCoordinates().second << endl;
 		cout << "2: " << tmp->two->getCoordinates().first << tmp->two->getCoordinates().second << endl;
 		cout << "3: " << tmp->three->getCoordinates().first << tmp->three->getCoordinates().second << endl;
 		cout << "4: " << tmp->four->getCoordinates().first << tmp->four->getCoordinates().second << endl;
+		*/
 	}
 	else if (let != 'O')
 	{
