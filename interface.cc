@@ -7,11 +7,13 @@
 
 using namespace std;
 
+Interface::Interface(bool textOnly, int seed, int level, string fileName1, string fileName2)  : textOnly {textOnly}, 
+    seed {seed}, level {level}, fileName1 {fileName1}, fileName2 {fileName2} {};
+
 void Interface::mainMenu() {
 	cout << "To start a game, enter start" << endl;
 	cout << "To quit the main menu, enter quit" << endl;
 }
-
 
 void Interface::initialize()  {
 	mainMenu();
@@ -36,13 +38,17 @@ void Interface::initialize()  {
 	cout << "Thank you for playing." << endl;
 }
 
-void Interface::startGame(string fileNameSeq1, string fileNameSeq2) {
+void Interface::startGame() {
 	// Create Players 1 and 2
-	Player p1("biquadris_sequence1.txt");
+	Player p1(fileName1);
 	p1.playSequence(p1.getQueue());
-	Player p2("biquadris_sequence2.txt");
+	Player p2(fileName2);
 	p2.playSequence(p2.getQueue());
 	printGame(p1, p2);
+
+    // Set player levels
+
+    // set seed for random generation
 
 	currentTurn = "p1";
 	switchTurn = false;
