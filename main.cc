@@ -20,6 +20,7 @@ int main(int argc, char *argv[]){
 
 
     for (int i = 0; i < argc; i++) {
+	    /*
         if (strcmp(argv[i], "-text") == 0)  { 
             textOnly = true;
         }
@@ -39,6 +40,7 @@ int main(int argc, char *argv[]){
         if (strcmp(argv[i], "-level") == 0) {
             level = atoi(argv[i+1]);
         }
+	*/
 
     }
 
