@@ -29,7 +29,7 @@ void Player::playSequence(std::vector<std::string> seq){
     next = seq[1];
     queue.erase(queue.begin());
   }
-  else if(lvl->getLevel() == 1 || lvl->getLevel() == 2) {
+  else if(lvl->getLevel() == 1 || lvl->getLevel() == 2 || lvl->getLevel() == 3) {
 
     if (queue.size() == 0) {
         lvl->generateSequence(seed);
@@ -136,6 +136,7 @@ void Player::setLevel(int x) {
     if  (x == 0) lvl = make_shared<LevelZero>(fileName);
     if  (x == 1) lvl = make_shared<LevelOne>();
     if  (x == 2) lvl = make_shared<LevelTwo>();
+    if  (x == 3) lvl = make_shared<LevelThree>();
     lvl->generateSequence(seed);
     queue = lvl->getSequence();
 }

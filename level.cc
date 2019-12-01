@@ -14,7 +14,3 @@ int Level::getLevel(){
 }
 
 void Level::generateSequence(int seed) {}
-
-bool Level::getHeavy(){
-	return heavy;
-}

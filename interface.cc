@@ -171,11 +171,43 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		if (cmd.find("lef") != string::npos)
 		{
 			player.moveBlock("left");
+			if(player.getLevel() > 2 && multiplier == 1){
+                               player.moveBlock("down");
+                               if (!player.getCurrentBlock()->getCanDown())
+                               {
+                                       int score = player.getBoard()->clearRow();
+                                       if (score != 0){
+                                               if (score >= 2) specialAction = true;
+                                               player.setScore(score);
+                                       }
+                                       player.getBoard()->clearRow();
+                                       switchTurn = true;
+                                       printBoard = true;
+                                       player.playSequence(player.getQueue());
+                                       break;
+                               }
+                        }
 			printBoard = true;
 		}
 		else if (cmd.find("ri") != string::npos)
 		{
 			player.moveBlock("right");
+			if(player.getLevel() > 2 && multiplier == 1){
+                               player.moveBlock("down");
+                               if (!player.getCurrentBlock()->getCanDown())
+                               {
+                                       int score = player.getBoard()->clearRow();
+                                       if (score != 0){
+                                               if (score >= 2) specialAction = true;
+                                               player.setScore(score);
+                                       }
+                                       player.getBoard()->clearRow();
+                                       switchTurn = true;
+                                       printBoard = true;
+                                       player.playSequence(player.getQueue());
+                                       break;
+                               }
+                        }
 			printBoard = true;
 		}
 		else if (cmd.find("do") != string::npos)
@@ -185,9 +217,10 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			if (!player.getCurrentBlock()->getCanDown())
 			{
 				int score = player.getBoard()->clearRow();
-				if (score >= 2)
-					specialAction = true;
-				player.setScore(score);
+				if (score != 0){
+                                         if (score >= 2) specialAction = true;
+                                         player.setScore(score);
+                                }
 				player.getBoard()->clearRow();
 				switchTurn = true;
 				printBoard = true;
@@ -200,12 +233,44 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			|| cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
 			player.rotateBlock(cmd);
+			if(player.getLevel() > 2 && multiplier == 1){
+				player.moveBlock("down");
+				if (!player.getCurrentBlock()->getCanDown())
+                        	{
+                                	int score = player.getBoard()->clearRow();
+                                	if (score != 0){
+                                                if (score >= 2) specialAction = true;
+                                                player.setScore(score);
+                                        }
+                                	player.getBoard()->clearRow();
+                                	switchTurn = true;
+                                	printBoard = true;
+                                	player.playSequence(player.getQueue());
+                                	break;
+                        	}
+			}
 			printBoard = true;
 		}
 		else if (cmd == "counterclockwise" || cmd.find("counter") != string::npos || cmd.find("co") != string::npos || cmd.find("cou") != string::npos
 			|| cmd.find("count") != string::npos)
 		{
 			player.rotateBlock(cmd);
+			if(player.getLevel() > 2 && multiplier == 1){
+                                player.moveBlock("down");
+                                if (!player.getCurrentBlock()->getCanDown())
+                                {
+                                        int score = player.getBoard()->clearRow();
+                                        if (score != 0){
+                                                if (score >= 2) specialAction = true;
+                                        	player.setScore(score);
+					}
+                                        player.getBoard()->clearRow();
+                                        switchTurn = true;
+                                        printBoard = true;
+                                        player.playSequence(player.getQueue());
+                                        break;
+                                }
+                        }
 			printBoard = true;
 		}
 		else if (cmd == "drop" || cmd.find("dr") == 0)

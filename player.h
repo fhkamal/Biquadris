@@ -6,6 +6,7 @@
 #include "levels/levelzero.h"
 #include "levels/levelone.h"
 #include "levels/leveltwo.h"
+#include "levels/levelthree.h"
 #include "board.h"
 #include "block/block.h"
 #include "block/iblock.h"
