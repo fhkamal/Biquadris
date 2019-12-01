@@ -37,6 +37,8 @@ class Player {
     std::vector<std::shared_ptr<Block>> blocksOnBoard;
     bool endGame;
     int seed;
+    bool isBlind;
+    bool specialHeavy;
 
 public:
     Player(std::string fileName, int seed, int level);
@@ -55,6 +57,7 @@ public:
     void setCurrent(std::string b);
     void moveBlock(std::string dir);
     void specialAction(std::string action);
+    void resetSpecialActions();
     void playSequence(std::vector<std::string> seq);
     std::string printBlock(std::string b);
     void rotateBlock(std::string direction);

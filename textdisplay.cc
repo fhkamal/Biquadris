@@ -27,7 +27,7 @@ ostream &operator<<(ostream &out, const TextDisplay &td)
 	return out;
 }
 
-void TextDisplay::updateDisplay(Board b){
+void TextDisplay::updateDisplay(Board b, bool blind){
 	for (int i = 0; i < height; i++)
 	{
 		for (int j = 0; j < width; j++)
@@ -39,6 +39,11 @@ void TextDisplay::updateDisplay(Board b){
 				board[i][j] = '*';
 			}
 		}
+	}
+
+	if (blind){
+		for (int i = 2; i < 12; i++)
+			for (int j = 2; j < 9; j++) board[i][j] = '?';
 	}
 }
 

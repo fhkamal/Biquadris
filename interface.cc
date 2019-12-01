@@ -90,10 +90,12 @@ void Interface::startGame()
 		{
 			if (currentTurn == "p1")
 			{
+				p1.resetSpecialActions();
 				currentTurn = "p2";
 			}
 			else
 			{
+				p2.resetSpecialActions();
 				currentTurn = "p1";
 			}
 			switchTurn = false;
