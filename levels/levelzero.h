@@ -9,7 +9,7 @@ public:
     std::vector<std::string> getSequence() override;
     LevelZero(std::string fileName);
     void getBlocks(std::string fileName);
-    int getLevel() override;
+    //int getLevel() override;
     ~LevelZero() override;
 };
 
