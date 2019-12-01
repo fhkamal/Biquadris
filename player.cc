@@ -24,25 +24,25 @@ void Player::playSequence(std::vector<std::string> seq){
     }
 
     if (*(seq.begin()) == "J") {
-        current = make_shared<JBlock>(board);	// block test
+        current = make_shared<JBlock>(board, lvl->getLevel());	// block test
     }
     else if (*(seq.begin()) == "S") {
-	    current = make_shared<SBlock>(board);
+	    current = make_shared<SBlock>(board, lvl->getLevel());
     }
     else if (*(seq.begin()) == "I") {
-	    current = make_shared<IBlock>(board);
+	    current = make_shared<IBlock>(board, lvl->getLevel());
     }
     else if (*(seq.begin()) == "Z") {
-    	current = make_shared<ZBlock>(board);
+    	current = make_shared<ZBlock>(board, lvl->getLevel());
     }
       else if (*(seq.begin()) == "T") {
-    	current = make_shared<TBlock>(board);
+    	current = make_shared<TBlock>(board, lvl->getLevel());
     }
     else if (*(seq.begin()) == "O") {
-    	current = make_shared<OBlock>(board);
+    	current = make_shared<OBlock>(board, lvl->getLevel());
     }
     else if (*(seq.begin()) == "L") {
-    	current = make_shared<LBlock>(board);
+    	current = make_shared<LBlock>(board, lvl->getLevel());
     }
 
     next = seq[1];
@@ -78,7 +78,7 @@ shared_ptr<Block> Player::getCurrentBlock() {
 
 
 void Player::setScore(int x) {
-    score += (x + getLevel()) * (x + getLevel());
+    score += (x + getLevel()) * (x + getLevel());    
 }
 
 void Player::setHighScore(int  x) {

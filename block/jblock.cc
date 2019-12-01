@@ -1,8 +1,10 @@
 #include "jblock.h"
 using namespace std;
 
-JBlock::JBlock(shared_ptr<Board> b) : Block{'J', b, 3}
+JBlock::JBlock(shared_ptr<Board> b, int level) : Block{'J', b, 3}
 {
+	levelCreated = level;
+
 	// The block spawns in the top left
 	one = b->getGrid()[2][0];
 	two = b->getGrid()[3][0];

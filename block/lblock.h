@@ -6,7 +6,7 @@ class LBlock: public Block {
 	public:
 		void movement(std::string dir);
 		//void rotate(std::string direction);
-		LBlock(std::shared_ptr<Board> b);
+		LBlock(std::shared_ptr<Board> b, int level);
 		LBlock();
 };
 #endif

@@ -1,8 +1,10 @@
 #include "zblock.h"
 using namespace std;
 
-ZBlock::ZBlock(shared_ptr<Board> b) : Block{'Z', b, 3}
+ZBlock::ZBlock(shared_ptr<Board> b, int level) : Block{'Z', b, 3}
 {
+	levelCreated = level;
+
 	// The block spawns in the top left
 	one = b->getGrid()[2][0];
 	two = b->getGrid()[2][1];

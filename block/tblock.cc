@@ -1,8 +1,10 @@
 #include "tblock.h"
 using namespace std;
 
-TBlock::TBlock(shared_ptr<Board> b) : Block{'T', b, 3}
+TBlock::TBlock(shared_ptr<Board> b, int level) : Block{'T', b, 3}
 {
+	levelCreated = level;
+
 	// The block spawns in the top left
 	one = b->getGrid()[2][0];
 	two = b->getGrid()[2][1];

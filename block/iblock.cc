@@ -1,8 +1,10 @@
 #include "iblock.h"
 using namespace std;
 
-IBlock::IBlock(shared_ptr<Board> b) : Block{'I', b, 4}
+IBlock::IBlock(shared_ptr<Board> b, int level) : Block{'I', b, 4}
 {
+	levelCreated = level;
+
 	// The block spawns in the top left
 
 	one = b->getGrid()[3][0];

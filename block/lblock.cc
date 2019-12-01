@@ -1,8 +1,10 @@
 #include "lblock.h"
 using namespace std;
 
-LBlock::LBlock(shared_ptr<Board> b) : Block{'L', b, 3}
+LBlock::LBlock(shared_ptr<Board> b, int level) : Block{'L', b, 3}
 {
+	levelCreated = level;
+
 	// The block spawns in the top left
 	one = b->getGrid()[2][2];
 	two = b->getGrid()[3][0];

@@ -30,6 +30,7 @@ protected:
 	std::shared_ptr<Board> board;
 	bool canDown;
 	const int length;
+	int levelCreated;
 
 public:
 	void setCanDown(bool b);

@@ -1,7 +1,11 @@
 #include "oblock.h"
 using namespace std;
 
-OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b, 2} {
+OBlock::OBlock(shared_ptr<Board> b, int level) : Block{'O', b, 2}
+{
+
+        levelCreated = level;
+
         // The block spawns in the top left
         one = b->getGrid()[2][0];
         two = b->getGrid()[2][1];
@@ -10,28 +14,29 @@ OBlock::OBlock(shared_ptr<Board> b) : Block{'O', b, 2} {
 
         // Set the block in the cells
         one->setBlockType('O');
-    one->setIsOccupied(true);
+        one->setIsOccupied(true);
 
-    two->setBlockType('O');
-    two->setIsOccupied(true);
+        two->setBlockType('O');
+        two->setIsOccupied(true);
 
-    three->setBlockType('O');
-    three->setIsOccupied(true);
+        three->setBlockType('O');
+        three->setIsOccupied(true);
 
-    four->setBlockType('O');
-    four->setIsOccupied(true);
+        four->setBlockType('O');
+        four->setIsOccupied(true);
 }
 
 // Constructor for temp blocks
 OBlock::OBlock() : Block{'O', make_shared<Board>(), 2} {}
 
-void OBlock::rotate(string direction){}
+void OBlock::rotate(string direction) {}
 
 void OBlock::movement(string dir)
 {
-	if(!inBounds(dir)){
-		return;
-	}
+        if (!inBounds(dir))
+        {
+                return;
+        }
         // call temp block constructor
         OBlock tmp = OBlock();
 
@@ -64,9 +69,10 @@ void OBlock::movement(string dir)
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second + 1];
 
                 // Set the current block cells to empty
-		if(!collision(tmp)){
-			return;
-		}
+                if (!collision(tmp))
+                {
+                        return;
+                }
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -75,7 +81,6 @@ void OBlock::movement(string dir)
                 three->setIsOccupied(false);
                 four->setBlockType(' ');
                 four->setIsOccupied(false);
-
 
                 // Swap pointers to cells with the temporary block
 
@@ -100,17 +105,19 @@ void OBlock::movement(string dir)
                 four->setBlockType('O');
                 four->setIsOccupied(true);
         }
-        else if (dir =="left") {
-                        // Shift the block 1 block to left
+        else if (dir == "left")
+        {
+                // Shift the block 1 block to left
                 tmp.one = board->getGrid()[(one->getCoordinates().first)][one->getCoordinates().second - 1];
                 tmp.two = board->getGrid()[(two->getCoordinates().first)][two->getCoordinates().second - 1];
                 tmp.three = board->getGrid()[(three->getCoordinates().first)][three->getCoordinates().second - 1];
                 tmp.four = board->getGrid()[(four->getCoordinates().first)][four->getCoordinates().second - 1];
 
                 // Set the current block cells to empty
-		if(!collision(tmp)){
-			return;
-		}
+                if (!collision(tmp))
+                {
+                        return;
+                }
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -119,7 +126,6 @@ void OBlock::movement(string dir)
                 three->setIsOccupied(false);
                 four->setBlockType(' ');
                 four->setIsOccupied(false);
-
 
                 // Swap pointers to cells with the temporary block
 
@@ -144,18 +150,20 @@ void OBlock::movement(string dir)
                 four->setBlockType('O');
                 four->setIsOccupied(true);
         }
-        else if (dir =="down") {
-                        // Shift the block 1 block to left
+        else if (dir == "down")
+        {
+                // Shift the block 1 block to left
                 tmp.one = board->getGrid()[(one->getCoordinates().first) + 1][one->getCoordinates().second];
                 tmp.two = board->getGrid()[(two->getCoordinates().first) + 1][two->getCoordinates().second];
                 tmp.three = board->getGrid()[(three->getCoordinates().first) + 1][three->getCoordinates().second];
                 tmp.four = board->getGrid()[(four->getCoordinates().first) + 1][four->getCoordinates().second];
 
                 // Set the current block cells to empty
-		if(!collision(tmp)){
-			canDown = false;
-			return;
-		}
+                if (!collision(tmp))
+                {
+                        canDown = false;
+                        return;
+                }
                 one->setBlockType(' ');
                 one->setIsOccupied(false);
                 two->setBlockType(' ');
@@ -164,7 +172,6 @@ void OBlock::movement(string dir)
                 three->setIsOccupied(false);
                 four->setBlockType(' ');
                 four->setIsOccupied(false);
-
 
                 // Swap pointers to cells with the temporary block
 
@@ -190,4 +197,3 @@ void OBlock::movement(string dir)
                 four->setIsOccupied(true);
         }
 }
-
