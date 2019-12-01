@@ -8,10 +8,10 @@
 using namespace std;
 
 Interface::Interface(bool textOnly, int seed, int level, string fileName1, string fileName2) : textOnly{textOnly},
-	 seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2}, specialAction{false} {
-		 	// Enable short forms of commands
-			map<string, string> macros; // Fill in later
-	 };
+	seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2} {
+		// Enable short forms of commands
+		map<string, string> macros; // Fill in later
+	};
 
 void Interface::mainMenu()
 {
@@ -38,7 +38,7 @@ void Interface::initialize()
 		else
 		{
 			cout << "You entered an invalid command: " << cmd << ". " << endl
-				 << "Please try again" << endl;
+				<< "Please try again" << endl;
 			mainMenu();
 		}
 	}
@@ -60,6 +60,7 @@ void Interface::startGame()
 
 	currentTurn = "p1";
 	switchTurn = false;
+	specialAction = false;
 
 	string cmd;
 
@@ -67,22 +68,23 @@ void Interface::startGame()
 	{
 		if (p1.getEndGame() || p2.getEndGame())
 			break;
-
-		if (specialAction)
-		{
-			string action;
-			cout << "Enter special action: ";
-			cin >> action;
-			cout << endl;
-			if (currentTurn == "p1")
-			{
-				p2.specialAction(action);
-			}
-			else
-			{
-				p1.specialAction(action);
-			}
-		}
+		/*
+		   cout << specialAction << endl;
+		   if (specialAction)
+		   {
+		   string action;
+		   cout << "Enter special action: ";
+		   cin >> action;
+		   cout << endl;
+		   if (currentTurn == "p1")
+		   {
+		   p2.specialAction(action);
+		   }
+		   else
+		   {
+		   p1.specialAction(action);
+		   }
+		   }*/
 
 		if (switchTurn)
 		{
@@ -112,29 +114,47 @@ void Interface::startGame()
 				commandInterpreter(cmd, p2);
 			}
 		}
-		if (printBoard)
+
+		if (printBoard) printGame(p1, p2);
+
+		if (specialAction)
+		{
+			string action;
+			cout << "Enter special action: ";
+			cin >> action;
+			cout << endl;
+			if (currentTurn == "p1")
+			{
+				p2.specialAction(action);
+			}
+			else
+			{
+				p1.specialAction(action);
+			}
+
 			printGame(p1, p2);
+		}
 	}
 
 	if (!p1.getEndGame() && p2.getEndGame())
 	{
 		cout << endl
-			 << endl
-			 << "Player 1 Wins with a highscore of: " << p1.getHighScore() << "!" << endl;
+			<< endl
+			<< "Player 1 Wins with a highscore of: " << p1.getHighScore() << "!" << endl;
 	} else if (p1.getEndGame() && !p2.getEndGame())
 	{
 		cout << endl
-			 << endl
-			 << "Player 2 Wins with a highscore of:" << p2.getHighScore() << "!" << endl;
+			<< endl
+			<< "Player 2 Wins with a highscore of:" << p2.getHighScore() << "!" << endl;
 	} else if (p1.getEndGame() && !p2.getEndGame())
 	{
 		cout << endl
-			 << endl
-			 << "The game ends in a Tie!" << endl;
+			<< endl
+			<< "The game ends in a Tie!" << endl;
 	}
 
 	cout << "Enter start to play again. " << endl
-		 << "Enter exit to quit." << endl;
+		<< "Enter exit to quit." << endl;
 }
 
 void Interface::commandInterpreter(string cmd, Player &player)
@@ -172,42 +192,42 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		{
 			player.moveBlock("left");
 			if(player.getLevel() > 2 && multiplier == 1){
-                               player.moveBlock("down");
-                               if (!player.getCurrentBlock()->getCanDown())
-                               {
-                                       int score = player.getBoard()->clearRow();
-                                       if (score != 0){
-                                               if (score >= 2) specialAction = true;
-                                               player.setScore(score);
-                                       }
-                                       player.getBoard()->clearRow();
-                                       switchTurn = true;
-                                       printBoard = true;
-                                       player.playSequence(player.getQueue());
-                                       break;
-                               }
-                        }
+				player.moveBlock("down");
+				if (!player.getCurrentBlock()->getCanDown())
+				{
+					int score = player.getBoard()->clearRow();
+					if (score != 0){
+						if (score >= 2) specialAction = true;
+						player.setScore(score);
+					}
+					player.getBoard()->clearRow();
+					switchTurn = true;
+					printBoard = true;
+					player.playSequence(player.getQueue());
+					break;
+				}
+			}
 			printBoard = true;
 		}
 		else if (cmd.find("ri") != string::npos)
 		{
 			player.moveBlock("right");
 			if(player.getLevel() > 2 && multiplier == 1){
-                               player.moveBlock("down");
-                               if (!player.getCurrentBlock()->getCanDown())
-                               {
-                                       int score = player.getBoard()->clearRow();
-                                       if (score != 0){
-                                               if (score >= 2) specialAction = true;
-                                               player.setScore(score);
-                                       }
-                                       player.getBoard()->clearRow();
-                                       switchTurn = true;
-                                       printBoard = true;
-                                       player.playSequence(player.getQueue());
-                                       break;
-                               }
-                        }
+				player.moveBlock("down");
+				if (!player.getCurrentBlock()->getCanDown())
+				{
+					int score = player.getBoard()->clearRow();
+					if (score != 0){
+						if (score >= 2) specialAction = true;
+						player.setScore(score);
+					}
+					player.getBoard()->clearRow();
+					switchTurn = true;
+					printBoard = true;
+					player.playSequence(player.getQueue());
+					break;
+				}
+			}
 			printBoard = true;
 		}
 		else if (cmd.find("do") != string::npos)
@@ -218,9 +238,9 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			{
 				int score = player.getBoard()->clearRow();
 				if (score != 0){
-                                         if (score >= 2) specialAction = true;
-                                         player.setScore(score);
-                                }
+					if (score >= 2) specialAction = true;
+					player.setScore(score);
+				}
 				player.getBoard()->clearRow();
 				switchTurn = true;
 				printBoard = true;
@@ -230,47 +250,47 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			printBoard = true;
 		}
 		else if (cmd == "clockwise" || cmd == "ccw" || cmd == "cl" || cmd == "clo" || cmd == "cloc"
-			|| cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
+				|| cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
 			player.rotateBlock(cmd);
 			if(player.getLevel() > 2 && multiplier == 1){
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
-                        	{
-                                	int score = player.getBoard()->clearRow();
-                                	if (score != 0){
-                                                if (score >= 2) specialAction = true;
-                                                player.setScore(score);
-                                        }
-                                	player.getBoard()->clearRow();
-                                	switchTurn = true;
-                                	printBoard = true;
-                                	player.playSequence(player.getQueue());
-                                	break;
-                        	}
+				{
+					int score = player.getBoard()->clearRow();
+					if (score != 0){
+						if (score >= 2) specialAction = true;
+						player.setScore(score);
+					}
+					player.getBoard()->clearRow();
+					switchTurn = true;
+					printBoard = true;
+					player.playSequence(player.getQueue());
+					break;
+				}
 			}
 			printBoard = true;
 		}
 		else if (cmd == "counterclockwise" || cmd.find("counter") != string::npos || cmd.find("co") != string::npos || cmd.find("cou") != string::npos
-			|| cmd.find("count") != string::npos)
+				|| cmd.find("count") != string::npos)
 		{
 			player.rotateBlock(cmd);
 			if(player.getLevel() > 2 && multiplier == 1){
-                                player.moveBlock("down");
-                                if (!player.getCurrentBlock()->getCanDown())
-                                {
-                                        int score = player.getBoard()->clearRow();
-                                        if (score != 0){
-                                                if (score >= 2) specialAction = true;
-                                        	player.setScore(score);
+				player.moveBlock("down");
+				if (!player.getCurrentBlock()->getCanDown())
+				{
+					int score = player.getBoard()->clearRow();
+					if (score != 0){
+						if (score >= 2) specialAction = true;
+						player.setScore(score);
 					}
-                                        player.getBoard()->clearRow();
-                                        switchTurn = true;
-                                        printBoard = true;
-                                        player.playSequence(player.getQueue());
-                                        break;
-                                }
-                        }
+					player.getBoard()->clearRow();
+					switchTurn = true;
+					printBoard = true;
+					player.playSequence(player.getQueue());
+					break;
+				}
+			}
 			printBoard = true;
 		}
 		else if (cmd == "drop" || cmd.find("dr") == 0)
@@ -285,7 +305,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				if (score >= 2) specialAction = true;
 				player.setScore(score);
 			}
-			
+
 			switchTurn = true;
 			printBoard = true;
 			player.playSequence(player.getQueue());
@@ -367,7 +387,6 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		multiplier--;
 	}
-
 	if (printBoard == true)
 	{
 		//cout << *(player.getBoard());
@@ -380,10 +399,10 @@ void Interface::printGame(Player &p1, Player &p2)
 	//p1.getBoard()->clearRow();
 	//p2.getBoard()->clearRow();
 	cout << "Level:    " << p1.getLevel() << "      "
-		 << "Level:    " << p2.getLevel() << endl;
+		<< "Level:    " << p2.getLevel() << endl;
 	cout << "Score:" << right << setw(5) << p1.getScore();
 	cout << "      "
-		 << "Score:" << right << setw(5) << p2.getScore() << endl;
+		<< "Score:" << right << setw(5) << p2.getScore() << endl;
 	cout << "-----------      -----------" << endl;
 	for (int i = 0; i < 18; i++)
 	{
