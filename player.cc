@@ -78,6 +78,20 @@ shared_ptr<Block> Player::getCurrentBlock() {
 
 
 void Player::setScore(int x) {
+    for (auto it = blocksOnBoard.begin(); it != blocksOnBoard.end(); it++) {
+        int scoreBlock = 0;
+        bool deleteBlock = true;
+        vector<shared_ptr<Cell>> cells = (*it)->getCells();
+        for (auto it2 = cells.begin(); it2 != cells.end(); it2++) {
+            if ((*it2)->getIsOccupied()) deleteBlock = false;
+        }
+        if (deleteBlock) {
+            scoreBlock = ((*it)->getLevelCreated() + 1) * ((*it)->getLevelCreated() + 1);
+            blocksOnBoard.erase(it);
+            it--; 
+        }
+        score += scoreBlock;
+    }
     score += (x + getLevel()) * (x + getLevel());    
 }
 

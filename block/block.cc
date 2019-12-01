@@ -34,6 +34,10 @@ bool Block::getCanDown()
 	return canDown;
 }
 
+int Block::getLevelCreated() {
+	return levelCreated;
+}
+
 bool Block::inBounds(string dir)
 {
 	if (dir == "right")
@@ -267,21 +271,11 @@ void Block::rotate(string dir)
 	four->setIsOccupied(true);
 }
 
-// Block Block::&operator=(const Block &other) {
-//     using std::swap;
-//     one = other.one;
-//     two = other.two;
-//     three = other.three;
-//     four = other.four;
-//     board = other.board;
-// }
-
-// Block& Block::operator=(Block &&other) {
-//     using std::swap;
-//     swap(one, other.one);
-//     swap(two, other.two);
-//     swap(three, other.three);
-//     swap(four, other.four);
-//     swap(board, other.board);
-//     return (*this);
-// }
+vector<shared_ptr<Cell>> Block::getCells() {
+	vector<shared_ptr<Cell>> cells;
+	cells.emplace_back(one);
+	cells.emplace_back(two);
+	cells.emplace_back(three);
+	cells.emplace_back(four);
+	return cells;
+}

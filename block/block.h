@@ -33,8 +33,10 @@ protected:
 	int levelCreated;
 
 public:
+	std::vector<std::shared_ptr<Cell>> getCells();
 	void setCanDown(bool b);
 	bool getCanDown();
+	int getLevelCreated();
 	bool inBounds(std::string dir);
 	bool collision(Block &b);
 	virtual void movement(std::string dir);

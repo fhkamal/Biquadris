@@ -57,7 +57,7 @@ void Interface::startGame() {
 
 	while(cin >> cmd) {
 		if (p1.getEndGame() || p2.getEndGame()) break;
-		if (printBoard) printGame(p1, p2);
+		
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
@@ -81,7 +81,7 @@ void Interface::startGame() {
 				commandInterpreter(cmd, p2);
 			}
 		}
-        
+        if (printBoard) printGame(p1, p2);
 	}
 
     if (!p1.getEndGame() && p2.getEndGame()) {
