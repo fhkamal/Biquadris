@@ -6,6 +6,11 @@ pair<int, int> Cell::getCoordinates() {
     return make_pair(row, col);
 }
 
+void Cell::setCoordinates(int r, int c){
+	col = c;
+	row = r;
+}
+
 Cell::Cell(int row, int col) : row {row}, col {col}, isOccupied {false}, blockType {' '} {}
 
 Cell::~Cell() {}

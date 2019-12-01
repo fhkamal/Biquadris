@@ -25,11 +25,16 @@ int Board::clearRow() {
             deleteRow = grid[i][j]->getIsOccupied(); 
         }
         if (deleteRow) {
+	    vector<shared_ptr<Cell>> c;
             for (int k = 0; k < width; k++) {
                grid[i][k]->setIsOccupied(false);
-              
+	       c.emplace_back(make_shared<Cell>(0, k));              
             }
-            vector<shared_ptr<Cell>> c = grid[i];
+	    for (int j = i; j >= 0; j--){
+		for (int k = 0;  k < width; k++){
+			grid[j][k]->setCoordinates(j + 1, k);
+		}
+	    }
             grid.erase(grid.begin() + i);
             grid.emplace(grid.begin(), c);
             count++;

@@ -5,13 +5,14 @@
 
 class Cell
 {
-    const int col;
-    const int row;
+    int col;
+    int row;
     bool isOccupied;
     char blockType; // 1 represents an empty
 
 public:
     std::pair<int, int> getCoordinates();
+    void setCoordinates(int r, int c);
     Cell(int row, int col);
     ~Cell();
     bool getIsOccupied();
