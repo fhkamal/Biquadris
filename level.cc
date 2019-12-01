@@ -13,7 +13,7 @@ int Level::getLevel(){
 	return level;
 }
 
-string Level::generateBlock(int seed) {}
+void Level::generateSequence(int seed) {}
 
 bool Level::getHeavy(){
 	return heavy;

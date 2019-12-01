@@ -48,9 +48,9 @@ void Interface::initialize()
 void Interface::startGame()
 {
 	// Create Players 1 and 2
-	Player p1(fileName1, seed);
+	Player p1(fileName1, seed, level);
 	p1.playSequence(p1.getQueue());
-	Player p2(fileName2, seed);
+	Player p2(fileName2, seed, level);
 	p2.playSequence(p2.getQueue());
 	printGame(p1, p2);
 
@@ -120,17 +120,13 @@ void Interface::startGame()
 	{
 		cout << endl
 			 << endl
-			 << "Player 1 Wins with a highscore of: " << p2.getHighScore() << "!" << endl;
-	}
-
-	if (p1.getEndGame() && !p2.getEndGame())
+			 << "Player 1 Wins with a highscore of: " << p1.getHighScore() << "!" << endl;
+	} else if (p1.getEndGame() && !p2.getEndGame())
 	{
 		cout << endl
 			 << endl
 			 << "Player 2 Wins with a highscore of:" << p2.getHighScore() << "!" << endl;
-	}
-
-	if (p1.getEndGame() && !p2.getEndGame())
+	} else if (p1.getEndGame() && !p2.getEndGame())
 	{
 		cout << endl
 			 << endl
@@ -218,22 +214,27 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 			}
 			int score = player.getBoard()->clearRow();
-			if (score >= 2)
-				specialAction = true;
-			player.setScore(score);
+			if (score != 0) {
+				if (score >= 2) specialAction = true;
+				player.setScore(score);
+			}
+			
 			switchTurn = true;
 			printBoard = true;
 			player.playSequence(player.getQueue());
+			break;
 		}
 
 		// Player Commands
 		else if (cmd == "levelup")
 		{
 			player.setLevel(player.getLevel() + 1);
+			printBoard = true;
 		}
 		else if (cmd == "leveldown")
 		{
 			player.setLevel(player.getLevel() - 1);
+			printBoard = true;
 		}
 		else if (cmd.find("norandom") != string::npos)
 		{

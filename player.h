@@ -38,7 +38,7 @@ class Player {
     int seed;
 
 public:
-    Player(std::string fileName, int seed);
+    Player(std::string fileName, int seed, int level);
     int getScore();
     int getHighScore();
     int getLevel();

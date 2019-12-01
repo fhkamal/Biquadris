@@ -7,6 +7,6 @@ class LevelTwo: public Level{
 public:
 	LevelTwo();
 	~LevelTwo() override;
-	std::string generateBlock(int seed);
+	void generateSequence(int seed) override;
 };
 #endif

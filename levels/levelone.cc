@@ -6,30 +6,36 @@ LevelOne::LevelOne(){
 	level = 1;
 }
 
-string LevelOne::generateBlock(int seed){
-	srand(seed);
-	int i = (rand() % 12) + 1;
-	if(i == 1){
-		return "S";
+void LevelOne::generateSequence(int seed){
+	if (seed != INT_MAX) {
+		srand(seed);
 	}
-	else if(i == 2){
-		return "Z";
+	
+	for (int k = 0; k < 50; k++) {
+		int i = (rand() % 12) + 1;
+		if(i == 1){
+			sequence.emplace_back("S");
+		}
+		else if(i == 2){
+			sequence.emplace_back("Z");
+		}
+		else if(i < 5){
+			sequence.emplace_back("I");
+		}
+		else if(i < 7){
+			sequence.emplace_back("T");
+		}
+		else if(i < 9){
+			sequence.emplace_back("J");
+		}
+		else if(i < 11){
+			sequence.emplace_back("L");
+		}
+		else{
+			sequence.emplace_back("O");
+		}
 	}
-	else if(i < 5){
-		return "I";
-	}
-	else if(i < 7){
-		return "T";
-	}
-	else if(i < 9){
-		return "J";
-	}
-	else if(i < 11){
-		return "L";
-	}
-	else{
-		return "O";
-	}
+	
 }
 
 LevelOne::~LevelOne() {}

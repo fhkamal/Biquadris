@@ -19,7 +19,7 @@ public:
     int getLevel();
     virtual std::vector<std::string> getSequence();
     //virtual std::unique_ptr<Block> generateBlock(Board &board, std::string blockType);
-    virtual std::string generateBlock(int seed);
+    virtual void generateSequence(int seed);
     virtual ~Level() = 0;
     bool getHeavy();
 };

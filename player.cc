@@ -2,8 +2,8 @@
 
 using namespace std;
  
-Player::Player(string fileName, int seed) : score {0}, highscore {0}, fileName {fileName}, endGame {false}, seed {seed} {
-    lvl = make_shared<LevelZero>(fileName);
+Player::Player(string fileName, int seed, int level) : score {0}, highscore {0}, fileName {fileName}, endGame {false}, seed {seed} {
+    setLevel(level);
     board = make_shared<Board>();
     board->init();
     queue = lvl->getSequence();
@@ -27,20 +27,32 @@ void Player::playSequence(std::vector<std::string> seq){
     current = createBlock(*(seq.begin()));
 
     next = seq[1];
-    blocksOnBoard.emplace_back(current);
-    // Update the board display and shift the queue of blocks
-    board->getTextDisplay()->updateDisplay(*board);
     queue.erase(queue.begin());
   }
-  else if(lvl->getLevel() == 1 || lvl->getLevel() == 2){
-    if(next == "N"){
-	current = createBlock(lvl->generateBlock(seed));
+  else if(lvl->getLevel() == 1 || lvl->getLevel() == 2) {
+
+    if (queue.size() == 0) {
+        lvl->generateSequence(seed);
+        queue = lvl->getSequence();
     }
-    else{
-	current = createBlock(next);
+
+    // If a block can't spawn, the game must end
+    if (!canSpawn(*(seq.begin())))  {
+        endGame = true;
+        board->getTextDisplay()->updateDisplay(*board);
+        return;
     }
-    next = lvl->generateBlock(seed);
+
+    current = createBlock(*(seq.begin()));
+
+    next = seq[1];
+    queue.erase(queue.begin());
+	
   }
+
+      blocksOnBoard.emplace_back(current);
+    // Update the board display and shift the queue of blocks
+    board->getTextDisplay()->updateDisplay(*board);
 }
 
 shared_ptr<Block> Player::createBlock(string s){
@@ -62,7 +74,7 @@ shared_ptr<Block> Player::createBlock(string s){
     else if (s == "O") {
         return make_shared<OBlock>(board, lvl->getLevel());
     }
-    else if (s  == "L") {
+    else  {
         return make_shared<LBlock>(board, lvl->getLevel());
     }
 }
@@ -107,7 +119,9 @@ void Player::setScore(int x) {
         }
         score += scoreBlock;
     }
-    score += (x + getLevel()) * (x + getLevel());    
+    score += (x + getLevel()) * (x + getLevel());
+
+    if (score > highscore) setHighScore(score);    
 }
 
 void Player::setHighScore(int  x) {
@@ -115,11 +129,15 @@ void Player::setHighScore(int  x) {
 }
 
 void Player::setLevel(int x) {
+    queue.clear();
     if (x > 4) x = 4;
     if (x < 0) x = 0;
 
     if  (x == 0) lvl = make_shared<LevelZero>(fileName);
-    // ADD IN REST HERE
+    if  (x == 1) lvl = make_shared<LevelOne>();
+    if  (x == 2) lvl = make_shared<LevelTwo>();
+    lvl->generateSequence(seed);
+    queue = lvl->getSequence();
 }
 
 void Player::specialAction(string action) {

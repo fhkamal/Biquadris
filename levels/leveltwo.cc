@@ -6,29 +6,34 @@ LevelTwo::LevelTwo(){
 	level = 2;
 }
 
-string LevelTwo::generateBlock(int seed){
-	srand(seed);
-	int i = (rand() % 7) + 1;
-	if(i == 1){
-		return "S";
+void LevelTwo::generateSequence(int seed){
+	if (seed != INT_MAX) {
+		srand(seed);
 	}
-	else if(i == 2){
-		return "Z";
-	}
-	else if(i == 3){
-		return "I";
-	}
-	else if(i == 4){
-		return "T";
-	}
-	else if(i == 5){
-		return "J";
-	}
-	else if(i == 6){
-		return "L";
-	}
-	else{
-		return "O";
+	
+	for (int k = 0; k < 50; k++) {
+		int i = (rand() % 7) + 1;
+		if(i == 1){
+			sequence.emplace_back("S");
+		}
+		else if(i == 2){
+			sequence.emplace_back("Z");
+		}
+		else if(i == 3){
+			sequence.emplace_back("I");
+		}
+		else if(i == 4){
+			sequence.emplace_back("T");
+		}
+		else if(i == 5){
+			sequence.emplace_back("J");
+		}
+		else if(i == 6){
+			sequence.emplace_back("L");
+		}
+		else{
+			sequence.emplace_back("O");
+		}
 	}
 }
 
