@@ -56,7 +56,8 @@ void Interface::startGame() {
 	string cmd;
 
 	while(cin >> cmd) {
-
+		if (p1.getEndGame() || p2.getEndGame()) break;
+		if (printBoard) printGame(p1, p2);
 		if (switchTurn) {
 			if (currentTurn == "p1") {
 				currentTurn = "p2";
@@ -80,12 +81,11 @@ void Interface::startGame() {
 				commandInterpreter(cmd, p2);
 			}
 		}
-        if (printBoard) printGame(p1, p2);
-        if (p1.getEndGame() || p2.getEndGame()) break;
+        
 	}
 
     if (!p1.getEndGame() && p2.getEndGame()) {
-        cout << endl << endl << "Player 2 Wins with a highscore of: " << p2.getHighScore() << "!" << endl;
+        cout << endl << endl << "Player 1 Wins with a highscore of: " << p2.getHighScore() << "!" << endl;
     }
 
     if(p1.getEndGame() && !p2.getEndGame()) {
@@ -140,12 +140,12 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			// use a getter to check if file can go anymore down from block field and if false then change player
 			player.moveBlock("down");
 			if (!player.getCurrentBlock()->getCanDown()) {
-                player.playSequence(player.getQueue());
                 int score = player.getBoard()->clearRow();
                 player.setScore(score);
                 player.getBoard()->clearRow();
 				switchTurn = true;
 				printBoard = true;
+				player.playSequence(player.getQueue());
 				break;
 			}
 			printBoard = true;
@@ -163,11 +163,11 @@ void Interface::commandInterpreter(string cmd, Player &player) {
 			while (player.getCurrentBlock()->getCanDown()) {
 				player.moveBlock("down");
 			}
-            player.playSequence(player.getQueue());
             int score = player.getBoard()->clearRow();
             player.setScore(score);
 			switchTurn = true;
 			printBoard = true;
+			player.playSequence(player.getQueue());
 		}
 
 		// Player Commands

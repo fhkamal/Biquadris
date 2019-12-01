@@ -19,6 +19,7 @@ void Player::playSequence(std::vector<std::string> seq){
     // If a block can't spawn, the game must end
     if (!canSpawn(*(seq.begin())))  {
         endGame = true;
+        board->getTextDisplay()->updateDisplay(*board);
         return;
     }
 
