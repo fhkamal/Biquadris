@@ -168,17 +168,17 @@ void Interface::commandInterpreter(string cmd, Player &player)
 	{
 
 		// Block Commands
-		if (cmd == "left")
+		if (cmd.find("lef") != string::npos)
 		{
 			player.moveBlock("left");
 			printBoard = true;
 		}
-		else if (cmd == "right")
+		else if (cmd.find("ri") != string::npos)
 		{
 			player.moveBlock("right");
 			printBoard = true;
 		}
-		else if (cmd == "down")
+		else if (cmd.find("do") != string::npos)
 		{
 			// use a getter to check if file can go anymore down from block field and if false then change player
 			player.moveBlock("down");
@@ -196,17 +196,19 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			}
 			printBoard = true;
 		}
-		else if (cmd == "clockwise")
+		else if (cmd == "clockwise" || cmd == "ccw" || cmd == "cl" || cmd == "clo" || cmd == "cloc"
+			|| cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
 			player.rotateBlock(cmd);
 			printBoard = true;
 		}
-		else if (cmd == "counterclockwise")
+		else if (cmd == "counterclockwise" || cmd.find("counter") != string::npos || cmd.find("co") != string::npos || cmd.find("cou") != string::npos
+			|| cmd.find("count") != string::npos)
 		{
 			player.rotateBlock(cmd);
 			printBoard = true;
 		}
-		else if (cmd == "drop")
+		else if (cmd == "drop" || cmd.find("dr") == 0)
 		{
 			// use a getter to check if file can go anymore down from block field and if false then change player
 			while (player.getCurrentBlock()->getCanDown())
@@ -226,31 +228,31 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 
 		// Player Commands
-		else if (cmd == "levelup")
+		else if (cmd == "levelup" ||  cmd == "levelu")
 		{
 			player.setLevel(player.getLevel() + 1);
 			printBoard = true;
 		}
-		else if (cmd == "leveldown")
+		else if (cmd == "leveldown" ||  cmd == "leveld")
 		{
 			player.setLevel(player.getLevel() - 1);
 			printBoard = true;
 		}
-		else if (cmd.find("norandom") != string::npos)
+		else if (cmd.find("norandom") != string::npos || cmd.find("nor") != string::npos || cmd.find("no") != string::npos)
 		{
 			string fileName;
 			cin >> fileName;
 			cout << fileName << endl;
 			break;
 		}
-		else if (cmd == "random")
+		else if (cmd == "random" || cmd.find("ra") != string::npos)
 		{
 			cout << "rndm" << endl;
 			break;
 		}
 
 		// Testing Commands
-		else if (cmd.find("sequence") != string::npos)
+		else if (cmd.find("sequence") != string::npos || cmd.find("s") != string::npos)
 		{
 			// string fileName = cmd.substr(cmd.find_first_of(" \t") + 1);
 			string s;
