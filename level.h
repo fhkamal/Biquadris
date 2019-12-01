@@ -6,6 +6,7 @@
 //#include <board.h>
 //#include <block.h>
 #include <string>
+#include <limits.h>
 
 class Level
 {

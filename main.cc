@@ -3,6 +3,8 @@
 #include <fstream>
 #include <string>
 #include "interface.h"
+#include <string.h>
+#include <limits.h>
 
 using namespace std;
 
