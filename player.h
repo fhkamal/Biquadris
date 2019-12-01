@@ -4,6 +4,8 @@
 #include <string>
 #include "level.h"
 #include "levels/levelzero.h"
+#include "levels/levelone.h"
+#include "levels/leveltwo.h"
 #include "board.h"
 #include "block/block.h"
 #include "block/iblock.h"

@@ -14,6 +14,8 @@ class Interface {
     std::string currentTurn;
     bool switchTurn;
     bool printBoard;
+    bool specialAction;
+    std::map<std::string, std::string> macros;
 
     // CommandLineArguments
     bool textOnly;
