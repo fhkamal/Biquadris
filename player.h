@@ -35,10 +35,10 @@ class Player {
     std::vector<std::string> queue;
     std::vector<std::shared_ptr<Block>> blocksOnBoard;
     bool endGame;
+    int seed;
 
 public:
-    Player(std::string fileName);
-
+    Player(std::string fileName, int seed);
     int getScore();
     int getHighScore();
     int getLevel();
@@ -46,7 +46,7 @@ public:
     std::string getNext();
     std::shared_ptr<Board> getBoard();
     std::shared_ptr<Block> getCurrentBlock();
-	bool canSpawn(std::string b);
+    bool canSpawn(std::string b);
     std::vector<std::string> getQueue();
     void setScore(int x);
     void setLevel(int x);
@@ -57,7 +57,7 @@ public:
     void playSequence(std::vector<std::string> seq);
     std::string printBlock(std::string b);
     void rotateBlock(std::string direction);
-   
+    std::shared_ptr<Block> createBlock(std::string s);
     friend std::ostream &operator<<(std::ostream &out, const Player &p);  
 };
 

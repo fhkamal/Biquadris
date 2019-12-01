@@ -24,9 +24,9 @@ vector<string> LevelZero::getSequence() {
     return sequence;
 }
 
-int LevelZero::getLevel()
+/*int LevelZero::getLevel()
 {
     return level;
-}
+}*/
 
 LevelZero::~LevelZero() {}

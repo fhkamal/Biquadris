@@ -48,9 +48,9 @@ void Interface::initialize()
 void Interface::startGame()
 {
 	// Create Players 1 and 2
-	Player p1(fileName1);
+	Player p1(fileName1, seed);
 	p1.playSequence(p1.getQueue());
-	Player p2(fileName2);
+	Player p2(fileName2, seed);
 	p2.playSequence(p2.getQueue());
 	printGame(p1, p2);
 

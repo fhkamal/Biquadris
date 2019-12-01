@@ -2,15 +2,16 @@
 
 using namespace std;
  
-Player::Player(string fileName) : score {0}, highscore {0}, fileName {fileName}, endGame {false} {
+Player::Player(string fileName, int seed) : score {0}, highscore {0}, fileName {fileName}, endGame {false}, seed {seed} {
     lvl = make_shared<LevelZero>(fileName);
     board = make_shared<Board>();
     board->init();
     queue = lvl->getSequence();
+    next = "N";
 }
 
 void Player::playSequence(std::vector<std::string> seq){
-
+  if(lvl->getLevel() == 0){
     if (seq.size() <= 2) {
         for (int i = 0; i < lvl->getSequence().size(); i++) {
             queue.emplace_back(lvl->getSequence()[i]);
@@ -23,33 +24,47 @@ void Player::playSequence(std::vector<std::string> seq){
         return;
     }
 
-    if (*(seq.begin()) == "J") {
-        current = make_shared<JBlock>(board, lvl->getLevel());	// block test
-    }
-    else if (*(seq.begin()) == "S") {
-	    current = make_shared<SBlock>(board, lvl->getLevel());
-    }
-    else if (*(seq.begin()) == "I") {
-	    current = make_shared<IBlock>(board, lvl->getLevel());
-    }
-    else if (*(seq.begin()) == "Z") {
-    	current = make_shared<ZBlock>(board, lvl->getLevel());
-    }
-      else if (*(seq.begin()) == "T") {
-    	current = make_shared<TBlock>(board, lvl->getLevel());
-    }
-    else if (*(seq.begin()) == "O") {
-    	current = make_shared<OBlock>(board, lvl->getLevel());
-    }
-    else if (*(seq.begin()) == "L") {
-    	current = make_shared<LBlock>(board, lvl->getLevel());
-    }
+    current = createBlock(*(seq.begin()));
 
     next = seq[1];
     blocksOnBoard.emplace_back(current);
     // Update the board display and shift the queue of blocks
     board->getTextDisplay()->updateDisplay(*board);
     queue.erase(queue.begin());
+  }
+  else if(lvl->getLevel() == 1 || lvl->getLevel() == 2){
+    if(next == "N"){
+	current = createBlock(lvl->generateBlock(seed));
+    }
+    else{
+	current = createBlock(next);
+    }
+    next = lvl->generateBlock(seed);
+  }
+}
+
+shared_ptr<Block> Player::createBlock(string s){
+    if (s == "J") {
+        return make_shared<JBlock>(board, lvl->getLevel());  // block test
+    }
+    else if (s == "S") {
+        return  make_shared<SBlock>(board, lvl->getLevel());
+    }
+    else if (s == "I") {
+        return make_shared<IBlock>(board, lvl->getLevel());
+    }
+    else if (s == "Z") {
+        return make_shared<ZBlock>(board, lvl->getLevel());
+    }
+    else if (s == "T") {
+        return make_shared<TBlock>(board, lvl->getLevel());
+    }
+    else if (s == "O") {
+        return make_shared<OBlock>(board, lvl->getLevel());
+    }
+    else if (s  == "L") {
+        return make_shared<LBlock>(board, lvl->getLevel());
+    }
 }
 
 vector<string> Player::getQueue(){
