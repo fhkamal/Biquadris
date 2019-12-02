@@ -8,7 +8,19 @@ Block::Block(char let, shared_ptr<Board> board, int length) : let{let}, canDown{
 
 // Block::Block(char let, Board *board): let{let}, board{board} orient{0},
 // one{nullptr}, two{nullptr}, three{nullptr}, four{nullptr} {}
-Block::~Block(){}
+Block::~Block(){
+	one->setBlockType(' ');
+	one->setIsOccupied(false);
+
+	two->setBlockType(' ');
+	two->setIsOccupied(false);
+
+	three->setBlockType(' ');
+	three->setIsOccupied(false);
+
+	four->setBlockType(' ');
+	four->setIsOccupied(false);
+}
 
 void Block::setCanDown(bool b)
 {

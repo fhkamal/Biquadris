@@ -87,7 +87,6 @@ void Interface::startGame()
 		   }
 		   }*/
 
-		cout << currentTurn << endl;
 		if (switchTurn)
 		{
 			if (currentTurn == "p1")
