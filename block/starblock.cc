@@ -18,7 +18,7 @@ bool StarBlock::bounds(){
 
 bool StarBlock::collide(StarBlock &b){
 	shared_ptr<Cell> c = make_shared<Cell>(30, 30);
-	if(b.one->getIsOccupied() && (b.one != one)){
+	if(b.one->getIsOccupied()){
 		b.one = c;
 		return false;
 	}

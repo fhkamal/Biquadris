@@ -1,7 +1,8 @@
 #include "level.h"
 using namespace std;
 
-Level::Level() {}
+Level::Level() {
+}
 
 Level::~Level() {}
 
@@ -14,3 +15,11 @@ int Level::getLevel(){
 }
 
 void Level::generateSequence(int seed) {}
+
+void Level::increment() {
+	turns++;
+}
+
+int Level::getTurns() {
+	return turns;
+}

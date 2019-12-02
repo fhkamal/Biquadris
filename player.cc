@@ -183,6 +183,10 @@ void Player::setHighScore(int x)
 	highscore = x;
 }
 
+shared_ptr<Level> Player::getLvl(){
+	return lvl;
+}
+
 void Player::setLevel(int x)
 {
 	queue.clear();

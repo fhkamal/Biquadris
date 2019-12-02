@@ -48,6 +48,7 @@ public:
     int getScore();
     int getHighScore();
     int getLevel();
+    std::shared_ptr<Level> getLvl();
     bool getEndGame();
     void setRowsCleared(int rows);
     void setBlocksOnBoard(std::shared_ptr<Block>);

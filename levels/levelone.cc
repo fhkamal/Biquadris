@@ -4,6 +4,7 @@ using namespace std;
 
 LevelOne::LevelOne(){
 	level = 1;
+	turns = 0;
 }
 
 void LevelOne::generateSequence(int seed){

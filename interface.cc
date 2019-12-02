@@ -109,7 +109,7 @@ void Interface::startGame()
 			if (currentTurn == "p1")
 			{
 				commandInterpreter(cmd, p1);
-				if (p1.getLevel() == 4 && p1.getBlocksOnBoard().size() % 5 == 0)
+				if (p1.getLevel() == 4 && (p1.getLvl()->getTurns() % 5 == 0) && switchTurn)
 				{
 					if (p1.getRowsCleared() == 0)
 					{
@@ -147,7 +147,7 @@ void Interface::startGame()
 			else if (currentTurn == "p2")
 			{
 				commandInterpreter(cmd, p2);
-				if (p2.getLevel() == 4 && p2.getBlocksOnBoard().size() % 5 == 0)
+				if (p2.getLevel() == 4 && (p2.getLvl()->getTurns() % 5) == 0 && switchTurn)
 				{
 					if (p2.getRowsCleared() == 0)
 					{
@@ -307,6 +307,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -328,6 +329,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -353,6 +355,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -374,6 +377,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -397,6 +401,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			player.moveBlock("down");
 			if (!player.getCurrentBlock()->getCanDown())
 			{
+				player.getLvl()->increment();
 				int score = player.getBoard()->clearRow();
 				if (score != 0)
 				{
@@ -421,6 +426,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -446,6 +452,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				player.moveBlock("down");
 				if (!player.getCurrentBlock()->getCanDown())
 				{
+					player.getLvl()->increment();
 					int score = player.getBoard()->clearRow();
 					if (score != 0)
 					{
@@ -470,6 +477,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			{
 				player.moveBlock("down");
 			}
+			player.getLvl()->increment();
 			int score = player.getBoard()->clearRow();
 			if (score != 0)
 			{

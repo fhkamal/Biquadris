@@ -11,7 +11,7 @@ Block::Block(char let, shared_ptr<Board> board, int length) : let{let}, canDown{
 Block::~Block(){
 	one->setBlockType(' ');
 	one->setIsOccupied(false);
-
+	if(let != '*'){
 	two->setBlockType(' ');
 	two->setIsOccupied(false);
 
@@ -20,6 +20,7 @@ Block::~Block(){
 
 	four->setBlockType(' ');
 	four->setIsOccupied(false);
+	}
 }
 
 void Block::setCanDown(bool b)
