@@ -7,6 +7,7 @@
 #include "levels/levelone.h"
 #include "levels/leveltwo.h"
 #include "levels/levelthree.h"
+#include "levels/levelfour.h"
 #include "board.h"
 #include "block/block.h"
 #include "block/iblock.h"
@@ -16,6 +17,7 @@
 #include "block/oblock.h"
 #include "block/zblock.h"
 #include "block/lblock.h"
+#include "block/starblock.h"
 
 
 
@@ -39,6 +41,7 @@ class Player {
     int seed;
     bool isBlind;
     bool specialHeavy;
+    int rowsCleared;
 
 public:
     Player(std::string fileName, int seed, int level);
@@ -46,6 +49,8 @@ public:
     int getHighScore();
     int getLevel();
     bool getEndGame();
+    void setRowsCleared(int rows);
+    void setBlocksOnBoard(std::shared_ptr<Block>);
     std::string getNext();
     std::shared_ptr<Board> getBoard();
     std::shared_ptr<Block> getCurrentBlock();
@@ -53,12 +58,16 @@ public:
     std::vector<std::string> getQueue();
     void setScore(int x);
     void setLevel(int x);
+    void setEndGame(bool b);
     void setHighScore(int x);
     void setCurrent(std::string b);
     void moveBlock(std::string dir);
     void specialAction(std::string action);
     void resetSpecialActions();
     bool getSpecialHeavy();
+    int getRowsCleared();
+    std::vector<std::shared_ptr<Block>> getBlocksOnBoard();
+    bool getIsBlind();
     void playSequence(std::vector<std::string> seq);
     std::string printBlock(std::string b);
     void rotateBlock(std::string direction);

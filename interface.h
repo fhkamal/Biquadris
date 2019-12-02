@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include "player.h"
+#include "block/starblock.h"
 
 class Interface {
     void startGame();

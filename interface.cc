@@ -110,10 +110,64 @@ void Interface::startGame()
 			if (currentTurn == "p1")
 			{
 				commandInterpreter(cmd, p1);
+				if(p1.getLevel() == 4 && p1.getBlocksOnBoard().size() % 5 == 0){
+                if(p1.getRowsCleared() == 0){
+                        if(!p1.canSpawn("*")){
+                                p1.setEndGame(true);
+                                p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+                                //cout << "test" << endl;
+                                return;
+                        }
+                        shared_ptr<Block> s = p1.createBlock("*");
+                        p1.setBlocksOnBoard(s);
+                        p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+                        while(s->getCanDown()){
+                                s->movement("down");
+                        }
+                        p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+                        int score = p1.getBoard()->clearRow();
+                        if(score != 0){
+                                if(score >= 2) specialAction = true;
+                                p1.setScore(score);
+                                p1.setRowsCleared(score);
+                        }
+                        printBoard = true;
+                }
+                else{
+                        p1.setRowsCleared(0);
+                }
+        }
 			}
 			else if (currentTurn == "p2")
 			{
 				commandInterpreter(cmd, p2);
+				if(p2.getLevel() == 4 && p2.getBlocksOnBoard().size() % 5 == 0){
+                if(p2.getRowsCleared() == 0){
+                        if(!p2.canSpawn("*")){
+                                p2.setEndGame(true);
+                                p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+                                //cout << "test" << endl;
+                                return;
+                        }
+                        shared_ptr<Block> s = p2.createBlock("*");
+                        p2.setBlocksOnBoard(s);
+                        p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+                        while(s->getCanDown()){
+                                s->movement("down");
+                        }
+                        p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+                        int score = p2.getBoard()->clearRow();
+                        if(score != 0){
+                                if(score >= 2) specialAction = true;
+                                p2.setScore(score);
+                                p2.setRowsCleared(score);
+                        }
+                        printBoard = true;
+                }
+                else{
+                        p2.setRowsCleared(0);
+                }
+        }
 			}
 		}
 
@@ -222,6 +276,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -242,6 +297,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -266,6 +322,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -286,6 +343,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -308,6 +366,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 					if (score >= 2)
 						specialAction = true;
 					player.setScore(score);
+					player.setRowsCleared(score);
 				}
 				player.getBoard()->clearRow();
 				switchTurn = true;
@@ -331,6 +390,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -355,6 +415,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 						if (score >= 2)
 							specialAction = true;
 						player.setScore(score);
+						player.setRowsCleared(score);
 					}
 					player.getBoard()->clearRow();
 					switchTurn = true;
@@ -378,6 +439,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 				if (score >= 2)
 					specialAction = true;
 				player.setScore(score);
+				player.setRowsCleared(score);
 			}
 
 			switchTurn = true;

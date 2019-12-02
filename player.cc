@@ -3,7 +3,7 @@
 using namespace std;
 
 Player::Player(string fileName, int seed, int level) : score{0}, highscore{0}, fileName{fileName}, endGame{false},
-	seed{seed}, isBlind{false}, specialHeavy{false}
+	seed{seed}, isBlind{false}, specialHeavy{false}, rowsCleared{0}
 {
 	setLevel(level);
 	board = make_shared<Board>();
@@ -18,7 +18,7 @@ void Player::playSequence(std::vector<std::string> seq)
 	{
 		if (seq.size() <= 2)
 		{
-			for (int i = 0; i < lvl->getSequence().size(); i++)
+			for (unsigned int i = 0; i < lvl->getSequence().size(); i++)
 			{
 				queue.emplace_back(lvl->getSequence()[i]);
 			}
@@ -36,7 +36,7 @@ void Player::playSequence(std::vector<std::string> seq)
 		next = seq[1];
 		queue.erase(queue.begin());
 	}
-	else if (lvl->getLevel() == 1 || lvl->getLevel() == 2 || lvl->getLevel() == 3)
+	else
 	{
 
 		if (queue.size() == 0)
@@ -90,9 +90,12 @@ shared_ptr<Block> Player::createBlock(string s)
 	{
 		return make_shared<OBlock>(board, lvl->getLevel());
 	}
-	else
+	else if (s == "L")
 	{
 		return make_shared<LBlock>(board, lvl->getLevel());
+	}
+	else{
+		return make_shared<StarBlock>(board);
 	}
 }
 
@@ -120,9 +123,33 @@ int Player::getHighScore()
 	return highscore;
 }
 
+int Player::getRowsCleared(){
+	return rowsCleared;
+}
+
+vector<shared_ptr<Block>> Player::getBlocksOnBoard(){
+	return blocksOnBoard;
+}
+
+bool Player::getEndGame(){
+	return endGame;
+}
+
+bool Player::getIsBlind(){
+	return isBlind;
+}
+
 shared_ptr<Block> Player::getCurrentBlock()
 {
 	return current;
+}
+
+void Player::setBlocksOnBoard(shared_ptr<Block> b){
+	blocksOnBoard.emplace_back(b);
+}
+
+void Player::setEndGame(bool b){
+	endGame = b;
 }
 
 void Player::setScore(int x)
@@ -172,8 +199,14 @@ void Player::setLevel(int x)
 		lvl = make_shared<LevelTwo>();
 	if (x == 3)
 		lvl = make_shared<LevelThree>();
+	if(x == 4)
+		lvl = make_shared<LevelFour>();
 	lvl->generateSequence(seed);
 	queue = lvl->getSequence();
+}
+
+void Player::setRowsCleared(int rows){
+	rowsCleared = rows;
 }
 
 void Player::specialAction(string action)
@@ -302,10 +335,9 @@ bool Player::canSpawn(string b)
 		if (board->getGrid()[3][1]->getIsOccupied())
 			return false;
 	}
+	else{
+		if(board->getGrid()[3][5]->getIsOccupied())
+			return false;
+	}
 	return true;
-}
-
-bool Player::getEndGame()
-{
-	return endGame;
 }
