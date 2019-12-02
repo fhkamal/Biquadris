@@ -193,6 +193,10 @@ void Player::resetSpecialActions(){
     board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
 
+bool Player::getSpecialHeavy(){
+    return specialHeavy;
+}
+
 void Player::moveBlock(string dir)
 {
     current->movement(dir);

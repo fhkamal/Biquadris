@@ -58,6 +58,7 @@ public:
     void moveBlock(std::string dir);
     void specialAction(std::string action);
     void resetSpecialActions();
+    bool getSpecialHeavy();
     void playSequence(std::vector<std::string> seq);
     std::string printBlock(std::string b);
     void rotateBlock(std::string direction);
