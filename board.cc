@@ -42,7 +42,7 @@ int Board::clearRow() {
         }
 
     }
-    td->updateDisplay(*this);
+    td->updateDisplay(*this, false);
     return count;
 }
 

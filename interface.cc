@@ -86,16 +86,15 @@ void Interface::startGame()
 		   }
 		   }*/
 
+		cout  << currentTurn << endl;
 		if (switchTurn)
 		{
 			if (currentTurn == "p1")
 			{
-				p1.resetSpecialActions();
 				currentTurn = "p2";
 			}
 			else
 			{
-				p2.resetSpecialActions();
 				currentTurn = "p1";
 			}
 			switchTurn = false;
@@ -117,6 +116,12 @@ void Interface::startGame()
 			}
 		}
 
+		if (switchTurn){
+		
+			if (currentTurn == "p1") p1.resetSpecialActions();
+			else p2.resetSpecialActions();
+		}
+
 		if (printBoard) printGame(p1, p2);
 
 		if (specialAction)
@@ -135,6 +140,7 @@ void Interface::startGame()
 			}
 
 			printGame(p1, p2);
+			specialAction = false;
 		}
 	}
 

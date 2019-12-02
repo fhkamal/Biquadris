@@ -184,11 +184,13 @@ void Player::specialAction(string action)
     else if (action == "heavy"){
         specialHeavy = true;
     }
+    board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
 
 void Player::resetSpecialActions(){
     isBlind = false;
     specialHeavy = false;
+    board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
 
 void Player::moveBlock(string dir)
