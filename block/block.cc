@@ -23,6 +23,10 @@ Block::~Block(){
 	}
 }
 
+char Block::getLet(){
+	return let;
+}
+
 void Block::setCanDown(bool b)
 {
 	canDown = b;

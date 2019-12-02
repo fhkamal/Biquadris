@@ -4,6 +4,7 @@ using namespace std;
 StarBlock::StarBlock(shared_ptr<Board> b) : Block('*', b, 1){
 	one = b->getGrid()[3][5];
 	one->setIsOccupied(true);
+	levelCreated = 4;
 }
 
 StarBlock::StarBlock() : Block{'*', make_shared<Board>(), 1} {}

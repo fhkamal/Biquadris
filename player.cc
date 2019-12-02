@@ -163,6 +163,9 @@ void Player::setScore(int x)
 		{
 			if ((*it2)->getIsOccupied())
 				deleteBlock = false;
+				if((*it)->getLet() == '*') {
+					break;
+				}
 		}
 		if (deleteBlock)
 		{

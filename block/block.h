@@ -45,6 +45,7 @@ public:
 	// Block &operator=(const Block& other);
 	// Block &operator=(Block&& other);
 	virtual void rotate(std::string direction);
+	char getLet();
 };
 
 #endif
