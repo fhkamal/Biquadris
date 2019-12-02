@@ -184,6 +184,17 @@ void Player::specialAction(string action)
     else if (action == "heavy"){
         specialHeavy = true;
     }
+    else {
+        string block;
+        cin >> block;
+        while (block != "S" || block != "Z" || block != "I" || block != "T" || block != "O" || block != "J" || block != "L"){
+            cout << "You are not forcing a valid block. Enter a valid block to force: ";
+            cin >> block;
+            cout << endl;
+            blocksOnBoard.pop_back();
+            queue.emplace(queue.begin(), block);
+        }
+    }
     board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
 
