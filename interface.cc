@@ -135,7 +135,7 @@ void Interface::startGame()
 			cout << "Enter special action: ";
 			cin >> action;
 			cout << endl;
-			while (action != "blind" || action != "heavy" || action != "force"){
+			while (action != "blind" && action != "heavy" && action != "force"){
 				cout << "Not a valid special action. Please enter a valid speical action: ";
 				cin >> action;
 				cout << endl;
