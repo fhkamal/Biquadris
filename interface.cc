@@ -225,7 +225,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 					break;
 				}
 			}
-			if (player.getSpecialHeavy())
+			if (player.getSpecialHeavy() && multiplier == 1)
 			{
 				player.moveBlock("down");
 				player.moveBlock("down");
@@ -269,7 +269,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 					break;
 				}
 			}
-			if (player.getSpecialHeavy())
+			if (player.getSpecialHeavy() && multiplier == 1)
 			{
 				player.moveBlock("down");
 				player.moveBlock("down");
