@@ -225,10 +225,7 @@ void Player::specialAction(string action)
 			cin >> block;
 			cout << endl;
 		}
-		current = nullptr;
-		blocksOnBoard.pop_back();
-		queue.emplace(queue.begin(), block);
-		playSequence(queue);
+		force(block);
 	}
 	board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
@@ -241,6 +238,14 @@ void Player::resetSpecialActions(){
 
 bool Player::getSpecialHeavy(){
 	return specialHeavy;
+}
+
+void Player::force(string b){
+		current = nullptr;
+		blocksOnBoard.pop_back();
+		queue.emplace(queue.begin(), b);
+		playSequence(queue);
+		board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
 
 void Player::moveBlock(string dir)

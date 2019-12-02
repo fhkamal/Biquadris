@@ -495,39 +495,9 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			cout << s << endl;
 			break;
 		}
-		else if (cmd == "I")
+		else if (cmd == "I" || cmd == "O" || cmd == "T" || cmd == "Z" || cmd == "S" || cmd == "L" || cmd == "J")
 		{
-			cout << "i-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "J")
-		{
-			cout << "j-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "L")
-		{
-			cout << "l-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "O")
-		{
-			cout << "o-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "S")
-		{
-			cout << "s-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "Z")
-		{
-			cout << "z-block" << endl;
-			printBoard = true;
-		}
-		else if (cmd == "T")
-		{
-			cout << "t-block" << endl;
+			player.force(cmd);
 			printBoard = true;
 		}
 		else if (cmd == "restart")

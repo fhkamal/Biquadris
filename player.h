@@ -65,6 +65,7 @@ public:
     void specialAction(std::string action);
     void resetSpecialActions();
     bool getSpecialHeavy();
+    void force(std::string b);
     int getRowsCleared();
     std::vector<std::shared_ptr<Block>> getBlocksOnBoard();
     bool getIsBlind();
