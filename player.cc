@@ -163,9 +163,9 @@ void Player::setScore(int x)
 		{
 			if ((*it2)->getIsOccupied())
 				deleteBlock = false;
-				if((*it)->getLet() == '*') {
-					break;
-				}
+			if((*it)->getLet() == '*') {
+				break;
+			}
 		}
 		if (deleteBlock)
 		{
@@ -246,14 +246,24 @@ void Player::resetSpecialActions(){
 bool Player::getSpecialHeavy(){
 	return specialHeavy;
 }
-
 void Player::force(string b){
-		current = nullptr;
-		blocksOnBoard.pop_back();
-		queue.emplace(queue.begin(), b);
-		playSequence(queue);
-		board->getTextDisplay()->updateDisplay(*board, isBlind);
+	current = nullptr;
+	unsigned int i = blocksOnBoard.size()-1;
+	for (; blocksOnBoard[i]->getLet() == '*'; --i){}
+	blocksOnBoard.erase(blocksOnBoard.begin() + i);
+	//blocksOnBoard.pop_back();
+	queue.emplace(queue.begin(), b);
+	playSequence(queue);
+	board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
+/*
+void Player::force(string b){
+	current = nullptr;
+	blocksOnBoard.pop_back();
+	queue.emplace(queue.begin(), b);
+	playSequence(queue);
+	board->getTextDisplay()->updateDisplay(*board, isBlind);
+}*/
 
 void Player::moveBlock(string dir)
 {

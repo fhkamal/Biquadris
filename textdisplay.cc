@@ -36,7 +36,7 @@ void TextDisplay::updateDisplay(Board b, bool blind){
 				board[i][j] = b.getGrid()[i][j]->getBlockType();
 			}
 			else {
-				board[i][j] = '*';
+				board[i][j] = ' ';
 			}
 		}
 	}
