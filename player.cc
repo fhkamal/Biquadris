@@ -14,7 +14,7 @@ Player::Player(string fileName, int seed, int level) : score{0}, highscore{0}, f
 
 void Player::playSequence(std::vector<std::string> seq)
 {
-	if (lvl->getLevel() == 0)
+	if (lvl->getLevel() == 0 || (lvl->getLevel() > 2 && !lvl->getRandom()))
 	{
 		if (seq.size() <= 2)
 		{
@@ -103,6 +103,10 @@ shared_ptr<Block> Player::createBlock(string s)
 vector<string> Player::getQueue()
 {
 	return queue;
+}
+
+void Player::setQueue(vector<string> s){
+	queue = s;
 }
 
 int Player::getScore()
