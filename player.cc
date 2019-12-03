@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Player::Player(string fileName, int seed, int level) : score{0}, highscore{0}, fileName{fileName}, endGame{false},
+Player::Player(string fileName, int seed, int level, int highScore) : score{0}, highscore{highScore}, fileName{fileName}, endGame{false},
 	seed{seed}, isBlind{false}, specialHeavy{false}, rowsCleared{0}
 {
 	setLevel(level);

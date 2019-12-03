@@ -11,7 +11,7 @@
 class Interface {
     void startGame();
     void mainMenu();
-    void commandInterpreter(std::string cmd, Player &player);
+    void commandInterpreter(std::string cmd, std::shared_ptr<Player>player);
     std::string currentTurn;
     bool switchTurn;
     bool printBoard;
@@ -27,7 +27,7 @@ class Interface {
 
     public:
         Interface(bool textOnly, int seed, int level, std::string fileName1, std::string fileName2);
-    	void printGame(Player &p1, Player &p2);
+    	void printGame(std::shared_ptr<Player> p1, std::shared_ptr<Player> p2);
         void initialize(); // initializes the main menu
         // Player whoseTurn(); (don't need pretty sure)
         // Player whoWon();

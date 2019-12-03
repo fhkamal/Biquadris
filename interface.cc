@@ -3,7 +3,7 @@
 
 //  Testing
 // #include "board.h"
-//#include "player.h"
+//#include "player->h"
 
 using namespace std;
 
@@ -49,15 +49,23 @@ void Interface::initialize()
 void Interface::startGame()
 {
 	// Create Players 1 and 2
-	Player p1(fileName1, seed, level);
-	p1.playSequence(p1.getQueue());
-	Player p2(fileName2, seed, level);
-	p2.playSequence(p2.getQueue());
+
+	// Player p1(fileName1, seed, level);
+	// p1->playSequence(p1->getQueue());
+	// Player p2(fileName2, seed, level);
+	// p2->playSequence(p2->getQueue());
+	shared_ptr<Player> p1 = make_shared<Player>(fileName1, seed, level, 0);
+	p1->playSequence(p1->getQueue());
+	shared_ptr<Player> p2 = make_shared<Player>(fileName2, seed, level, 0);
+	p2->playSequence(p2->getQueue());
+
 	printGame(p1, p2);
 
 	// Set player levels
 
 	// set seed for random generation
+
+	beginning: 
 
 	currentTurn = "p1";
 	switchTurn = false;
@@ -67,7 +75,7 @@ void Interface::startGame()
 
 	while (cin >> cmd)
 	{
-		if (p1.getEndGame() || p2.getEndGame())
+		if (p1->getEndGame() || p2->getEndGame())
 			break;
 		/*
 		   cout << specialAction << endl;
@@ -79,11 +87,11 @@ void Interface::startGame()
 		   cout << endl;
 		   if (currentTurn == "p1")
 		   {
-		   p2.specialAction(action);
+		   p2->specialAction(action);
 		   }
 		   else
 		   {
-		   p1.specialAction(action);
+		   p1->specialAction(action);
 		   }
 		   }*/
 
@@ -104,81 +112,87 @@ void Interface::startGame()
 		if (cmd == "quit" || cmd == "exit" || cmd == "q")
 			break;
 
-		if (cmd != "restart")
-		{
+		if (cmd == "restart") {
+			int p1High = p1->getHighScore();
+			int p2High = p2->getHighScore();
+
+			p1 = make_shared<Player>(fileName1, seed, level, p1High);
+			p2 = make_shared<Player>(fileName2, seed, level, p2High);
+		}
+		else {
 			if (currentTurn == "p1")
 			{
 				commandInterpreter(cmd, p1);
-				if (p1.getLevel() == 4 && (p1.getLvl()->getTurns() % 5 == 0) && switchTurn)
+				if (p1->getLevel() == 4 && (p1->getLvl()->getTurns() % 5 == 0) && switchTurn)
 				{
-					if (p1.getRowsCleared() == 0)
+					if (p1->getRowsCleared() == 0)
 					{
-						if (!p1.canSpawn("*"))
+						if (!p1->canSpawn("*"))
 						{
-							p1.setEndGame(true);
-							p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+							p1->setEndGame(true);
+							p1->getBoard()->getTextDisplay()->updateDisplay(*(p1->getBoard()), p1->getIsBlind());
 							//cout << "test" << endl;
 							return;
 						}
-						shared_ptr<Block> s = p1.createBlock("*");
-						p1.setBlocksOnBoard(s);
-						p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+						shared_ptr<Block> s = p1->createBlock("*");
+						p1->setBlocksOnBoard(s);
+						p1->getBoard()->getTextDisplay()->updateDisplay(*(p1->getBoard()), p1->getIsBlind());
 						while (s->getCanDown())
 						{
 							s->movement("down");
 						}
-						p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
-						int score = p1.getBoard()->clearRow();
+						p1->getBoard()->getTextDisplay()->updateDisplay(*(p1->getBoard()), p1->getIsBlind());
+						int score = p1->getBoard()->clearRow();
 						if (score != 0)
 						{
 							if (score >= 2)
 								specialAction = true;
-							p1.setScore(score);
-							p1.setRowsCleared(score);
+							p1->setScore(score);
+							p1->setRowsCleared(score);
 						}
 						printBoard = true;
 					}
 					else
 					{
-						p1.setRowsCleared(0);
+						p1->setRowsCleared(0);
 					}
 				}
 			}
 			else if (currentTurn == "p2")
 			{
 				commandInterpreter(cmd, p2);
-				if (p2.getLevel() == 4 && (p2.getLvl()->getTurns() % 5) == 0 && switchTurn)
+				if (p2->getLevel() == 4 && (p2->getLvl()->getTurns() % 5) == 0 && switchTurn)
 				{
-					if (p2.getRowsCleared() == 0)
+					if (p2->getRowsCleared() == 0)
 					{
-						if (!p2.canSpawn("*"))
+						if (!p2->canSpawn("*"))
 						{
-							p2.setEndGame(true);
-							p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+							p2->setEndGame(true);
+							p2->getBoard()->getTextDisplay()->updateDisplay(*(p2->getBoard()), p2->getIsBlind());
 							//cout << "test" << endl;
 							return;
 						}
-						shared_ptr<Block> s = p2.createBlock("*");
-						p2.setBlocksOnBoard(s);
-						p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+						shared_ptr<Block> s = p2->createBlock("*");
+						p2->setBlocksOnBoard(s);
+						p2->getBoard()->getTextDisplay()->updateDisplay(*(p2->getBoard()), p2->getIsBlind());
 						while (s->getCanDown())
 						{
 							s->movement("down");
 						}
-						p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
-						int score = p2.getBoard()->clearRow();
+						p2->getBoard()->getTextDisplay()->updateDisplay(*(p2->getBoard()), p2->getIsBlind());
+						int score = p2->getBoard()->clearRow();
 						if (score != 0)
 						{
 							if (score >= 2)
 								specialAction = true;
-							p2.setScore(score);
-							p2.setRowsCleared(score);
+							p2->setScore(score);
+							p2->setRowsCleared(score);
 						}
 						printBoard = true;
 					}
 					else
 					{
-						p2.setRowsCleared(0);
+						p2->setRowsCleared(0);
 					}
 				}
 			}
@@ -188,9 +202,9 @@ void Interface::startGame()
 		{
 
 			if (currentTurn == "p1")
-				p1.resetSpecialActions();
+				p1->resetSpecialActions();
 			else
-				p2.resetSpecialActions();
+				p2->resetSpecialActions();
 		}
 
 		if (printBoard)
@@ -210,34 +224,34 @@ void Interface::startGame()
 			}
 			if (currentTurn == "p1")
 			{
-				p2.specialAction(action);
+				p2->specialAction(action);
 			}
 			else
 			{
-				p1.specialAction(action);
+				p1->specialAction(action);
 			}
 
 			printGame(p1, p2);
 			specialAction = false;
 		}
-		if (p1.getEndGame() || p2.getEndGame()) {
+		if (p1->getEndGame() || p2->getEndGame()) {
 			break;
 		}
 	}
 
-	if (!p1.getEndGame() && p2.getEndGame())
+	if (!p1->getEndGame() && p2->getEndGame())
 	{
 		cout << endl
 			 << endl
-			 << "Player 1 wins with a score of: " << p1.getScore() << "!" << endl;
+			 << "Player 1 wins with a score of: " << p1->getScore() << "!" << endl;
 	}
-	else if (p1.getEndGame() && !p2.getEndGame())
+	else if (p1->getEndGame() && !p2->getEndGame())
 	{
 		cout << endl
 			 << endl
-			 << "Player 2 wins with a score of: " << p2.getScore() << "!" << endl;
+			 << "Player 2 wins with a score of: " << p2->getScore() << "!" << endl;
 	}
-	else if (p1.getEndGame() && !p2.getEndGame())
+	else if (p1->getEndGame() && !p2->getEndGame())
 	{
 		cout << endl
 			 << endl
@@ -248,7 +262,7 @@ void Interface::startGame()
 		 << "Enter exit to quit." << endl;
 }
 
-void Interface::commandInterpreter(string cmd, Player &player)
+void Interface::commandInterpreter(string cmd, shared_ptr<Player>player)
 {
 	// List of Commands
 
@@ -280,12 +294,12 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		// Player Commands
 		if (cmd == "levelup" || cmd == "levelu")
 		{
-			player.setLevel(player.getLevel() + 1);
+			player->setLevel(player->getLevel() + 1);
 			printBoard = true;
 		}
 		else if (cmd == "leveldown" || cmd == "leveld")
 		{
-			player.setLevel(player.getLevel() - 1);
+			player->setLevel(player->getLevel() - 1);
 			printBoard = true;
 		}
 		else if (cmd.find("norandom") != string::npos || cmd.find("nor") != string::npos || cmd.find("no") != string::npos)
@@ -304,47 +318,47 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		// Block Commands
 		else if (cmd.find("lef") != string::npos)
 		{
-			player.moveBlock("left");
-			if (player.getLevel() > 2 && multiplier == 1)
+			player->moveBlock("left");
+			if (player->getLevel() > 2 && multiplier == 1)
 			{
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
-			if (player.getSpecialHeavy() && multiplier == 1)
+			if (player->getSpecialHeavy() && multiplier == 1)
 			{
-				player.moveBlock("down");
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
@@ -352,47 +366,47 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		else if (cmd.find("ri") != string::npos)
 		{
-			player.moveBlock("right");
-			if (player.getLevel() > 2 && multiplier == 1)
+			player->moveBlock("right");
+			if (player->getLevel() > 2 && multiplier == 1)
 			{
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
-			if (player.getSpecialHeavy() && multiplier == 1)
+			if (player->getSpecialHeavy() && multiplier == 1)
 			{
-				player.moveBlock("down");
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
@@ -401,47 +415,47 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		else if (cmd.find("do") != string::npos)
 		{
 			// use a getter to check if file can go anymore down from block field and if false then change player
-			player.moveBlock("down");
-			if (!player.getCurrentBlock()->getCanDown())
+			player->moveBlock("down");
+			if (!player->getCurrentBlock()->getCanDown())
 			{
-				player.getLvl()->increment();
-				int score = player.getBoard()->clearRow();
+				player->getLvl()->increment();
+				int score = player->getBoard()->clearRow();
 				if (score != 0)
 				{
 					if (score >= 2)
 						specialAction = true;
-					player.setScore(score);
-					player.setRowsCleared(score);
+					player->setScore(score);
+					player->setRowsCleared(score);
 				}
-				player.getBoard()->clearRow();
+				player->getBoard()->clearRow();
 				switchTurn = true;
 				printBoard = true;
-				player.playSequence(player.getQueue());
+				player->playSequence(player->getQueue());
 				break;
 			}
 			printBoard = true;
 		}
 		else if (cmd == "clockwise" || cmd == "cl" || cmd == "clo" || cmd == "cloc" || cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
-			player.rotateBlock(cmd);
-			if (player.getLevel() > 2 && multiplier == 1)
+			player->rotateBlock(cmd);
+			if (player->getLevel() > 2 && multiplier == 1)
 			{
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
@@ -449,25 +463,25 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		else if (cmd == "counterclockwise" || cmd.find("counter") != string::npos || cmd.find("co") != string::npos || cmd.find("cou") != string::npos || cmd.find("count") != string::npos)
 		{
-			player.rotateBlock(cmd);
-			if (player.getLevel() > 2 && multiplier == 1)
+			player->rotateBlock(cmd);
+			if (player->getLevel() > 2 && multiplier == 1)
 			{
-				player.moveBlock("down");
-				if (!player.getCurrentBlock()->getCanDown())
+				player->moveBlock("down");
+				if (!player->getCurrentBlock()->getCanDown())
 				{
-					player.getLvl()->increment();
-					int score = player.getBoard()->clearRow();
+					player->getLvl()->increment();
+					int score = player->getBoard()->clearRow();
 					if (score != 0)
 					{
 						if (score >= 2)
 							specialAction = true;
-						player.setScore(score);
-						player.setRowsCleared(score);
+						player->setScore(score);
+						player->setRowsCleared(score);
 					}
-					player.getBoard()->clearRow();
+					player->getBoard()->clearRow();
 					switchTurn = true;
 					printBoard = true;
-					player.playSequence(player.getQueue());
+					player->playSequence(player->getQueue());
 					break;
 				}
 			}
@@ -476,23 +490,23 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		else if (cmd == "drop" || cmd.find("dr") == 0)
 		{
 			// use a getter to check if file can go anymore down from block field and if false then change player
-			while (player.getCurrentBlock()->getCanDown())
+			while (player->getCurrentBlock()->getCanDown())
 			{
-				player.moveBlock("down");
+				player->moveBlock("down");
 			}
-			player.getLvl()->increment();
-			int score = player.getBoard()->clearRow();
+			player->getLvl()->increment();
+			int score = player->getBoard()->clearRow();
 			if (score != 0)
 			{
 				if (score >= 2)
 					specialAction = true;
-				player.setScore(score);
-				player.setRowsCleared(score);
+				player->setScore(score);
+				player->setRowsCleared(score);
 			}
 
 			switchTurn = true;
 			printBoard = true;
-			player.playSequence(player.getQueue());
+			player->playSequence(player->getQueue());
 		}
 
 		// Testing Commands
@@ -506,7 +520,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		else if (cmd == "I" || cmd == "O" || cmd == "T" || cmd == "Z" || cmd == "S" || cmd == "L" || cmd == "J")
 		{
-			player.force(cmd);
+			player->force(cmd);
 			printBoard = true;
 		}
 		else if (cmd == "restart")
@@ -518,40 +532,40 @@ void Interface::commandInterpreter(string cmd, Player &player)
 	}
 	if (printBoard == true)
 	{
-		//cout << *(player.getBoard());
+		//cout << *(player->getBoard());
 	}
 }
 
-void Interface::printGame(Player &p1, Player &p2)
+void Interface::printGame(shared_ptr<Player> p1, shared_ptr<Player> p2)
 {
 	cout << endl;
-	//p1.getBoard()->clearRow();
-	//p2.getBoard()->clearRow();
-	cout << "Level:    " << p1.getLevel() << "      "
-		 << "Level:    " << p2.getLevel() << endl;
-	cout << "Score:" << right << setw(5) << p1.getScore();
+	//p1->getBoard()->clearRow();
+	//p2->getBoard()->clearRow();
+	cout << "Level:    " << p1->getLevel() << "      "
+		 << "Level:    " << p2->getLevel() << endl;
+	cout << "Score:" << right << setw(5) << p1->getScore();
 	cout << "      "
-		 << "Score:" << right << setw(5) << p2.getScore() << endl;
+		 << "Score:" << right << setw(5) << p2->getScore() << endl;
 	cout << "-----------      -----------" << endl;
 	for (int i = 0; i < 18; i++)
 	{
 		for (int j = 0; j < 11; j++)
 		{
-			cout << p1.getBoard()->getTextDisplay()->getBoard()[i][j];
+			cout << p1->getBoard()->getTextDisplay()->getBoard()[i][j];
 		}
 
 		cout << "      ";
 
 		for (int j = 0; j < 11; j++)
 		{
-			cout << p2.getBoard()->getTextDisplay()->getBoard()[i][j];
+			cout << p2->getBoard()->getTextDisplay()->getBoard()[i][j];
 		}
 		cout << endl;
 	}
 	cout << "-----------      -----------" << endl;
 	cout << "Next:            Next:" << endl;
-	string x = p1.printBlock(p1.getNext());
-	string y = p2.printBlock(p2.getNext());
+	string x = p1->printBlock(p1->getNext());
+	string y = p2->printBlock(p2->getNext());
 	cout << x.substr(0, x.find('/')) + "             " + y.substr(0, y.find('/')) << endl;
 	cout << x.substr(x.find('/') + 1) + "             " + y.substr(y.find('/') + 1) << endl;
 	cout << endl;
