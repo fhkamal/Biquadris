@@ -292,12 +292,20 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		{
 			string fileName;
 			cin >> fileName;
-			cout << fileName << endl;
+			if(player.getLevel() > 2){
+				player.getLvl()->setRandom(false);
+				player.getLvl()->getBlocks(fileName);
+				player.setQueue(player.getLvl()->getSequence());
+			}
 			break;
 		}
 		else if (cmd == "random" || cmd.find("ra") != string::npos)
 		{
-			cout << "rndm" << endl;
+			if(player.getLevel() > 2){
+				player.getLvl()->setRandom(true);
+				player.getLvl()->generateSequence(seed);
+				player.setQueue(player.getLvl()->getSequence());
+			}
 			break;
 		}
 

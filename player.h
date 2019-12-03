@@ -52,6 +52,7 @@ public:
     bool getEndGame();
     void setRowsCleared(int rows);
     void setBlocksOnBoard(std::shared_ptr<Block>);
+    void setQueue(std::vector<std::string> s);
     std::string getNext();
     std::shared_ptr<Board> getBoard();
     std::shared_ptr<Block> getCurrentBlock();

@@ -9,6 +9,7 @@ LevelThree::LevelThree(){
 }
 
 void LevelThree::generateSequence(int seed){
+	sequence.clear();
 	if (seed != INT_MAX) {
 		srand(seed);
 	}

@@ -14,6 +14,7 @@ class Level
 protected:
     int level;
     int turns;
+    bool random;
     std::vector<std::string> sequence;
 public:
     Level();
@@ -24,7 +25,9 @@ public:
     virtual void generateSequence(int seed);
     virtual ~Level() = 0;
     void increment();
+    void setRandom(bool b);
     int getTurns();
+    bool getRandom();
 };
 
 #endif

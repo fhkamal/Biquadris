@@ -18,11 +18,12 @@ void Level::getBlocks(string fileName)
 {
     ifstream f{fileName};
     string block;
-
+    sequence.clear();
     while (f >> block)
     {
         sequence.emplace_back(block);
     }
+    cout << sequence.size() << endl;
 }
 
 void Level::generateSequence(int seed) {}
@@ -33,4 +34,12 @@ void Level::increment() {
 
 int Level::getTurns() {
 	return turns;
+}
+
+void Level::setRandom(bool b){
+	random = b;
+}
+
+bool Level::getRandom(){
+	return random;
 }
