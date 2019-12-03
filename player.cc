@@ -14,9 +14,10 @@ Player::Player(string fileName, int seed, int level, int highscore) : score{0}, 
 
 void Player::playSequence(std::vector<std::string> seq)
 {
+	//if the sequence is not random
 	if (lvl->getLevel() == 0 || (lvl->getLevel() > 2 && !lvl->getRandom()))
 	{
-		if (seq.size() <= 2)
+		if (seq.size() <= 2) //loops the sequence back around when it gets too small
 		{
 			for (unsigned int i = 0; i < lvl->getSequence().size(); i++)
 			{
@@ -36,10 +37,10 @@ void Player::playSequence(std::vector<std::string> seq)
 		next = seq[1];
 		queue.erase(queue.begin());
 	}
-	else
+	else //sequence is random
 	{
 
-		if (queue.size() == 0)
+		if (queue.size() == 0) //creates sequence
 		{
 			lvl->generateSequence(seed);
 			queue = lvl->getSequence();
@@ -66,10 +67,10 @@ void Player::playSequence(std::vector<std::string> seq)
 }
 
 shared_ptr<Block> Player::createBlock(string s)
-{
+{// creates block based on letter
 	if (s == "J")
 	{
-		return make_shared<JBlock>(board, lvl->getLevel()); // block test
+		return make_shared<JBlock>(board, lvl->getLevel());
 	}
 	else if (s == "S")
 	{
@@ -158,13 +159,13 @@ void Player::setEndGame(bool b){
 }
 
 void Player::setScore(int x)
-{
+{	//checks if each block is still on the board
 	for (auto it = blocksOnBoard.begin(); it != blocksOnBoard.end(); it++)
 	{
 		int scoreBlock = 0;
 		bool deleteBlock = true;
 		vector<shared_ptr<Cell>> cells = (*it)->getCells();
-		for (auto it2 = cells.begin(); it2 != cells.end(); it2++)
+		for (auto it2 = cells.begin(); it2 != cells.end(); it2++) //checks each cell of the block
 		{
 			if ((*it2)->getIsOccupied())
 				deleteBlock = false;
@@ -172,7 +173,7 @@ void Player::setScore(int x)
 				break;
 			}
 		}
-		if (deleteBlock)
+		if (deleteBlock) //deletes block and updates score
 		{
 			scoreBlock = ((*it)->getLevelCreated() + 1) * ((*it)->getLevelCreated() + 1);
 			blocksOnBoard.erase(it);
@@ -229,7 +230,7 @@ void Player::specialAction(string action)
 	else if (action == "heavy"){
 		specialHeavy = true;
 	}
-	else {
+	else { //sets block to force on the opposing player
 		string block;
 		cin >> block;
 		while (block != "S" && block != "Z" && block != "I" && block != "T" && block != "O" && block != "J" && block != "L"){
@@ -251,7 +252,7 @@ void Player::resetSpecialActions(){
 bool Player::getSpecialHeavy(){
 	return specialHeavy;
 }
-void Player::force(string b){
+void Player::force(string b){ //forces the block onto the other player
 	current = nullptr;
 	unsigned int i = blocksOnBoard.size()-1;
 	for (; blocksOnBoard[i]->getLet() == '*'; --i){}
@@ -261,14 +262,6 @@ void Player::force(string b){
 	playSequence(queue);
 	board->getTextDisplay()->updateDisplay(*board, isBlind);
 }
-/*
-void Player::force(string b){
-	current = nullptr;
-	blocksOnBoard.pop_back();
-	queue.emplace(queue.begin(), b);
-	playSequence(queue);
-	board->getTextDisplay()->updateDisplay(*board, isBlind);
-}*/
 
 void Player::moveBlock(string dir)
 {
@@ -323,7 +316,7 @@ string Player::getNext()
 }
 
 bool Player::canSpawn(string b)
-{
+{	//checks if each block can spawn
 	if (b == "I")
 	{
 		if (board->getGrid()[3][0]->getIsOccupied() || board->getGrid()[3][1]->getIsOccupied() ||
