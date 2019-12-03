@@ -58,7 +58,9 @@ void Interface::startGame(int p1High, int p2High)
 	p1.playSequence(p1.getQueue());
 	Player p2(fileName2, seed, level, p2High);
 	p2.playSequence(p2.getQueue());
+	restart = true;
 	printGame(p1, p2);
+	restart = false;
 
 	// Initial conditions of the game
 	currentTurn = "p1";
@@ -539,7 +541,10 @@ void Interface::printGame(Player &p1, Player &p2)
 {
 	cout << endl;
 	cout << "Current turn: ";
-	if(currentTurn == "p1"){
+	if (restart){
+		cout << "p1" << endl;
+	}
+	else if(currentTurn == "p1"){
 		cout << "p2" << endl;
 	}
 	else{
