@@ -418,7 +418,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			}
 			printBoard = true;
 		}
-		else if (cmd == "clockwise" || cmd == "ccw" || cmd == "cl" || cmd == "clo" || cmd == "cloc" || cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
+		else if (cmd == "clockwise" || cmd == "cl" || cmd == "clo" || cmd == "cloc" || cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
 			player.rotateBlock(cmd);
 			if (player.getLevel() > 2 && multiplier == 1)
@@ -490,7 +490,6 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			switchTurn = true;
 			printBoard = true;
 			player.playSequence(player.getQueue());
-			break;
 		}
 
 		// Testing Commands
