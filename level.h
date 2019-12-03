@@ -7,6 +7,7 @@
 //#include <block.h>
 #include <string>
 #include <limits.h>
+#include <fstream>
 
 class Level
 {
@@ -16,7 +17,7 @@ protected:
     std::vector<std::string> sequence;
 public:
     Level();
-
+    void getBlocks(std::string filename);
     int getLevel();
     virtual std::vector<std::string> getSequence();
     //virtual std::unique_ptr<Block> generateBlock(Board &board, std::string blockType);

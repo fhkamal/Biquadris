@@ -14,6 +14,17 @@ int Level::getLevel(){
 	return level;
 }
 
+void Level::getBlocks(string fileName)
+{
+    ifstream f{fileName};
+    string block;
+
+    while (f >> block)
+    {
+        sequence.emplace_back(block);
+    }
+}
+
 void Level::generateSequence(int seed) {}
 
 void Level::increment() {
