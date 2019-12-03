@@ -14,10 +14,10 @@ class TextDisplay
     int width = 11;
 
 public:
-    TextDisplay();
-    void updateDisplay(Board grid, bool blind);
-    std::vector<std::vector<char>> getBoard();
-    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+    TextDisplay(); //constructor
+    void updateDisplay(Board grid, bool blind); //updates the display given the board
+    std::vector<std::vector<char>> getBoard(); //returns the board
+    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td); //outputs the board in text
 };
 
 #endif
