@@ -525,6 +525,16 @@ void Interface::commandInterpreter(string cmd, Player &player)
 void Interface::printGame(Player &p1, Player &p2)
 {
 	cout << endl;
+	cout << "Current turn: ";
+	if(currentTurn == "p1"){
+		cout << "p2" << endl;
+	}
+	else{
+		cout << "p1" << endl;
+	}
+	cout << "HiSco:" << right << setw(5) << p1.getHighScore();
+	cout << "      "
+		<< "HiSco:" << right << setw(5) << p2.getHighScore() << endl;
 	//p1.getBoard()->clearRow();
 	//p2.getBoard()->clearRow();
 	cout << "Level:    " << p1.getLevel() << "      "

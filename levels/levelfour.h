@@ -4,6 +4,7 @@
 #include "../level.h"
 
 class LevelFour: public Level{
+	bool random;
 public:
         LevelFour();
         ~LevelFour() override;
