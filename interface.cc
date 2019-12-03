@@ -221,7 +221,6 @@ void Interface::startGame()
 			specialAction = false;
 		}
 		if (p1.getEndGame() || p2.getEndGame()) {
-			cout << "Break from loop" << endl;
 			break;
 		}
 	}
