@@ -230,13 +230,13 @@ void Interface::startGame()
 	{
 		cout << endl
 			 << endl
-			 << "Player 1 Wins with a highscore of: " << p1.getHighScore() << "!" << endl;
+			 << "Player 1 wins with a score of: " << p1.getScore() << "!" << endl;
 	}
 	else if (p1.getEndGame() && !p2.getEndGame())
 	{
 		cout << endl
 			 << endl
-			 << "Player 2 Wins with a highscore of:" << p2.getHighScore() << "!" << endl;
+			 << "Player 2 wins with a score of: " << p2.getScore() << "!" << endl;
 	}
 	else if (p1.getEndGame() && !p2.getEndGame())
 	{
