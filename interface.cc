@@ -1,41 +1,39 @@
 #include "interface.h"
 #include "iomanip"
 
-//  Testing
-// #include "board.h"
-//#include "player.h"
-
 using namespace std;
 
 Interface::Interface(bool textOnly, int seed, int level, string fileName1, string fileName2) : textOnly{textOnly},
-																							   seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2}
-{
-	// Enable short forms of commands
-	map<string, string> macros; // Fill in later
-};
+	 seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2}, p1HighScore{0}, p2HighScore{0}, restart{false} {};
 
+// Displays menu options to user
 void Interface::mainMenu()
 {
 	cout << "To start a game, enter start" << endl;
 	cout << "To quit the main menu, enter quit" << endl;
 }
 
+// Main menu functionality
 void Interface::initialize()
 {
 	mainMenu();
 	string cmd;
 
+	//  Gets user input for main menu
 	while (cin >> cmd)
 	{
 		if (cmd == "start")
 		{
 			cout << "Starting the game..." << endl;
+			// Starts the initial base game
 			startGame(0, 0);
 		}
+		// Exits the game
 		else if (cmd == "quit" || cmd == "exit") 
 		{
 			break;
 		}
+		// User error handling
 		else
 		{
 			cout << "You entered an invalid command: " << cmd << ". " << endl
@@ -43,6 +41,7 @@ void Interface::initialize()
 			mainMenu();
 		}
 
+		// Restarts a new game keeping the players' highscore
 		while (restart) {
 			restart = false;
 			startGame(p1HighScore, p2HighScore);
@@ -51,6 +50,7 @@ void Interface::initialize()
 	cout << "Thank you for playing." << endl;
 }
 
+// Creates a new game using player's highscore
 void Interface::startGame(int p1High, int p2High)
 {
 	// Create Players 1 and 2
@@ -60,10 +60,7 @@ void Interface::startGame(int p1High, int p2High)
 	p2.playSequence(p2.getQueue());
 	printGame(p1, p2);
 
-	// Set player levels
-
-	// set seed for random generation
-
+	// Initial conditions of the game
 	currentTurn = "p1";
 	switchTurn = false;
 	specialAction = false;
@@ -72,8 +69,11 @@ void Interface::startGame(int p1High, int p2High)
 
 	while (cin >> cmd)
 	{
-		if (p1.getEndGame() || p2.getEndGame())
-			break;
+		// Exit loop if it's the end of the game
+		if (p1.getEndGame() || p2.getEndGame()) break;
+
+
+		// Switches turns between players
 		if (switchTurn)
 		{
 			if (currentTurn == "p1")
@@ -88,10 +88,11 @@ void Interface::startGame(int p1High, int p2High)
 		}
 
 		// Exits the game loop and returns to main menu
-		if (cmd == "quit" || cmd == "exit" || cmd == "q")
-			break;
-
+		if (cmd == "quit" || cmd == "exit" || cmd == "q") break;
+		
+		// Restart the game
 		if (cmd == "restart") {
+			// Store each player's highscore
 			p1HighScore = p1.getHighScore();
 			p2HighScore = p2.getHighScore();
 			restart = true;
@@ -100,18 +101,24 @@ void Interface::startGame(int p1High, int p2High)
 		else {
 			if (currentTurn == "p1")
 			{
+				// Run the command
 				commandInterpreter(cmd, p1);
+
+				// For level 4 check if number of turns is a multiple of five
 				if (p1.getLevel() == 4 && (p1.getLvl()->getTurns() % 5 == 0) && switchTurn)
-				{
+				{	
+					// If rows are not cleared then spawn a star
 					if (p1.getRowsCleared() == 0)
 					{
 						if (!p1.canSpawn("*"))
-						{
+						{	
+							// If a star can't spawn signal end of game
 							p1.setEndGame(true);
 							p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
-							//cout << "test" << endl;
+
 							return;
 						}
+						// Spawn a star and drop it down
 						shared_ptr<Block> s = p1.createBlock("*");
 						p1.setBlocksOnBoard(s);
 						p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
@@ -120,11 +127,14 @@ void Interface::startGame(int p1High, int p2High)
 							s->movement("down");
 						}
 						p1.getBoard()->getTextDisplay()->updateDisplay(*(p1.getBoard()), p1.getIsBlind());
+
+						// number of rows cleared
 						int score = p1.getBoard()->clearRow();
 						if (score != 0)
 						{
-							if (score >= 2)
-								specialAction = true;
+							// if two or more rows are clear enable special action
+							if (score >= 2) specialAction = true;
+							// Update player's score
 							p1.setScore(score);
 							p1.setRowsCleared(score);
 						}
@@ -138,18 +148,24 @@ void Interface::startGame(int p1High, int p2High)
 			}
 			else if (currentTurn == "p2")
 			{
+				// Run the command
 				commandInterpreter(cmd, p2);
+
+				// For level 4 check if number of turns is a multiple of five
 				if (p2.getLevel() == 4 && (p2.getLvl()->getTurns() % 5) == 0 && switchTurn)
-				{
+				{	
+					// If rows are not cleared then spawn a star
 					if (p2.getRowsCleared() == 0)
 					{
+						// If a star can't spawn signal end of game
 						if (!p2.canSpawn("*"))
 						{
 							p2.setEndGame(true);
 							p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
-							//cout << "test" << endl;
+
 							return;
 						}
+						// Spawn a star and drop it down
 						shared_ptr<Block> s = p2.createBlock("*");
 						p2.setBlocksOnBoard(s);
 						p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
@@ -158,11 +174,14 @@ void Interface::startGame(int p1High, int p2High)
 							s->movement("down");
 						}
 						p2.getBoard()->getTextDisplay()->updateDisplay(*(p2.getBoard()), p2.getIsBlind());
+
+						// number of rows cleared
 						int score = p2.getBoard()->clearRow();
 						if (score != 0)
 						{
-							if (score >= 2)
-								specialAction = true;
+							// if two or more rows are clear enable special action
+							if (score >= 2) specialAction = true;
+							// Update player's score
 							p2.setScore(score);
 							p2.setRowsCleared(score);
 						}
@@ -176,6 +195,7 @@ void Interface::startGame(int p1High, int p2High)
 			}
 		}
 
+		// reset each player's special actiom
 		if (switchTurn)
 		{
 
@@ -184,22 +204,28 @@ void Interface::startGame(int p1High, int p2High)
 			else
 				p2.resetSpecialActions();
 		}
+		
+		// Print game progress
+		if (printBoard) printGame(p1, p2);
 
-		if (printBoard)
-			printGame(p1, p2);
 
+		// Activate special actiom
 		if (specialAction)
-		{
+		{	
+			// Get user's imput
 			string action;
 			cout << "Enter special action: ";
 			cin >> action;
 			cout << endl;
 			while (action != "blind" && action != "heavy" && action != "force")
 			{
+				// User errorhandling
 				cout << "Not a valid special action. Please enter a valid speical action: ";
 				cin >> action;
 				cout << endl;
 			}
+
+			// activate special actions on opposing player
 			if (currentTurn == "p1")
 			{
 				p2.specialAction(action);
@@ -212,34 +238,24 @@ void Interface::startGame(int p1High, int p2High)
 			printGame(p1, p2);
 			specialAction = false;
 		}
-		if (p1.getEndGame() || p2.getEndGame()) {
-			break;
-		}
+		// Check for endgame conditions
+		if (p1.getEndGame() || p2.getEndGame()) break;
 	}
 
+	// Output winner 
 	if (!p1.getEndGame() && p2.getEndGame())
 	{
-		cout << endl
-			 << endl
-			 << "Player 1 wins with a score of: " << p1.getScore() << "!" << endl;
+		cout << endl << endl << "Player 1 wins with a score of: " << p1.getScore() << "!" << endl;
 	}
 	else if (p1.getEndGame() && !p2.getEndGame())
 	{
-		cout << endl
-			 << endl
-			 << "Player 2 wins with a score of: " << p2.getScore() << "!" << endl;
-	}
-	else if (p1.getEndGame() && !p2.getEndGame())
-	{
-		cout << endl
-			 << endl
-			 << "The game ends in a Tie!" << endl;
+		cout << endl << endl << "Player 2 wins with a score of: " << p2.getScore() << "!" << endl;
 	}
 
-	cout << "Enter start to play again. " << endl
-		 << "Enter exit to quit." << endl;
+	cout << "Enter start to play again. " << endl << "Enter exit to quit." << endl;
 }
 
+// Runs player commands
 void Interface::commandInterpreter(string cmd, Player &player)
 {
 	// List of Commands
@@ -250,6 +266,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 
 	int multiplier = 1;
 
+	// Check if there is a digit in front for multiplier
 	if (isdigit(cmd[0]))
 	{
 		int n = cmd[0] - '0'; // Converts the multiplier from char to int
@@ -259,6 +276,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		cmd = cmd.substr(1);
 	}
+	// Check if multiplier supplied is more than 1 digit
 	while (isdigit(cmd[0]))
 	{
 		int n = cmd[0] - '0'; // Converts the multiplier from char to int
@@ -267,6 +285,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 	}
 	printBoard = false;
 
+	// Runs commands while multiplier is more than 0
 	while (multiplier > 0)
 	{
 		// Player Commands
@@ -421,9 +440,11 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			}
 			printBoard = true;
 		}
+		// Rotate the block 90 degrees clockwise
 		else if (cmd == "clockwise" || cmd == "cl" || cmd == "clo" || cmd == "cloc" || cmd == "clock" || cmd == "clockw" || cmd == "clockwi" || cmd == "clockwis")
 		{
 			player.rotateBlock(cmd);
+			// If level is greater than two than activate the "heavy" property
 			if (player.getLevel() > 2 && multiplier == 1)
 			{
 				player.moveBlock("down");
@@ -447,6 +468,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 			}
 			printBoard = true;
 		}
+		// Rotate the block 90 degrees counterclockwise
 		else if (cmd == "counterclockwise" || cmd.find("counter") != string::npos || cmd.find("co") != string::npos || cmd.find("cou") != string::npos || cmd.find("count") != string::npos)
 		{
 			player.rotateBlock(cmd);
@@ -475,7 +497,7 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		else if (cmd == "drop" || cmd.find("dr") == 0)
 		{
-			// use a getter to check if file can go anymore down from block field and if false then change player
+			// Check if file can go anymore down from block field and if false then change player
 			while (player.getCurrentBlock()->getCanDown())
 			{
 				player.moveBlock("down");
@@ -498,7 +520,6 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		// Testing Commands
 		else if (cmd.find("sequence") != string::npos || cmd.find("s") != string::npos)
 		{
-			// string fileName = cmd.substr(cmd.find_first_of(" \t") + 1);
 			string s;
 			cin >> s;
 			cout << s << endl;
@@ -506,19 +527,11 @@ void Interface::commandInterpreter(string cmd, Player &player)
 		}
 		else if (cmd == "I" || cmd == "O" || cmd == "T" || cmd == "Z" || cmd == "S" || cmd == "L" || cmd == "J")
 		{
+			// Makes the letter the current block
 			player.force(cmd);
 			printBoard = true;
 		}
-		else if (cmd == "restart")
-		{
-			cout << "rstrt" << endl;
-			break;
-		}
 		multiplier--;
-	}
-	if (printBoard == true)
-	{
-		//cout << *(player.getBoard());
 	}
 }
 
@@ -535,8 +548,6 @@ void Interface::printGame(Player &p1, Player &p2)
 	cout << "HiSco:" << right << setw(5) << p1.getHighScore();
 	cout << "      "
 		<< "HiSco:" << right << setw(5) << p2.getHighScore() << endl;
-	//p1.getBoard()->clearRow();
-	//p2.getBoard()->clearRow();
 	cout << "Level:    " << p1.getLevel() << "      "
 		 << "Level:    " << p2.getLevel() << endl;
 	cout << "Score:" << right << setw(5) << p1.getScore();
