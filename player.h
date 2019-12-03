@@ -44,7 +44,7 @@ class Player {
     int rowsCleared;
 
 public:
-    Player(std::string fileName, int seed, int level);
+    Player(std::string fileName, int seed, int level, int highscore);
     int getScore();
     int getHighScore();
     int getLevel();

@@ -30,7 +30,7 @@ void Interface::initialize()
 		if (cmd == "start")
 		{
 			cout << "Starting the game..." << endl;
-			startGame();
+			startGame(0, 0);
 		}
 		else if (cmd == "quit" || cmd == "exit") 
 		{
@@ -42,16 +42,21 @@ void Interface::initialize()
 				 << "Please try again" << endl;
 			mainMenu();
 		}
+
+		while (restart) {
+			restart = false;
+			startGame(p1HighScore, p2HighScore);
+		}
 	}
 	cout << "Thank you for playing." << endl;
 }
 
-void Interface::startGame()
+void Interface::startGame(int p1High, int p2High)
 {
 	// Create Players 1 and 2
-	Player p1(fileName1, seed, level);
+	Player p1(fileName1, seed, level, p1High);
 	p1.playSequence(p1.getQueue());
-	Player p2(fileName2, seed, level);
+	Player p2(fileName2, seed, level, p2High);
 	p2.playSequence(p2.getQueue());
 	printGame(p1, p2);
 
@@ -69,24 +74,6 @@ void Interface::startGame()
 	{
 		if (p1.getEndGame() || p2.getEndGame())
 			break;
-		/*
-		   cout << specialAction << endl;
-		   if (specialAction)
-		   {
-		   string action;
-		   cout << "Enter special action: ";
-		   cin >> action;
-		   cout << endl;
-		   if (currentTurn == "p1")
-		   {
-		   p2.specialAction(action);
-		   }
-		   else
-		   {
-		   p1.specialAction(action);
-		   }
-		   }*/
-
 		if (switchTurn)
 		{
 			if (currentTurn == "p1")
@@ -104,8 +91,13 @@ void Interface::startGame()
 		if (cmd == "quit" || cmd == "exit" || cmd == "q")
 			break;
 
-		if (cmd != "restart")
-		{
+		if (cmd == "restart") {
+			p1HighScore = p1.getHighScore();
+			p2HighScore = p2.getHighScore();
+			restart = true;
+			return;
+		}
+		else {
 			if (currentTurn == "p1")
 			{
 				commandInterpreter(cmd, p1);

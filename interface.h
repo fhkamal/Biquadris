@@ -9,7 +9,7 @@
 #include "block/starblock.h"
 
 class Interface {
-    void startGame();
+    void startGame(int p1HighScore, int p2HighScore);
     void mainMenu();
     void commandInterpreter(std::string cmd, Player &player);
     std::string currentTurn;
@@ -17,6 +17,9 @@ class Interface {
     bool printBoard;
     bool specialAction;
     std::map<std::string, std::string> macros;
+    int p1HighScore;
+    int p2HighScore;
+    bool restart;
 
     // CommandLineArguments
     bool textOnly;
