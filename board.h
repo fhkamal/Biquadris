@@ -6,31 +6,34 @@
 #include <vector>
 #include <memory>
 #include "cell.h"
-// #include "textdisplay.h"
-// #include "player.h"
-//#include "block/block.h"
 #include "textdisplay.h"
 
 class TextDisplay;
 
 class Board {
+
     // The grid
     std::vector<std::vector<std::shared_ptr<Cell>>> grid;
+    
     // Dimensions of the grid
     const int height = 18;
     const int width = 11;
+
+    // Text display for the grid
     std::shared_ptr<TextDisplay> td;
 
     public:
-
-    std::vector<std::vector<std::shared_ptr<Cell>>> getGrid();
+    // Clears rows and returns how many rows were cleared
     int clearRow();
-    // void setDisplay(unique_ptr<TextDisplay> td);
-    bool tooTall();
+
+    // Initializes the board
     void init();
-    // bool validMove(unique_ptr<Block> b);
-    // void setPiece(unique_ptr<Block> b);
+
+    // Getters and Setters
+    std::vector<std::vector<std::shared_ptr<Cell>>> getGrid();
     std::shared_ptr<TextDisplay> getTextDisplay();
+
+    // Output operator
     friend std::ostream &operator<<(std::ostream &out, const Board &b);
 };
 

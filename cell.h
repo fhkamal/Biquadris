@@ -5,16 +5,22 @@
 
 class Cell
 {
+    // coordinates
     int col;
     int row;
+    // is there a block inside on this cell
     bool isOccupied;
-    char blockType; // 1 represents an empty
+    // what block is on this cell
+    char blockType; 
 
 public:
-    std::pair<int, int> getCoordinates();
-    void setCoordinates(int r, int c);
+    // Constructor and Destructor
     Cell(int row, int col);
     ~Cell();
+
+    // Getters and Setters
+    std::pair<int, int> getCoordinates();
+    void setCoordinates(int r, int c);
     bool getIsOccupied();
     void setIsOccupied(bool b);
     void setBlockType(char c);
