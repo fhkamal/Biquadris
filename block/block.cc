@@ -6,20 +6,17 @@ Block::Block(char let, shared_ptr<Board> board, int length) : let{let}, canDown{
 	this->board = board;
 };
 
-// Block::Block(char let, Board *board): let{let}, board{board} orient{0},
-// one{nullptr}, two{nullptr}, three{nullptr}, four{nullptr} {}
 Block::~Block(){
 	one->setBlockType(' ');
 	one->setIsOccupied(false);
+	// star only occupies one cell
 	if(let != '*'){
-	two->setBlockType(' ');
-	two->setIsOccupied(false);
-
-	three->setBlockType(' ');
-	three->setIsOccupied(false);
-
-	four->setBlockType(' ');
-	four->setIsOccupied(false);
+		two->setBlockType(' ');
+		two->setIsOccupied(false);
+		three->setBlockType(' ');
+		three->setIsOccupied(false);
+		four->setBlockType(' ');
+		four->setIsOccupied(false);
 	}
 }
 
@@ -47,7 +44,7 @@ bool Block::inBounds(string dir)
 	{
 		// Check if blocks to the right are in bounds
 		if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
-			three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
+				three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
 		{
 			return false;
 		}
@@ -56,15 +53,16 @@ bool Block::inBounds(string dir)
 	{
 		//Checks if blocks to the left are in bounds
 		if (one->getCoordinates().second <= 0 || two->getCoordinates().second <= 0 ||
-			three->getCoordinates().second <= 0 || four->getCoordinates().second <= 0)
+				three->getCoordinates().second <= 0 || four->getCoordinates().second <= 0)
 		{
 			return false;
 		}
 	}
 	else if (dir == "down")
 	{
+		// Check if blocks can go down
 		if (one->getCoordinates().first + 1 > 17 || two->getCoordinates().first + 1 > 17 ||
-			three->getCoordinates().first + 1 > 17 || four->getCoordinates().first + 1 > 17)
+				three->getCoordinates().first + 1 > 17 || four->getCoordinates().first + 1 > 17)
 		{
 			canDown = false;
 			return false;
@@ -77,7 +75,11 @@ void Block::movement(string dir) {}
 
 bool Block::collision(Block &b)
 {
+	// create a temp block
 	shared_ptr<Cell> c = make_shared<Cell>(30, 30);
+
+	// Check all the cells to see if the spot they were moved to is occupied. If it is then make sure it's not 
+	// occupied by the original block after the move because that is still valid.
 	if (b.one->getIsOccupied() && (b.one != one) && (b.one != two) && (b.one != three) && (b.one != four))
 	{
 		b.one = c;
@@ -148,31 +150,16 @@ void Block::rotate(string dir)
 		else if (one->getCoordinates().second == four->getCoordinates().second && type == 1)
 			hs = 3;
 
-		/*
-		cout << "hs: " << hs << endl;
-		cout << "vs: " << vs << endl;
-
-		cout << "1: " << tmp->one->getCoordinates().first << tmp->one->getCoordinates().second << endl;
-		cout << "2: " << tmp->two->getCoordinates().first << tmp->two->getCoordinates().second << endl;
-		cout << "3: " << tmp->three->getCoordinates().first << tmp->three->getCoordinates().second << endl;
-		cout << "4: " << tmp->four->getCoordinates().first << tmp->four->getCoordinates().second << endl;
-		*/
-
 		// Apply rotation on block
 		tmp->one = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
-								   [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
 		tmp->two = board->getGrid()[vs + pivotY - (abs(two->getCoordinates().second - pivotX) * type)]
-								   [hs + pivotX - (abs(two->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(two->getCoordinates().first - pivotY) * type)];
 		tmp->three = board->getGrid()[vs + pivotY - (abs(three->getCoordinates().second - pivotX) * type)]
-									 [hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)];
 		tmp->four = board->getGrid()[vs + pivotY - (abs(four->getCoordinates().second - pivotX) * type)]
-									[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)];
-		/*
-		cout << "1: " << tmp->one->getCoordinates().first << tmp->one->getCoordinates().second << endl;
-		cout << "2: " << tmp->two->getCoordinates().first << tmp->two->getCoordinates().second << endl;
-		cout << "3: " << tmp->three->getCoordinates().first << tmp->three->getCoordinates().second << endl;
-		cout << "4: " << tmp->four->getCoordinates().first << tmp->four->getCoordinates().second << endl;
-		*/
+			[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)];
+
 	}
 	else if (let != 'O')
 	{
@@ -198,36 +185,23 @@ void Block::rotate(string dir)
 
 		// Apply rotation on block
 		tmp->one = board->getGrid()[vs + pivotY - (abs(one->getCoordinates().second - pivotX) * type)]
-								   [hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(one->getCoordinates().first - pivotY) * type)];
 		tmp->two = board->getGrid()[vs + pivotY - (abs(two->getCoordinates().second - pivotX) * type)]
-								   [hs + pivotX - (abs(two->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(two->getCoordinates().first - pivotY) * type)];
 		tmp->three = board->getGrid()[vs + pivotY - (abs(three->getCoordinates().second - pivotX) * type)]
-									 [hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(three->getCoordinates().first - pivotY) * type)];
 		tmp->four = board->getGrid()[vs + pivotY - (abs(four->getCoordinates().second - pivotX) * type)]
-									[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(four->getCoordinates().first - pivotY) * type)];
 
 		tmp->topLeft = board->getGrid()[vs + pivotY - (abs(topLeft->getCoordinates().second - pivotX) * type)]
-									   [hs + pivotX - (abs(topLeft->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(topLeft->getCoordinates().first - pivotY) * type)];
 		tmp->topRight = board->getGrid()[vs + pivotY - (abs(topRight->getCoordinates().second - pivotX) * type)]
-										[hs + pivotX - (abs(topRight->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(topRight->getCoordinates().first - pivotY) * type)];
 		tmp->bottomLeft = board->getGrid()[vs + pivotY - (abs(bottomLeft->getCoordinates().second - pivotX) * type)]
-										  [hs + pivotX - (abs(bottomLeft->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(bottomLeft->getCoordinates().first - pivotY) * type)];
 		tmp->bottomRight = board->getGrid()[vs + pivotY - (abs(bottomRight->getCoordinates().second - pivotX) * type)]
-										   [hs + pivotX - (abs(bottomRight->getCoordinates().first - pivotY) * type)];
+			[hs + pivotX - (abs(bottomRight->getCoordinates().first - pivotY) * type)];
 	}
-
-	// if(dir == "clockwise"){
-	// 	tmp->one = board->getGrid()[one->getCoordinates().second - 1][1 - (one->getCoordinates().first - (length - 2)) + 1];
-	// 	tmp->two = board->getGrid()[two->getCoordinates().second - 1][1 - (two->getCoordinates().first - (length - 2)) + 1];
-	// 	tmp->three = board->getGrid()[three->getCoordinates().second - 1][1 - (three->getCoordinates().first - (length - 2)) + 1];
-	// 	tmp->four = board->getGrid()[four->getCoordinates().second - 1][1 - (four->getCoordinates().first - (length - 2)) + 1];
-	// }
-	// else if(dir == "counterclockwise"){
-	// 	tmp->one == board->getGrid()[1 - (one->getCoordinates().second - (length - 2))][one->getCoordinates().first];
-	// 	tmp->two == board->getGrid()[1 - (two->getCoordinates().second - (length - 2))][two->getCoordinates().first];
-	// 	tmp->three == board->getGrid()[1 - (three->getCoordinates().second - (length - 2))][three->getCoordinates().first];
-	// 	tmp->four == board->getGrid()[1 - (four->getCoordinates().second - (length - 2))][four->getCoordinates().first];
-	// }
 
 	// Set the current block cells to empty
 	if (!collision(*tmp))

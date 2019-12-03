@@ -34,11 +34,6 @@ SBlock::SBlock(shared_ptr<Board> b, int level) : Block{'S', b, 3}
 // Constructor for temp blocks
 SBlock::SBlock() : Block{'S', make_shared<Board>(), 3} {}
 
-//void SBlock::rotate(string direction){
-//        if(direction == "clockwise"){
-//
-//        }
-//}
 
 void SBlock::movement(string dir)
 {
@@ -124,13 +119,6 @@ void SBlock::movement(string dir)
 	swap(topRight, tmp.topRight);
 	swap(bottomLeft, tmp.bottomLeft);
 	swap(bottomRight, tmp.bottomRight);
-
-	/*
-	cout << "tl: " << topLeft->getCoordinates().first << topLeft->getCoordinates().second << endl;
-	cout << "tr: " << topRight->getCoordinates().first << topRight->getCoordinates().second << endl;
-	cout << "bl: " << bottomLeft->getCoordinates().first << bottomLeft->getCoordinates().second << endl;
-	cout << "br: " << bottomRight->getCoordinates().first << bottomRight->getCoordinates().second << endl;
-	*/
 
 	// Set temp values to sa random cell so they don't delete board cells
 	tmp.one = make_shared<Cell>(3, 1);

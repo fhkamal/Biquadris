@@ -21,19 +21,14 @@ JBlock::JBlock(shared_ptr<Board> b, int level) : Block{'J', b, 3}
 	one->setBlockType('J');
 	one->setIsOccupied(true);
 
-	// cout << "two";
 	two->setBlockType('J');
 	two->setIsOccupied(true);
 
-	// cout << "three";
 	three->setBlockType('J');
 	three->setIsOccupied(true);
 
-	// cout << "four";
 	four->setBlockType('J');
 	four->setIsOccupied(true);
-
-	// cout << "end";
 }
 
 // Constructor for temp blocks

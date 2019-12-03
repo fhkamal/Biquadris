@@ -34,12 +34,6 @@ TBlock::TBlock(shared_ptr<Board> b, int level) : Block{'T', b, 3}
 // Constructor for temp blocks
 TBlock::TBlock() : Block{'T', make_shared<Board>(), 3} {}
 
-//void TBlock::rotate(string direction){
-//        if(direction == "clockwise"){
-//
-//        }
-//}
-
 void TBlock::movement(string dir)
 {
 	if (!inBounds(dir))

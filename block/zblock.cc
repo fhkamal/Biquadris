@@ -34,11 +34,6 @@ ZBlock::ZBlock(shared_ptr<Board> b, int level) : Block{'Z', b, 3}
 // Constructor for temp blocks
 ZBlock::ZBlock() : Block{'Z', make_shared<Board>(), 3} {}
 
-//void ZBlock::rotate(string direction){
-//        if(direction == "clockwise"){
-//
-//        }
-//}
 
 void ZBlock::movement(string dir)
 {

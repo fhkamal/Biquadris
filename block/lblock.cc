@@ -34,11 +34,6 @@ LBlock::LBlock(shared_ptr<Board> b, int level) : Block{'L', b, 3}
 // Constructor for temp blocks
 LBlock::LBlock() : Block{'L', make_shared<Board>(), 3} {}
 
-//void LBlock::rotate(string direction){
-//       if(direction == "clockwise"){
-
-//        }
-//}
 
 void LBlock::movement(string dir)
 {

@@ -48,20 +48,6 @@ void OBlock::movement(string dir)
 
         if (dir == "right")
         {
-                // // Check if blocks to the right are in bounds
-                // if (one->getCoordinates().second + 1 > 10 || two->getCoordinates().second + 1 > 10 ||
-                //      three->getCoordinates().second + 1 > 10 || four->getCoordinates().second + 1 > 10)
-                // {
-                //      return;
-                // }
-
-                // // Check if blocks to the right are occupied
-                // if (board->getGrid()[(one->getCoordinates().first + 1)][one->getCoordinates().second + 1]->getIsOccupied() ||
-                //      board->getGrid()[(two->getCoordinates().first + 1)][two->getCoordinates().second + 1]->getIsOccupied() ||
-                //      board->getGrid()[(three->getCoordinates().first + 1)][three->getCoordinates().second + 1]->getIsOccupied() ||
-                //      board->getGrid()[(four->getCoordinates().first + 1)][four->getCoordinates().second + 1]->getIsOccupied())
-                //      return;
-
                 // Shift the block 1 block to right
                 tmp.one = board->getGrid()[(one->getCoordinates().first)][one->getCoordinates().second + 1];
                 tmp.two = board->getGrid()[(two->getCoordinates().first)][two->getCoordinates().second + 1];
