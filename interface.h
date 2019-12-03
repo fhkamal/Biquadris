@@ -9,14 +9,16 @@
 #include "block/starblock.h"
 
 class Interface {
-    void startGame();
+    void startGame(int p1High, int p2High);
     void mainMenu();
     void commandInterpreter(std::string cmd, std::shared_ptr<Player>player);
     std::string currentTurn;
     bool switchTurn;
     bool printBoard;
     bool specialAction;
-    std::map<std::string, std::string> macros;
+    bool restart;
+    int p1HighScore;
+    int p2HighScore;
 
     // CommandLineArguments
     bool textOnly;

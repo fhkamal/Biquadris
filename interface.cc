@@ -8,7 +8,7 @@
 using namespace std;
 
 Interface::Interface(bool textOnly, int seed, int level, string fileName1, string fileName2) : textOnly{textOnly},
-																							   seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2}
+		seed{seed}, level{level}, fileName1{fileName1}, fileName2{fileName2}, restart {false}, p1HighScore {0}, p2HighScore{0}
 {
 	// Enable short forms of commands
 	map<string, string> macros; // Fill in later
@@ -30,7 +30,7 @@ void Interface::initialize()
 		if (cmd == "start")
 		{
 			cout << "Starting the game..." << endl;
-			startGame();
+			startGame(0, 0);
 		}
 		else if (cmd == "quit" || cmd == "exit") 
 		{
@@ -42,11 +42,19 @@ void Interface::initialize()
 				 << "Please try again" << endl;
 			mainMenu();
 		}
+		if (restart) {
+			cout << "here" << endl;
+			startGame(p1HighScore, p2HighScore);
+		}
+	}
+	if (restart) {
+		cout << "here" << endl;
+		startGame(p1HighScore, p2HighScore);
 	}
 	cout << "Thank you for playing." << endl;
 }
 
-void Interface::startGame()
+void Interface::startGame(int p1High, int p2High)
 {
 	// Create Players 1 and 2
 
@@ -54,9 +62,9 @@ void Interface::startGame()
 	// p1->playSequence(p1->getQueue());
 	// Player p2(fileName2, seed, level);
 	// p2->playSequence(p2->getQueue());
-	shared_ptr<Player> p1 = make_shared<Player>(fileName1, seed, level, 0);
+	shared_ptr<Player> p1 = make_shared<Player>(fileName1, seed, level, p1High);
 	p1->playSequence(p1->getQueue());
-	shared_ptr<Player> p2 = make_shared<Player>(fileName2, seed, level, 0);
+	shared_ptr<Player> p2 = make_shared<Player>(fileName2, seed, level, p2High);
 	p2->playSequence(p2->getQueue());
 
 	printGame(p1, p2);
@@ -113,11 +121,11 @@ void Interface::startGame()
 			break;
 
 		if (cmd == "restart") {
-			int p1High = p1->getHighScore();
-			int p2High = p2->getHighScore();
-
-			p1 = make_shared<Player>(fileName1, seed, level, p1High);
-			p2 = make_shared<Player>(fileName2, seed, level, p2High);
+			cout << "Restart" << endl;
+			restart = true;
+			p1HighScore = p1->getHighScore();
+			p2HighScore = p2->getHighScore();
+			return;
 		}
 		else {
 			if (currentTurn == "p1")
