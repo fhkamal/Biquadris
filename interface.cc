@@ -32,7 +32,7 @@ void Interface::initialize()
 			cout << "Starting the game..." << endl;
 			startGame();
 		}
-		else if (cmd == "quit")
+		else if (cmd == "quit" || cmd == "exit") 
 		{
 			break;
 		}
@@ -219,6 +219,10 @@ void Interface::startGame()
 
 			printGame(p1, p2);
 			specialAction = false;
+		}
+		if (p1.getEndGame() || p2.getEndGame()) {
+			cout << "Break from loop" << endl;
+			break;
 		}
 	}
 

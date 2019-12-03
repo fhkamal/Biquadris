@@ -49,6 +49,7 @@ void Player::playSequence(std::vector<std::string> seq)
 		if (!canSpawn(*(seq.begin())))
 		{
 			endGame = true;
+			cout << "Here" << endl;
 			board->getTextDisplay()->updateDisplay(*board, isBlind);
 			return;
 		}
