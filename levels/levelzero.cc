@@ -9,17 +9,6 @@ LevelZero::LevelZero(string fileName)
     this->getBlocks(fileName); 
 }
 
-void LevelZero::getBlocks(string fileName)
-{
-    ifstream f{fileName};
-    string block;
-
-    while (f >> block)
-    {
-        sequence.emplace_back(block);
-    }
-}
-
 vector<string> LevelZero::getSequence() {
     return sequence;
 }
