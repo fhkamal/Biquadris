@@ -10,11 +10,11 @@ LevelThree::LevelThree(){
 
 void LevelThree::generateSequence(int seed){
 	sequence.clear();
-	if (seed != INT_MAX) {
+	if (seed != INT_MAX) { //for no seed
 		srand(seed);
 	}
 	
-	for (int k = 0; k < 50; k++) {
+	for (int k = 0; k < 50; k++) { //inserts 50 blocks into the sequence randomly
 		int i = (rand() % 9) + 1;
 		if(i < 3){
 			sequence.emplace_back("S");

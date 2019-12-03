@@ -19,11 +19,10 @@ void Level::getBlocks(string fileName)
     ifstream f{fileName};
     string block;
     sequence.clear();
-    while (f >> block)
+    while (f >> block) //reads in blocks from the file
     {
         sequence.emplace_back(block);
     }
-    cout << sequence.size() << endl;
 }
 
 void Level::generateSequence(int seed) {}

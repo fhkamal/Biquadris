@@ -8,11 +8,11 @@ LevelTwo::LevelTwo(){
 }
 
 void LevelTwo::generateSequence(int seed){
-	if (seed != INT_MAX) {
+	if (seed != INT_MAX) { //for no seed
 		srand(seed);
 	}
 	
-	for (int k = 0; k < 50; k++) {
+	for (int k = 0; k < 50; k++) {  //generates 50 blocks randomly
 		int i = (rand() % 7) + 1;
 		if(i == 1){
 			sequence.emplace_back("S");

@@ -9,11 +9,12 @@ LevelFour::LevelFour(){
 }
 
 void LevelFour::generateSequence(int seed){
-	if (seed != INT_MAX) {
+	sequence.clear();
+	if (seed != INT_MAX) { //for no seed
 		srand(seed);
 	}
 	
-	for (int k = 0; k < 50; k++) {
+	for (int k = 0; k < 50; k++) { //randomly generates 50 letters to emplace onto sequence
 		int i = (rand() % 9) + 1;
 		if(i < 3){
 			sequence.emplace_back("S");

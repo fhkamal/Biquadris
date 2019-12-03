@@ -5,8 +5,8 @@
 
 class LevelTwo: public Level{
 public:
-	LevelTwo();
-	~LevelTwo() override;
-	void generateSequence(int seed) override;
+	LevelTwo(); //constructor
+	~LevelTwo() override; //destructor
+	void generateSequence(int seed) override; //randomly generates sequence of blocks given a seed
 };
 #endif

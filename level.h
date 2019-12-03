@@ -17,17 +17,16 @@ protected:
     bool random;
     std::vector<std::string> sequence;
 public:
-    Level();
-    void getBlocks(std::string filename);
-    int getLevel();
-    virtual std::vector<std::string> getSequence();
-    //virtual std::unique_ptr<Block> generateBlock(Board &board, std::string blockType);
-    virtual void generateSequence(int seed);
-    virtual ~Level() = 0;
-    void increment();
-    void setRandom(bool b);
-    int getTurns();
-    bool getRandom();
+    Level(); //constructor
+    void getBlocks(std::string filename); //sets sequence to a vector of blocks provided by the filename
+    int getLevel(); //returns level as an integer
+    virtual std::vector<std::string> getSequence(); //returns the sequence of blocks
+    virtual void generateSequence(int seed); //creates a random sequence of blocks given a seed
+    virtual ~Level() = 0; //virtual destructor
+    void increment(); //increments turns by 1
+    void setRandom(bool b); //sets random to true or false when random or norandom is called respectively
+    int getTurns(); //returns turns passed
+    bool getRandom(); //returns random
 };
 
 #endif

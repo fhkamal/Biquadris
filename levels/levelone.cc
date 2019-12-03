@@ -8,11 +8,11 @@ LevelOne::LevelOne(){
 }
 
 void LevelOne::generateSequence(int seed){
-	if (seed != INT_MAX) {
+	if (seed != INT_MAX) { //for no seed
 		srand(seed);
 	}
 	
-	for (int k = 0; k < 50; k++) {
+	for (int k = 0; k < 50; k++) { //makes a vector of 50, adding it block values
 		int i = (rand() % 12) + 1;
 		if(i == 1){
 			sequence.emplace_back("S");
