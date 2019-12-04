@@ -28,7 +28,8 @@ int main(int argc, char *argv[]){
         }
 
         if (strcmp(argv[i], "-seed") == 0) {
-            seedValue = atoi(argv[i+1]);
+            istringstream iss{argv[i + 1]};
+            iss >> seedValue; 
         }
 
         if (strcmp(argv[i], "-scriptfile1") == 0) {
@@ -40,7 +41,8 @@ int main(int argc, char *argv[]){
         }
 
         if (strcmp(argv[i], "-level") == 0) {
-            level = atoi(argv[i+1]);
+            istringstream iss{argv[i + 1]};
+            iss >> level;
         }
 	
 
